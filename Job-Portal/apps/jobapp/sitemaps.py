@@ -6,7 +6,7 @@ class JobSitemap(Sitemap):
     priority = 0.7
 
     def items(self):
-        return Job.objects.filter(is_published=True, is_closed=False).order_by('-created_at')
+        return Job.objects.filter(is_published=True, is_closed=False, is_deleted=False).order_by('-created_at')
 
     def lastmod(self, obj):
         return obj.updated_at

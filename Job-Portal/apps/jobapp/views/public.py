@@ -15,7 +15,7 @@ def home_view(request):
     """
     Home page — kept as FBV due to AJAX + stats logic.
     """
-    published_jobs = Job.objects.filter(is_published=True).order_by('-updated_at')
+    published_jobs = Job.objects.filter(is_published=True, is_deleted=False).order_by('-updated_at')
     jobs = published_jobs.filter(is_closed=False)
     total_candidates = User.objects.filter(role='employee').count()
     total_companies = User.objects.filter(role='employer').count()
@@ -80,12 +80,12 @@ class SingleJobView(DetailView):
     def get_object(self, queryset=None):
         job_id = self.kwargs['id']
         
-        # Increment views_count safely in DB
-        Job.objects.filter(id=job_id).update(views_count=F('views_count') + 1)
+        # Increment views_count safely in DB only for non-deleted jobs
+        Job.objects.filter(id=job_id, is_deleted=False).update(views_count=F('views_count') + 1)
         
         job = cache.get(job_id)
         if not job:
-            job = get_object_or_404(Job, id=job_id)
+            job = get_object_or_404(Job, id=job_id, is_deleted=False)
             cache.set(job_id, job, 60 * 15)
         else:
             # Refresh views_count in cached object

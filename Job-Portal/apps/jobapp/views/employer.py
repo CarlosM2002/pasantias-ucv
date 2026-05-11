@@ -48,7 +48,7 @@ class JobEditView(EmployerRequiredMixin, UpdateView):
     pk_url_kwarg = 'id'
 
     def get_queryset(self):
-        return Job.objects.filter(user=self.request.user)
+        return Job.objects.filter(user=self.request.user, is_deleted=False)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -68,13 +68,18 @@ class DeleteJobView(EmployerRequiredMixin, DeleteView):
     success_url = reverse_lazy('jobapp:dashboard')
 
     def get_queryset(self):
-        return Job.objects.filter(user=self.request.user)
+        return Job.objects.filter(user=self.request.user, is_deleted=False)
 
-    def form_valid(self, form):
-        # Invalidate cache before deleting
-        cache.delete(str(self.get_object().id))
-        messages.success(self.request, 'Your Job Post was successfully deleted!')
-        return super().form_valid(form)
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        cache.delete(str(self.object.id))
+        messages.success(request, 'Your Job Post was successfully deleted!')
+        success_url = self.get_success_url()
+        self.object.delete()
+        return redirect(success_url)
 
 
 class MakeCompleteJobView(EmployerRequiredMixin, View):

@@ -38,11 +38,17 @@ class DeleteBookmarkView(EmployeeRequiredMixin, DeleteView):
     success_url = reverse_lazy('jobapp:dashboard')
 
     def get_queryset(self):
-        return BookmarkJob.objects.filter(user=self.request.user)
+        return BookmarkJob.objects.filter(user=self.request.user, is_deleted=False)
 
-    def form_valid(self, form):
-        messages.success(self.request, 'Saved Job was successfully deleted!')
-        return super().form_valid(form)
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        messages.success(request, 'Saved Job was successfully deleted!')
+        success_url = self.get_success_url()
+        self.object.delete()
+        return redirect(success_url)
 
 
 class JobBookmarkView(EmployeeRequiredMixin, View):

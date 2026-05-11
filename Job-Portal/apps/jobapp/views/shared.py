@@ -16,14 +16,14 @@ def dashboard_view(request):
     total_applicants = {}
 
     if request.user.role == 'employer':
-        jobs = Job.objects.filter(user=request.user.id)
+        jobs = Job.objects.filter(user=request.user.id, is_deleted=False)
         for job in jobs:
             count = Applicant.objects.filter(job=job.id).count()
             total_applicants[job.id] = count
 
     if request.user.role == 'employee':
-        savedjobs = BookmarkJob.objects.filter(user=request.user.id)
-        appliedjobs = Applicant.objects.filter(user=request.user.id)
+        savedjobs = BookmarkJob.objects.filter(user=request.user.id, is_deleted=False)
+        appliedjobs = Applicant.objects.filter(user=request.user.id, is_deleted=False)
 
     context = {
         'jobs': jobs,
