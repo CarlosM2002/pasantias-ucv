@@ -156,8 +156,6 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': env('CLOUDINARY_API_SECRET', default=''),
 }
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 AUTH_USER_MODEL = 'account.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID = 1
@@ -188,6 +186,9 @@ MESSAGE_TAGS = {
 
 # WhiteNoise compressed static files
 STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
