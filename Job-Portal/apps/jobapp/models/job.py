@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.core.cache import cache
+from django.utils import timezone
 
 from core.models import SoftDeleteModel, TimeStampedModel
 
@@ -60,6 +61,13 @@ class Job(TimeStampedModel, SoftDeleteModel):
         if self.id:
             cache.delete(str(self.id))
         super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        # Soft delete related applications and bookmarks when this job is deleted.
+        now = timezone.now()
+        self.applicant_set.filter(is_deleted=False).update(is_deleted=True, deleted_at=now)
+        self.bookmarkjob_set.filter(is_deleted=False).update(is_deleted=True, deleted_at=now)
+        super().delete(*args, **kwargs)
 
     def __str__(self):
         return self.title

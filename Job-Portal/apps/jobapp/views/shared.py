@@ -22,8 +22,8 @@ def dashboard_view(request):
             total_applicants[job.id] = count
 
     if request.user.role == 'employee':
-        savedjobs = BookmarkJob.objects.filter(user=request.user.id, is_deleted=False)
-        appliedjobs = Applicant.objects.filter(user=request.user.id, is_deleted=False)
+        savedjobs = BookmarkJob.objects.filter(user=request.user.id, is_deleted=False, job__is_deleted=False)
+        appliedjobs = Applicant.objects.filter(user=request.user.id, is_deleted=False, job__is_deleted=False)
 
     context = {
         'jobs': jobs,
