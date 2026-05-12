@@ -80,12 +80,12 @@ class SingleJobView(DetailView):
     def get_object(self, queryset=None):
         job_id = self.kwargs['id']
         
-        # Increment views_count safely in DB only for non-deleted jobs
-        Job.objects.filter(id=job_id, is_deleted=False).update(views_count=F('views_count') + 1)
+        # Increment views_count safely in DB
+        Job.objects.filter(id=job_id).update(views_count=F('views_count') + 1)
         
         job = cache.get(job_id)
         if not job:
-            job = get_object_or_404(Job, id=job_id, is_deleted=False)
+            job = get_object_or_404(Job, id=job_id)
             cache.set(job_id, job, 60 * 15)
         else:
             # Refresh views_count in cached object
@@ -96,7 +96,9 @@ class SingleJobView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        related_job_list = self.object.tags.similar_objects()
+        related_objects = self.object.tags.similar_objects()
+        related_job_ids = [obj.id for obj in related_objects]
+        related_job_list = Job.objects.filter(id__in=related_job_ids, is_deleted=False)
         paginator = Paginator(related_job_list, 5)
         page_number = self.request.GET.get('page')
         context['page_obj'] = paginator.get_page(page_number)
