@@ -6,4 +6,5 @@ GENDER_TYPE = (
 ROLE = (
     ('employer', "Employer"),
     ('employee', "Employee"),
+    ('admin', "Administrator"),
 )

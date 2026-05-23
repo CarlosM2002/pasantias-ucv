@@ -144,6 +144,16 @@ thousands of listings and apply today!{% endblock %}
         <a href="{% url 'jobapp:create-job' %}" class="btn btn-warning btn-block btn-lg">Post Your Job</a>
       </div>
     </div>
+    {% elif request.user.role == "admin" %}
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <h2 class="text-white">Administrador del sistema</h2>
+        <p class="mb-0 text-white lead">Revisa el estado de empresas, usuarios, ofertas y postulaciones.</p>
+      </div>
+      <div class="col-md-3 ml-auto">
+        <a href="{% url 'jobapp:dashboard' %}" class="btn btn-warning btn-block btn-lg">Ir al Panel</a>
+      </div>
+    </div>
     {% elif request.user.role == "employee" %}
     <div class="row align-items-center">
       <div class="col-md-8">
