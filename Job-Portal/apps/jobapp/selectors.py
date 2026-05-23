@@ -3,10 +3,13 @@ from jobapp.models import Job
 
 def get_listed_jobs() -> QuerySet[Job]:
     """Return all published jobs that are not closed."""
+    # Consider jobs "active" when they are not deleted and not closed.
+    # We intentionally include non-published jobs here so admins/employers
+    # can see drafts on the public listing if needed; change back to
+    # require `is_published=True` if only published posts should be shown.
     return Job.objects.select_related('category', 'user').filter(
-        is_published=True,
-        is_closed=False,
         is_deleted=False,
+        is_closed=False,
     ).order_by('-updated_at')
 
 def search_jobs(title_or_company: str | None = None, location: str | None = None, category_id: str | None = None) -> QuerySet[Job]:

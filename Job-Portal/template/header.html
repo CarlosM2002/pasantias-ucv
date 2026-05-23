@@ -22,13 +22,12 @@
   <header class="site-navbar mt-3">
     <div class="container-fluid">
       <div class="row align-items-center">
-        <div class="site-logo col-6"><a href="{% url 'jobapp:home' %}">DJobPortal</a></div>
+        <div class="site-logo col-6"><a href="{% url 'jobapp:home' %}">Portal PEC</a></div>
         <nav class="mx-auto site-navigation">
           <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-            <li><a href="{% url 'jobapp:home' %}" class="nav-link">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="{% url 'jobapp:job-list' %}">Job Listings</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="{% url 'jobapp:home' %}" class="nav-link">Inicio</a></li>
+            <li><a href="{% url 'jobapp:about' %}">Acerca de</a></li>
+            <li><a href="{% url 'jobapp:job-list' %}">Ofertas de Pasantía</a></li>
           </ul>
         </nav>
         <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
@@ -82,7 +81,7 @@
                 {% else %}
 
                 <li class="pr-3 has-children">
-                  <a>Register</a>
+                  <a>Registro</a>
                   <ul class="dropdown">
                     <li><a href="{% url 'account:employer-registration' %}">Employer</a></li>
                     <li><a href="{% url 'account:employee-registration' %}">Employee</a></li>
@@ -91,7 +90,7 @@
 
                 <a href="{% url 'account:login' %}"
                   class="js-clone-nav btn btn-primary border-width-2 d-none d-lg-inline-block ov-fix"><span
-                    class="mr-2 icon-lock_outline"></span>Log In</a>
+                    class="mr-2 icon-lock_outline"></span>Login</a>
                 {% endif %}
               </ul>
             </div>

@@ -39,10 +39,11 @@ def home_view(request):
     # Cache stats for 15 minutes
     stats = cache.get('home_stats')
     if not stats:
+        # Use get_listed_jobs() to count active jobs (not deleted and not closed)
         stats = {
             'total_candidates': User.objects.filter(role='employee').count(),
             'total_companies': User.objects.filter(role='employer').count(),
-            'total_jobs': jobs.count(),
+            'total_jobs': get_listed_jobs().count(),
             'total_completed_jobs': published_jobs.filter(is_closed=True).count(),
         }
         cache.set('home_stats', stats, 60 * 15)
@@ -58,17 +59,25 @@ def home_view(request):
     return render(request, 'jobapp/index.html', context)
 
 
+def about_view(request):
+    """Simple About page."""
+    return render(request, 'about.html')
+
+
 class JobListView(ListView):
     """All published open jobs."""
     template_name = 'jobapp/job-list.html'
     context_object_name = 'page_obj'
-    paginate_by = 12
+    paginate_by = 1000  # show up to 1000 active jobs per page (effectively 'all' for most sites)
 
     def get_queryset(self):
         user_id = self.request.GET.get('user_id')
         if user_id:
             return get_listed_jobs().filter(user_id=user_id)
         return get_listed_jobs()
+
+    # Keep default ListView context behavior so `page_obj` is a proper
+    # paginated Page object expected by the templates.
 
 
 class SingleJobView(DetailView):

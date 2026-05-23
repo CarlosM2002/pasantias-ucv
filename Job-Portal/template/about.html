@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('{% static 'images/hero_1.jpg' %}');" id="home-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="text-white font-weight-bold">Sobre Nosotros</h1>
+        <div class="custom-breadcrumbs">
+          <a href="{% url 'jobapp:home' %}">Inicio</a> <span class="mx-2 slash">/</span>
+          <span class="text-white"><strong>Nosotros</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="site-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <h2>Acerca del Portal PEC</h2>
+        <p>El Portal PEC es una plataforma web desarrollada con el propósito de optimizar el emparejamiento entre estudiantes de computación y empresas. Buscamos centralizar las ofertas, agilizar las postulaciones y brindar un espacio donde el talento universitario pueda conectar eficientemente con el sector profesional.</p>
+
+        <h3>Nuestro Enfoque en las Pasantías</h3>
+        <p>Entendemos que la pasantía es un paso fundamental y riguroso en la formación académica. Por ello, nuestra plataforma está diseñada comprendiendo la estructura completa de este proceso, facilitando el flujo de información para que los estudiantes puedan cumplir exitosamente con el total de sus <strong>340 horas</strong> reglamentarias.</p>
+        
+        <p>El portal apoya la gestión integral de este requisito indispensable, abarcando de forma simultánea las <strong>240 horas</strong> requeridas en empresas externas y las <strong>100 horas</strong> en dependencias de la UCV. Nuestro objetivo es ser el puente ideal que asegure una coordinación fluida entre el estudiante, los supervisores asignados en ambas modalidades y la Comisión de Pasantía.</p>
+
+        <h3>Nuestra Misión</h3>
+        <p>Proveer una herramienta tecnológica local y eficiente que simplifique la búsqueda de oportunidades, garantizando que cada candidato encuentre el entorno adecuado para aplicar sus conocimientos técnicos y desarrollar su perfil profesional.</p>
+
+        <h3>Contacto</h3>
+        <p>Para consultas sobre el uso de la plataforma o soporte técnico, escríbenos a <a href="mailto:soporte@portalpec.example.com">soporte@portalpec.example.com</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
