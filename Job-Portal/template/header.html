@@ -50,7 +50,15 @@
                         <li><a href="{% url 'account:logout' %}">Logout</a></li>
                       </ul>
                     </li>
+                {% elif user.is_authenticated and user.role == 'admin' %}
 
+                    <li class="pr-3 has-children">
+                      <a>Admin</a> 
+                      <ul class="dropdown">
+                        <li><a href="{% url 'jobapp:dashboard' %}">Admin Dashboard</a></li>
+                        <li><a href="{% url 'account:logout' %}">Logout</a></li>
+                      </ul>
+                    </li>
                 {% elif user.is_authenticated %}
 
                 <li class="pr-3 has-children">
