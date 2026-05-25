@@ -598,7 +598,7 @@ h1, h2, h3, h4 {
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(137, 186, 22, 0.9);
+      background: #3968AE(137, 186, 22, 0.9);
       z-index: 1; }
     .bg-image.overlay-blue > .container {
       position: relative;
@@ -1072,8 +1072,8 @@ h1, h2, h3, h4 {
   margin-bottom: 2rem;
   border-radius: 7px; }
   .block__87154.bg-primary {
-    -webkit-box-shadow: 0 5px 30px -5px rgba(137, 186, 22, 0.8);
-    box-shadow: 0 5px 30px -5px rgba(137, 186, 22, 0.8); }
+    -webkit-box-shadow: 0 5px 30px -5px #3968AE(137, 186, 22, 0.8);
+    box-shadow: 0 5px 30px -5px #3968AE(137, 186, 22, 0.8); }
     .block__87154.bg-primary p {
       font-size: 1.5rem;
       font-weight: 300;
