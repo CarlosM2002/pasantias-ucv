@@ -1285,7 +1285,7 @@ h1, h2, h3, h4 {
 .site-footer {
   padding: 7rem 0;
   position: relative;
-  background: #555; }
+  background: #263238; }
   @media (max-width: 991.98px) {
     .site-footer {
       padding: 2rem 0; } }
@@ -1349,7 +1349,7 @@ h1, h2, h3, h4 {
   width: 40px;
   height: 40px;
   position: relative;
-  background: #89ba16;
+  background: #3968AE;
   border-radius: 50%;
   text-decoration: none !important; }
   .footer-social a > span, .social a > span {
@@ -1363,7 +1363,7 @@ h1, h2, h3, h4 {
   .footer-social a:hover, .social a:hover {
     background: #fff; }
     .footer-social a:hover span, .social a:hover span {
-      color: #89ba16; }
+      color: #3968AE; }
 
 .social a:hover {
   background: #343a40; }
