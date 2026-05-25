@@ -3082,8 +3082,8 @@ fieldset:disabled a.btn {
 
 .btn-warning:hover {
     color: #212529;
-    background-color: #fff242;
-    border-color: #fff235
+    background-color: #FDF5CE;
+    border-color: #FDF5CE
 }
 
 .btn-warning.focus,
@@ -3349,14 +3349,14 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-info {
-    color: #17a2b8;
-    border-color: #17a2b8
+    color: #3968AE;
+    border-color: #3968AE
 }
 
 .btn-outline-info:hover {
     color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8
+    background-color: #7AA7C6;
+    border-color: #7AA7C6
 }
 
 .btn-outline-info.focus,
@@ -5808,7 +5808,7 @@ a.badge-success:focus {
 
 .badge-info {
     color: #fff;
-    background-color: #17a2b8
+    background-color: #7AA7C6
 }
 
 a.badge-info:focus,

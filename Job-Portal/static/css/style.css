@@ -406,26 +406,36 @@ body {
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.7;
-  position: relative; }
-  body:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 100;
-    opacity: 0;
-    visibility: hidden;
-    -webkit-transition: .3s all ease;
-    -o-transition: .3s all ease;
-    transition: .3s all ease; }
-  body.offcanvas-menu {
-    position: relative; }
-    body.offcanvas-menu:after {
-      opacity: 1;
-      visibility: visible; }
+  position: relative;
+  background-color: #F4F3F2;
+}
+
+.form-control,
+.form-control:focus,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="search"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+textarea,
+select,
+.bootstrap-select .dropdown-toggle,
+.bootstrap-select .dropdown-menu,
+.form-check,
+.form-group {
+  background-color: #FFFFFF !important;
+}
+
+form:not(.search-jobs-form) {
+  background-color: #FFFFFF !important;
+}
 
 h1, h2, h3, h4 {
   color: #000; }
@@ -511,7 +521,7 @@ h1, h2, h3, h4 {
     .home-section .search-jobs-form .btn-white:hover, .home-section .search-jobs-form .btn-white:active, .home-section .search-jobs-form .btn-white:focus {
       outline: none !important; }
   .home-section .search-jobs-form .form-control {
-    background: #fff;
+    background:  #fff;
     border: transparent !important;
     color: #343a40; }
     .home-section .search-jobs-form .form-control:active, .home-section .search-jobs-form .form-control:focus {
@@ -530,7 +540,7 @@ h1, h2, h3, h4 {
     padding: 0.5rem .5rem;
     margin-bottom: .3rem;
     color: #343a40;
-    background: #fff;
+    background:  #fff;
     border: 1px solid #eee !important; }
   .home-section .search-jobs-form .dropdown-item.active {
     -webkit-box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.4);
@@ -917,8 +927,8 @@ h1, h2, h3, h4 {
 .btn.btn-primary {
   color: #fff; }
   .btn.btn-primary:hover {
-    background: #90c317;
-    border-color: #90c317; }
+    background: #7AA7C6;
+    border-color: #7AA7C6; }
 
 .btn.btn-outline-white {
   background: transparent;
