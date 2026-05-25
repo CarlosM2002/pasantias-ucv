@@ -25,7 +25,7 @@ class SEOTestCase(TestCase):
     def test_homepage_seo(self):
         response = self.client.get(reverse('jobapp:home'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<title>DJobPortal - Find Your Dream Job Today</title>')
+        self.assertContains(response, '<title>Portal PEC</title>')
         self.assertContains(response, 'meta name="description" content="DJobPortal is the leading job board')
 
     def test_job_detail_seo(self):
