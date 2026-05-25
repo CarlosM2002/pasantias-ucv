@@ -2996,8 +2996,8 @@ fieldset:disabled a.btn {
 
 .btn-success {
     color: #FFFFFF;
-    background-color: #709812;
-    border-color: #709812
+    background-color: #4CAF50;
+    border-color: #4CAF50
 }
 
 .btn-success:hover {
@@ -3023,8 +3023,8 @@ fieldset:disabled a.btn {
 .btn-success:not(:disabled):not(.disabled):active,
 .show>.btn-success.dropdown-toggle {
     color: #fff;
-    background-color: #3968AE;
-    border-color: #3968AE
+    background-color: #4b6a03;
+    border-color: #4b6a03
 }
 
 .btn-success:not(:disabled):not(.disabled).active:focus,
@@ -5826,7 +5826,7 @@ a.badge-info:focus {
 
 .badge-warning {
     color: #212529;
-    background-color: #fff568
+    background-color: #FDF5CE
 }
 
 a.badge-warning:focus,
