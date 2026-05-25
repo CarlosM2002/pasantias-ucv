@@ -574,7 +574,7 @@ h1, h2, h3, h4 {
       left: 0;
       right: 0;
       bottom: 0;
-      background: #7AA7C6;
+      background: rgba(122, 167, 198, 0.9);
       z-index: 1; }
     .bg-image.overlay-primary > .container {
       position: relative;
@@ -1285,10 +1285,65 @@ h1, h2, h3, h4 {
 .site-footer {
   padding: 7rem 0;
   position: relative;
-  background: #263238; }
+  background: #263238;
+  font-family: 'Nunito', sans-serif;
+}
   @media (max-width: 991.98px) {
     .site-footer {
       padding: 2rem 0; } }
+  .footer-banner {
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background: rgba(255,255,255,0.04);
+    padding: 0.75rem;
+  }
+  .footer-banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  .site-footer .footer-column {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .site-footer .footer-column h3,
+  .site-footer h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+  .site-footer .footer-column h3 .icon-map-marker,
+  .site-footer .footer-column h3 .icon-map-pin {
+    font-size: 1rem;
+    vertical-align: middle;
+  }
+  .site-footer .footer-column p,
+  .site-footer .footer-column .footer-note,
+  .site-footer .footer-column li a {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .site-footer #lead {
+    font-size: 0.99rem;
+    margin-bottom: 0.75rem;
+    color: #fff;
+  }
+  .site-footer .footer-column p {
+    margin-bottom: 0.75rem;
+  }
+  .site-footer .footer-column ul {
+    padding: 0;
+    margin: 0;
+  }
+  .site-footer .footer-column ul li {
+    margin-bottom: 0.75rem;
+  }
+  .site-footer .footer-column ul li a {
+    color: rgba(255, 255, 255, 0.75);
+  }
   .site-footer.slanted-footer:before {
     content: "";
     background: #001f42;

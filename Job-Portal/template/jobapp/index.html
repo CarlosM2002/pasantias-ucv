@@ -16,8 +16,8 @@ thousands of listings and apply today!{% endblock %}
     <div class="row align-items-center justify-content-center">
       <div class="col-md-12">
         <div class="mb-5 text-center">
-          <h1 class="text-white font-weight-bold">ayudame loco</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur perferendis.</p>
+          <h1 class="text-white font-weight-bold">Portal de Pasantías </h1>
+          <p>Conectamos el talento de la Escuela de Computación con las mejores empresas.</p>
         </div>
         <form method="GET" action="{% url 'jobapp:search_result' %}" class="search-jobs-form">
           {% include 'jobapp/search.html' %}
@@ -36,9 +36,8 @@ thousands of listings and apply today!{% endblock %}
   <div class="container">
     <div class="row mb-5 justify-content-center">
       <div class="col-md-7 text-center">
-        <h2 class="section-title mb-2 text-white">DJobPortal Stats</h2>
-        <p class="lead text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita unde officiis
-          recusandae sequi excepturi corrupti.</p>
+        <h2 class="section-title mb-2 text-white">Estadisticas Portal PEC</h2>
+        <p class="lead text-white">Métricas que impulsan el desarrollo y el futuro profesional de nuestra escuela.</p>
       </div>
     </div>
     <div class="row pb-0 block__19738 section-counter">
@@ -47,28 +46,28 @@ thousands of listings and apply today!{% endblock %}
         <div class="d-flex align-items-center justify-content-center mb-2">
           <strong class="number" data-number="{{ total_candidates }}">0</strong>
         </div>
-        <span class="caption">Candidates</span>
+        <span class="caption">Pasantes</span>
       </div>
 
       <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
         <div class="d-flex align-items-center justify-content-center mb-2">
           <strong class="number" data-number="{{ total_jobs }}">0</strong>
         </div>
-        <span class="caption">Jobs Posted</span>
+        <span class="caption">Ofertas de Pasantía</span>
       </div>
 
       <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
         <div class="d-flex align-items-center justify-content-center mb-2">
           <strong class="number" data-number="{{ total_completed_jobs }}">0</strong>
         </div>
-        <span class="caption">Jobs Filled</span>
+        <span class="caption">Puestos cubiertos</span>
       </div>
 
       <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
         <div class="d-flex align-items-center justify-content-center mb-2">
           <strong class="number" data-number="{{ total_companies }}">0</strong>
         </div>
-        <span class="caption">Companies</span>
+        <span class="caption">Empresas</span>
       </div>
 
 
@@ -168,12 +167,11 @@ thousands of listings and apply today!{% endblock %}
     {% else %}
     <div class="row align-items-center">
       <div class="col-md-8">
-        <h2 class="text-white">Looking For A Job?</h2>
-        <p class="mb-0 text-white lead">Lorem ipsum dolor sit amet consectetur adipisicing elit tempora adipisci
-          impedit.</p>
+        <h2 class="text-white">¿Buscas pasantías?</h2>
+        <p class="mb-0 text-white lead">Nuestro portal te conecta con ofertas de pasantías en empresas verificadas y dependencias de la UCV, adaptadas a al área de desarrollo de tu preferencia.</p>
       </div>
       <div class="col-md-3 ml-auto">
-        <a href="{% url 'account:employee-registration' %}" class="btn btn-warning btn-block btn-lg">Sign Up</a>
+        <a href="{% url 'account:employee-registration' %}" class="btn btn-warning btn-block btn-lg">Registrarse</a>
       </div>
     </div>
     {% endif %}
