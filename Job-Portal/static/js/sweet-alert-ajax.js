@@ -2,7 +2,7 @@ function call_sw_alert_func(route, id, message){
     // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     
     swal({
-      title: "Are you sure?",
+      title: "¿Estás seguro?",
       text: message,
       icon: "warning",
       buttons: true,
@@ -19,16 +19,16 @@ function call_sw_alert_func(route, id, message){
             success : function(data) {
               if (route.includes('delete')) { 
                 swal({
-                  title: "Delete Done!",
-                  text: "Your Job Was Deleted!",
+                  title: "¡Borrado!",
+                  text: "Tu oferta ha sido eliminada!",
                   icon: "success",
                   button: "Done",
                 });
                 $("#row_"+id).remove();
               }else if(route.includes('close')){
                 swal({
-                  title: "Done!",
-                  text: "Your Job was marked closed!",
+                  title: "¡Hecho!",
+                  text: "Tu oferta ha sido marcada como cerrada!",
                   icon: "success",
                   button: "Done",
                 });
@@ -38,14 +38,14 @@ function call_sw_alert_func(route, id, message){
 
             error : function () {
                 swal({
-                    title: 'Something went wrong !',
+                    title: '¡Ocurrió un error inesperado!',
                     // text: data.message,
                     timer: '1500'
                 })
             }
         });
       } else {
-        swal("Your Post Is Safe!");
+        swal("No se borró tu oferta!");
       }
     });
   }

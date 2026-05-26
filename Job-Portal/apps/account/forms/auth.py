@@ -9,18 +9,18 @@ class EmployeeRegistrationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         UserCreationForm.__init__(self, *args, **kwargs)
         self.fields['gender'].required = True
-        self.fields['first_name'].label = "First Name :"
-        self.fields['last_name'].label = "Last Name :"
-        self.fields['password1'].label = "Password :"
-        self.fields['password2'].label = "Confirm Password :"
-        self.fields['email'].label = "Email :"
-        self.fields['gender'].label = "Gender :"
+        self.fields['first_name'].label = "Nombre :"
+        self.fields['last_name'].label = "Apellido :"
+        self.fields['password1'].label = "Contraseña :"
+        self.fields['password2'].label = "Confirmar Contraseña :"
+        self.fields['email'].label = "Correo Electrónico :"
+        self.fields['gender'].label = "Género :"
 
-        self.fields['first_name'].widget.attrs.update({'placeholder': 'Enter First Name'})
-        self.fields['last_name'].widget.attrs.update({'placeholder': 'Enter Last Name'})
-        self.fields['email'].widget.attrs.update({'placeholder': 'Enter Email'})
-        self.fields['password1'].widget.attrs.update({'placeholder': 'Enter Password'})
-        self.fields['password2'].widget.attrs.update({'placeholder': 'Confirm Password'})
+        self.fields['first_name'].widget.attrs.update({'placeholder': 'Ingrese su nombre'})
+        self.fields['last_name'].widget.attrs.update({'placeholder': 'Ingrese su apellido'})
+        self.fields['email'].widget.attrs.update({'placeholder': 'Ingrese su correo electrónico'})
+        self.fields['password1'].widget.attrs.update({'placeholder': 'Ingrese su contraseña'})
+        self.fields['password2'].widget.attrs.update({'placeholder': 'Confirme su contraseña'})
 
     class Meta:
         model = User
@@ -45,16 +45,17 @@ class EmployerRegistrationForm(UserCreationForm):
         UserCreationForm.__init__(self, *args, **kwargs)
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
-        self.fields['first_name'].label = "Company Name"
-        self.fields['last_name'].label = "Company Address"
-        self.fields['password1'].label = "Password"
-        self.fields['password2'].label = "Confirm Password"
+        self.fields['first_name'].label = "Nombre de la Empresa"
+        self.fields['last_name'].label = "Dirección de la Empresa"
+        self.fields['email'].label = "Correo Electrónico"
+        self.fields['password1'].label = "Contraseña"
+        self.fields['password2'].label = "Confirmar Contraseña"
 
-        self.fields['first_name'].widget.attrs.update({'placeholder': 'Enter Company Name'})
-        self.fields['last_name'].widget.attrs.update({'placeholder': 'Enter Company Address'})
-        self.fields['email'].widget.attrs.update({'placeholder': 'Enter Email'})
-        self.fields['password1'].widget.attrs.update({'placeholder': 'Enter Password'})
-        self.fields['password2'].widget.attrs.update({'placeholder': 'Confirm Password'})
+        self.fields['first_name'].widget.attrs.update({'placeholder': 'Ingrese el nombre de la empresa'})
+        self.fields['last_name'].widget.attrs.update({'placeholder': 'Ingrese la dirección de la empresa'})
+        self.fields['email'].widget.attrs.update({'placeholder': 'Ingrese el correo electrónico'})
+        self.fields['password1'].widget.attrs.update({'placeholder': 'Ingrese la contraseña'})
+        self.fields['password2'].widget.attrs.update({'placeholder': 'Confirme la contraseña'})
 
     class Meta:
         model = User
@@ -69,10 +70,16 @@ class EmployerRegistrationForm(UserCreationForm):
 
 
 class UserLoginForm(forms.Form):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
+    
+    email = forms.EmailField(
+        label='Correo electrónico',
+        widget=forms.EmailInput(attrs={'placeholder': 'Correo electrónico'})
+    )
+    
     password = forms.CharField(
+        label='Contraseña',
         strip=False,
-        widget=forms.PasswordInput(attrs={'placeholder': 'Password'}),
+        widget=forms.PasswordInput(attrs={'placeholder': 'Contraseña'}),
     )
 
     def __init__(self, request=None, *args, **kwargs):
@@ -88,13 +95,13 @@ class UserLoginForm(forms.Form):
             try:
                 user = User.objects.get(email=email)
             except User.DoesNotExist:
-                raise forms.ValidationError("User Does Not Exist.")
+                raise forms.ValidationError("El usuario no existe.")
 
             if not user.check_password(password):
-                raise forms.ValidationError("Password Does not Match.")
+                raise forms.ValidationError("La contraseña no coincide.")
 
             if not user.is_active:
-                raise forms.ValidationError("User is not Active.")
+                raise forms.ValidationError("El usuario no está activo.")
 
         return super(UserLoginForm, self).clean(*args, **kwargs)
 

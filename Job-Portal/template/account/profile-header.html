@@ -12,7 +12,7 @@
             {% else %}
             <div class="company-logo-container">
                 {% if profile.company_logo %}
-                <img src="{{ profile.company_logo.url }}" alt="Company Logo"
+                <img src="{{ profile.company_logo.url }}" alt="Logo de la empresa"
                     class="profile-company-logo img-fluid rounded border p-1">
                 {% else %}
                 <div
@@ -29,7 +29,7 @@
                 {{ profile.user.get_full_name }}
                 {% else %}
                 {{ profile.user.first_name }} {{ profile.user.last_name }} <small
-                    class="text-muted text-capitalize">(Employer)</small>
+                    class="text-muted text-capitalize">(Empresa/Dependencia)</small>
                 {% endif %}
             </h2>
             <div class="social-links d-flex gap-2">

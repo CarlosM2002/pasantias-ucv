@@ -134,12 +134,11 @@
     {% if request.user.role == "employer" %}
     <div class="row align-items-center">
       <div class="col-md-8">
-        <h2 class="text-white">Want To Hire?</h2>
-        <p class="mb-0 text-white lead">Lorem ipsum dolor sit amet consectetur adipisicing elit tempora adipisci
-          impedit.</p>
+        <h2 class="text-white">¿Buscas pasantes?</h2>
+        <p class="mb-0 text-white lead">Conecta tu empresa o dependencia con estudiantes de la UCV listos para integrarse a tus equipos de desarrollo y potenciar tus proyectos.</p>
       </div>
       <div class="col-md-3 ml-auto">
-        <a href="{% url 'jobapp:create-job' %}" class="btn btn-warning btn-block btn-lg">Post Your Job</a>
+        <a href="{% url 'jobapp:create-job' %}" class="btn btn-warning btn-block btn-lg">Publica tu oferta</a>
       </div>
     </div>
     {% elif request.user.role == "admin" %}
@@ -155,12 +154,11 @@
     {% elif request.user.role == "employee" %}
     <div class="row align-items-center">
       <div class="col-md-8">
-        <h2 class="text-white">Looking For A Job?</h2>
-        <p class="mb-0 text-white lead">Lorem ipsum dolor sit amet consectetur adipisicing elit tempora adipisci
-          impedit.</p>
+        <h2 class="text-white">¿Buscas pasantías?</h2>
+        <p class="mb-0 text-white lead">Nuestro portal te conecta con ofertas de pasantías en empresas verificadas y dependencias de la UCV, adaptadas a al área de desarrollo de tu preferencia.</p>
       </div>
       <div class="col-md-3 ml-auto">
-        <a href="{% url 'jobapp:job-list' %}" class="btn btn-warning btn-block btn-lg">Job List</a>
+        <a href="{% url 'jobapp:job-list' %}" class="btn btn-warning btn-block btn-lg">Ver ofertas</a>
       </div>
     </div>
     {% else %}

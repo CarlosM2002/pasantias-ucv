@@ -6,26 +6,26 @@ from jobapp.models import Job
 class JobForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         forms.ModelForm.__init__(self, *args, **kwargs)
-        self.fields['title'].label = "Job Title :"
-        self.fields['location'].label = "Job Location :"
-        self.fields['salary'].label = "Salary :"
-        self.fields['work_mode'].label = "Work Mode :"
-        self.fields['experience_level'].label = "Experience Level :"
-        self.fields['description'].label = "Job Description :"
-        self.fields['tags'].label = "Tags :"
-        self.fields['last_date'].label = "Submission Deadline :"
-        self.fields['company_name'].label = "Company Name :"
-        self.fields['url'].label = "Website :"
+        self.fields['title'].label = "Título :"
+        self.fields['location'].label = "Ubicación :"
+        self.fields['salary'].label = "Remuneración :"
+        self.fields['work_mode'].label = "Modalidad :"
+        self.fields['experience_level'].label = "Nivel de Experiencia :"
+        self.fields['description'].label = "Descripción de la Oferta :"
+        self.fields['tags'].label = "Etiquetas :"
+        self.fields['last_date'].label = "Fecha Límite de Envío :"
+        self.fields['company_name'].label = "Nombre de la Empresa :"
+        self.fields['url'].label = "Página web :"
 
-        self.fields['title'].widget.attrs.update({'placeholder': 'eg : Software Developer'})
-        self.fields['location'].widget.attrs.update({'placeholder': 'eg : Bangladesh'})
+        self.fields['title'].widget.attrs.update({'placeholder': 'Por ejemplo: Desarrollador de Software'})
+        self.fields['location'].widget.attrs.update({'placeholder': 'Por ejemplo: Chacao'})
         self.fields['salary'].widget.attrs.update({'placeholder': '$800 - $1200'})
         self.fields['tags'].widget.attrs.update(
             {'placeholder': 'Use comma separated. eg: Python, JavaScript '}
         )
         self.fields['last_date'].widget.attrs.update({'placeholder': 'YYYY-MM-DD '})
-        self.fields['company_name'].widget.attrs.update({'placeholder': 'Company Name'})
-        self.fields['url'].widget.attrs.update({'placeholder': 'https://example.com'})
+        self.fields['company_name'].widget.attrs.update({'placeholder': 'Nombre de la empresa'})
+        self.fields['url'].widget.attrs.update({'placeholder': 'https://ejemplo.com'})
 
     class Meta:
         model = Job
@@ -75,14 +75,14 @@ class JobEditForm(forms.ModelForm):
         self.fields['description'].label = "Job Description :"
         self.fields['last_date'].label = "Dead Line :"
         self.fields['company_name'].label = "Company Name :"
-        self.fields['url'].label = "Website :"
+        self.fields['url'].label = "Página web :"
 
-        self.fields['title'].widget.attrs.update({'placeholder': 'eg : Software Developer'})
-        self.fields['location'].widget.attrs.update({'placeholder': 'eg : Bangladesh'})
+        self.fields['title'].widget.attrs.update({'placeholder': 'Por ejemplo: Desarrollador de Software'})
+        self.fields['location'].widget.attrs.update({'placeholder': 'Por ejemplo: Chacao'})
         self.fields['salary'].widget.attrs.update({'placeholder': '$800 - $1200'})
         self.fields['last_date'].widget.attrs.update({'placeholder': 'YYYY-MM-DD '})
-        self.fields['company_name'].widget.attrs.update({'placeholder': 'Company Name'})
-        self.fields['url'].widget.attrs.update({'placeholder': 'https://example.com'})
+        self.fields['company_name'].widget.attrs.update({'placeholder': 'Nombre de la empresa'})
+        self.fields['url'].widget.attrs.update({'placeholder': 'https://ejemplo.com'})
 
         last_date = forms.CharField(
             widget=forms.TextInput(

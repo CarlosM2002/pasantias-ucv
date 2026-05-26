@@ -1,4 +1,4 @@
 from .auth import EmployerRegistrationForm, EmployeeRegistrationForm, UserLoginForm
-from .profile import EmployeeProfileEditForm, EmployeeProfileForm, EmployerProfileForm
+from .profile import EmployeeProfileEditForm, EmployerProfileEditForm, EmployeeProfileForm, EmployerProfileForm
 
 

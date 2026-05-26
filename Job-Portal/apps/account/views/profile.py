@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import UpdateView, View, DetailView
 
-from account.forms import EmployeeProfileEditForm, EmployeeProfileForm, EmployerProfileForm
+from account.forms import EmployeeProfileEditForm, EmployerProfileEditForm, EmployeeProfileForm, EmployerProfileForm
 from account.models import User, EmployeeProfile, EmployerProfile
 from jobapp.permission import EmployeeRequiredMixin
 
@@ -54,7 +54,7 @@ class EmployerEditProfileView(View):
         if user != request.user or user.role != 'employer':
             return redirect('jobapp:home')
         
-        user_form = EmployeeProfileEditForm(instance=user) # Can reuse or create specialized
+        user_form = EmployerProfileEditForm(instance=user)
         profile, created = EmployerProfile.objects.get_or_create(user=user)
         profile_form = EmployerProfileForm(instance=profile)
         
@@ -68,7 +68,7 @@ class EmployerEditProfileView(View):
         if user != request.user or user.role != 'employer':
             return redirect('jobapp:home')
             
-        user_form = EmployeeProfileEditForm(request.POST, instance=user)
+        user_form = EmployerProfileEditForm(request.POST, instance=user)
         profile, created = EmployerProfile.objects.get_or_create(user=user)
         profile_form = EmployerProfileForm(request.POST, request.FILES, instance=profile)
         
@@ -77,7 +77,22 @@ class EmployerEditProfileView(View):
             profile_form.save()
             messages.success(request, 'Company Profile Was Successfully Updated!')
             return redirect('account:edit-profile', id=user.id)
-            
+        """
+        # If validation failed, collect missing/errored fields and show a message
+        missing_fields = []
+        for form_obj in (user_form, profile_form):
+            for fname, errs in form_obj.errors.items():
+                try:
+                    label = form_obj.fields[fname].label
+                except Exception:
+                    label = fname
+                # only add once
+                if label not in missing_fields:
+                    missing_fields.append(label)
+
+        if missing_fields:
+            messages.error(request, 'Faltan o son inválidos los campos: %s' % (', '.join(missing_fields)))
+        """
         return render(request, self.template_name, {
             'form': user_form,
             'profile_form': profile_form

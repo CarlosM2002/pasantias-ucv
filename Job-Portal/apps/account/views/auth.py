@@ -28,7 +28,7 @@ class UserLogoutView(View):
 
     def get(self, request, *args, **kwargs):
         auth.logout(request)
-        messages.success(request, 'You are successfully logged out.')
+        messages.success(request, 'Has cerrado sesión correctamente.')
         return redirect(reverse_lazy('account:login'))
 
     def post(self, request, *args, **kwargs):
@@ -43,7 +43,7 @@ class EmployeeRegistrationView(CreateView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, 'Your account was successfully created! Please log in.')
+        messages.success(self.request, 'Tu cuenta fue creada exitosamente! Por favor, inicia sesión.')
         return redirect(self.success_url)
 
 
@@ -55,7 +55,7 @@ class EmployerRegistrationView(CreateView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, 'Your Employer account was successfully created! Please log in.')
+        messages.success(self.request, 'Tu cuenta fue creada exitosamente! Por favor, inicia sesión.')
         return redirect(self.success_url)
 
 
