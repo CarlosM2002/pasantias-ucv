@@ -17,9 +17,9 @@ JOB_TYPE = (
 )
 
 WORK_MODE = (
-    ('1', 'Remote'),
-    ('2', 'Hybrid'),
-    ('3', 'On-site'),
+    ('1', 'Remoto'),
+    ('2', 'Hibrido'),
+    ('3', 'Presencial'),
 )
 
 EXPERIENCE_LEVEL = (

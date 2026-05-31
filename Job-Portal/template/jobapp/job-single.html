@@ -62,8 +62,8 @@
       <div class="col-md-7">
         <h1 class="text-white font-weight-bold">{{ job.title }}</h1>
         <div class="custom-breadcrumbs">
-          <a href="{% url 'jobapp:home' %}">Home</a> <span class="mx-2 slash">/</span>
-          <a href="{% url 'jobapp:job-list' %}">Job</a> <span class="mx-2 slash">/</span>
+          <a href="{% url 'jobapp:home' %}">Inicio</a> <span class="mx-2 slash">/</span>
+          <a href="{% url 'jobapp:dashboard' %}">Ofertas</a> <span class="mx-2 slash">/</span>
           <span class="text-white"><strong>{{ job.title }}</strong></span>
         </div>
       </div>
@@ -132,7 +132,7 @@
             {% elif request.user.id == job.user.id and user.role == 'employer' %}
             <button
               onclick="call_sw_alert_func('{% url 'jobapp:delete' job.id %}','{{ job.id }}','Una vez borres esta oferta, no podrás recuperarla.')"
-              class="btn btn-block btn-danger btn-md">Delete</button>
+              class="btn btn-block btn-danger btn-md">Borrar</button>
 
             {% comment %} {% else %}
 
@@ -166,9 +166,9 @@
 
             {% elif request.user.id == job.user.id and user.role == 'employer' %}
 
-            <a href="{% url 'jobapp:edit-job' job.id %}" class="btn btn-block btn-light btn-md">Edit</a>
+            <a href="{% url 'jobapp:edit-job' job.id %}" class="btn btn-block btn-light btn-md">Editar</a>
             {% else %}
-            <a href="{% url 'jobapp:create-job' %}" class="btn btn-block btn-primary btn-md">Publish Your Job</a>
+            <a href="{% url 'jobapp:create-job' %}" class="btn btn-block btn-primary btn-md">Publicar Oferta</a>
             {% endif %}
 
           </div>
@@ -208,7 +208,7 @@
             {% elif request.user.id == job.user.id and user.role == 'employer' %}
             <button
               onclick="call_sw_alert_func('{% url 'jobapp:delete' job.id %}','{{ job.id }}','Once Deleted, You Will Not be Able To Recover This Post!')"
-              class="btn btn-block btn-danger btn-md">Delete</button>
+              class="btn btn-block btn-danger btn-md">Borrar</button>
 
             {% elif user.role == none %}
 
@@ -242,7 +242,7 @@
           {% elif request.user.id == job.user.id and user.role == 'employer' %}
           <div class="col-6">
 
-            <a href="{% url 'jobapp:edit-job' job.id %}" class="btn btn-block btn-light btn-md">Edit</a>
+            <a href="{% url 'jobapp:edit-job' job.id %}" class="btn btn-block btn-light btn-md">Editar</a>
           </div>
           {% elif user.role == none %}
           <div class="col-6">
@@ -281,7 +281,7 @@
         </div>
 
         <div class="bg-light p-3 border rounded">
-          <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Share</h3>
+          <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Compartir</h3>
           <div class="px-3">
             <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-facebook"></span></a>
             <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-twitter"></span></a>
@@ -301,7 +301,7 @@
 
     <div class="row mb-5 justify-content-center">
       <div class="col-md-7 text-center">
-        <h2 class="section-title mb-2">{{ total }} Related Jobs</h2>
+        <h2 class="section-title mb-2">{{ total }} Ofertas relacionadas</h2>
       </div>
     </div>
 

@@ -67,14 +67,13 @@ class JobForm(forms.ModelForm):
 class JobEditForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         forms.ModelForm.__init__(self, *args, **kwargs)
-        self.fields['title'].label = "Job Title :"
-        self.fields['location'].label = "Job Location :"
-        self.fields['salary'].label = "Salary :"
-        self.fields['work_mode'].label = "Work Mode :"
-        self.fields['experience_level'].label = "Experience Level :"
-        self.fields['description'].label = "Job Description :"
-        self.fields['last_date'].label = "Dead Line :"
-        self.fields['company_name'].label = "Company Name :"
+        self.fields['title'].label = "Título :"
+        self.fields['location'].label = "Ubicación :"
+        self.fields['salary'].label = "Remuneración :"
+        self.fields['work_mode'].label = "Modalidad :"
+        self.fields['description'].label = "Descripción de la Oferta :"
+        self.fields['last_date'].label = "Fecha Límite de solicitud :"
+        self.fields['company_name'].label = "Nombre de la Empresa :"
         self.fields['url'].label = "Página web :"
 
         self.fields['title'].widget.attrs.update({'placeholder': 'Por ejemplo: Desarrollador de Software'})
@@ -84,7 +83,7 @@ class JobEditForm(forms.ModelForm):
         self.fields['company_name'].widget.attrs.update({'placeholder': 'Nombre de la empresa'})
         self.fields['url'].widget.attrs.update({'placeholder': 'https://ejemplo.com'})
 
-        last_date = forms.CharField(
+        self.fields['last_date'] = forms.CharField(
             widget=forms.TextInput(
                 attrs={
                     'placeholder': 'Service Name',
@@ -100,8 +99,6 @@ class JobEditForm(forms.ModelForm):
             "location",
             "job_type",
             "work_mode",
-            "experience_level",
-            "category",
             "salary",
             "description",
             "last_date",
@@ -115,12 +112,6 @@ class JobEditForm(forms.ModelForm):
         if not job_type:
             raise forms.ValidationError("Job Type is required")
         return job_type
-
-    def clean_category(self):
-        category = self.cleaned_data.get('category')
-        if not category:
-            raise forms.ValidationError("Category is required")
-        return category
 
     def save(self, commit=True):
         job = super(JobEditForm, self).save(commit=False)
