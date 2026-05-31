@@ -4,9 +4,11 @@ from account.models import User, EmployeeProfile, EmployerProfile
 class EmployeeProfileEditForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(EmployeeProfileEditForm, self).__init__(*args, **kwargs)
-        self.fields['first_name'].widget.attrs.update({'placeholder': 'Enter First Name'})
-        self.fields['last_name'].widget.attrs.update({'placeholder': 'Enter Last Name'})
-
+        self.fields['first_name'].label = 'Nombre'
+        self.fields['last_name'].label = 'Apellido'
+        self.fields['first_name'].widget.attrs.update({'placeholder': 'Ingrese su nombre'})
+        self.fields['last_name'].widget.attrs.update({'placeholder': 'Ingrese su apellido'})
+        
     class Meta:
         model = User
         fields = ["first_name", "last_name", "gender"]

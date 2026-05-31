@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 ('is_closed', models.BooleanField(default=False)),
                 ('timestamp', models.DateTimeField(auto_now=True)),
                 ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Category', to='jobapp.category')),
-                ('tags', taggit.managers.TaggableManager(help_text='A comma-separated list of tags.', through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags')),
+                ('tags', taggit.managers.TaggableManager(help_text='Separar tags por comas .', through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='User', to=settings.AUTH_USER_MODEL)),
             ],
         ),
