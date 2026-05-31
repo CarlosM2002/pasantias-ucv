@@ -8,11 +8,25 @@
     <div class="container">
         <div class="row">
             <div class="col-md-7">
-                <h1 class="text-white font-weight-bold">Administrador</h1>
-                <div class="custom-breadcrumbs">
-                    <a href="{% url 'jobapp:home' %}">Inicio</a> <span class="mx-2 slash">/</span>
-                    <span class="text-white"><strong>Panel de Control</strong></span>
-                </div>
+                {% if user.role == 'admin' %}
+                    <h1 class="text-white font-weight-bold">Administrador</h1>
+                    <div class="custom-breadcrumbs">
+                        <a href="{% url 'jobapp:home' %}">Inicio</a> <span class="mx-2 slash">/</span>
+                        <span class="text-white"><strong>Panel de Control</strong></span>
+                    </div>
+                {% elif user.role == 'employer' %}
+                    <h1 class="text-white font-weight-bold">Empresa</h1>
+                    <div class="custom-breadcrumbs">
+                        <a href="{% url 'jobapp:home' %}">Inicio</a> <span class="mx-2 slash">/</span>
+                        <span class="text-white"><strong>Ofertas</strong></span>
+                    </div>
+                {% elif user.role == 'employee' %}
+                    <h1 class="text-white font-weight-bold">Pasante</h1>
+                    <div class="custom-breadcrumbs">
+                        <a href="{% url 'jobapp:home' %}">Inicio</a> <span class="mx-2 slash">/</span>
+                        <span class="text-white"><strong>Ofertas</strong></span>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
