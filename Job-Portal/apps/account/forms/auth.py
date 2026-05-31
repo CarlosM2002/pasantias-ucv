@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 
 from account.models import User
+from account.constants import TIPO_EMPRESA
 
 
 class EmployeeRegistrationForm(UserCreationForm):
@@ -41,25 +42,33 @@ class EmployeeRegistrationForm(UserCreationForm):
 
 
 class EmployerRegistrationForm(UserCreationForm):
+    tipo_empresa = forms.ChoiceField(
+        choices=TIPO_EMPRESA,
+        label="Tipo de Empresa",
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
     def __init__(self, *args, **kwargs):
         UserCreationForm.__init__(self, *args, **kwargs)
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
+        self.fields['tipo_empresa'].required = True
         self.fields['first_name'].label = "Nombre de la Empresa"
         self.fields['last_name'].label = "Dirección de la Empresa"
         self.fields['email'].label = "Correo Electrónico"
         self.fields['password1'].label = "Contraseña"
         self.fields['password2'].label = "Confirmar Contraseña"
 
-        self.fields['first_name'].widget.attrs.update({'placeholder': 'Ingrese el nombre de la empresa'})
-        self.fields['last_name'].widget.attrs.update({'placeholder': 'Ingrese la dirección de la empresa'})
-        self.fields['email'].widget.attrs.update({'placeholder': 'Ingrese el correo electrónico'})
-        self.fields['password1'].widget.attrs.update({'placeholder': 'Ingrese la contraseña'})
-        self.fields['password2'].widget.attrs.update({'placeholder': 'Confirme la contraseña'})
+        self.fields['first_name'].widget.attrs.update({'placeholder': 'Ingrese el nombre de la empresa', 'class': 'form-control'})
+        self.fields['last_name'].widget.attrs.update({'placeholder': 'Ingrese la dirección de la empresa', 'class': 'form-control'})
+        self.fields['email'].widget.attrs.update({'placeholder': 'Ingrese el correo electrónico', 'class': 'form-control'})
+        self.fields['password1'].widget.attrs.update({'placeholder': 'Ingrese la contraseña', 'class': 'form-control'})
+        self.fields['password2'].widget.attrs.update({'placeholder': 'Confirme la contraseña', 'class': 'form-control'})
+        self.fields['tipo_empresa'].widget.attrs.update({'class': 'form-control'})
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'email', 'password1', 'password2', 'tipo_empresa']
 
     def save(self, commit=True):
         user = UserCreationForm.save(self, commit=False)

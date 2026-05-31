@@ -52,9 +52,9 @@
                 {% elif user.is_authenticated and user.role == 'admin' %}
 
                     <li class="pr-3 has-children">
-                      <a>Admin</a> 
+                      <a>Administrador</a> 
                       <ul class="dropdown">
-                        <li><a href="{% url 'jobapp:dashboard' %}">Admin</a></li>
+                        <li><a href="{% url 'jobapp:dashboard' %}">Panel de administración</a></li>
                         <li><a href="{% url 'account:logout' %}">Cerrar sesión</a></li>
                       </ul>
                     </li>
@@ -66,7 +66,7 @@
                     <li><a href="{% url 'account:candidate-profile' request.user.id %}">Ver perfil</a></li>
                     <li><a href="{% url 'account:edit-profile' request.user.id %}">Editar perfil</a></li>
                     <li><a href="{% url 'jobapp:dashboard' %}">Ofertas guardadas</a></li>
-                    <li><a href="{% url 'account:logout' %}">Cerrar Sesión</a></li>
+                    <li><a href="{% url 'account:logout' %}">Cerrar sesión</a></li>
                   </ul>
                 </li>
                 <!-- <a href="{% url 'account:logout' %}"
@@ -84,7 +84,7 @@
 
                 <a href="{% url 'account:login' %}"
                   class="js-clone-nav btn btn-primary border-width-2 d-none d-lg-inline-block ov-fix"><span
-                    class="mr-2 icon-lock_outline"></span>Login</a>
+                    class="mr-2 icon-lock_outline"></span>Inicio de Sesión</a>
                 {% endif %}
               </ul>
             </div>

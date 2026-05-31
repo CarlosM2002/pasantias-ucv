@@ -8,11 +8,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-7">
-                <h1 class="text-white font-weight-bold">Ofertas</h1>
+                <h1 class="text-white font-weight-bold">Administrador</h1>
                 <div class="custom-breadcrumbs">
                     <a href="{% url 'jobapp:home' %}">Inicio</a> <span class="mx-2 slash">/</span>
-                    <a href="{% url 'jobapp:job-list' %}">Ofertas</a> <span class="mx-2 slash">/</span>
-                    <span class="text-white"><strong>Lista de ofertas</strong></span>
+                    <span class="text-white"><strong>Panel de Control</strong></span>
                 </div>
             </div>
         </div>
@@ -27,7 +26,7 @@
 
                 <div class="card">
                     {% if user.role == "admin" %}
-                    <h5 class="card-header text-center">Administrator Panel</h5>
+                    <h5 class="card-header text-center">Panel de Administración</h5>
                     <div class="card-body">
                         <div class="mb-3 text-right">
                             <a href="{% url 'jobapp:admin-report' %}" class="btn btn-primary">Generar reporte</a>
@@ -67,7 +66,7 @@
                             </div>
                         </div>
                         {% if recent_users %}
-                        <h5 class="card-header text-center mt-4">Últimos usuarios registrados</h5>
+                        <h5 class="card-header text-center mt-4">Últimos Usuarios Registrados</h5>
                         <div class="table-responsive">
                             <table class="table text-center mt-3">
                                 <thead class="thead-dark">
@@ -83,7 +82,23 @@
                                     <tr>
                                         <td>{{ recent.email }}</td>
                                         <td>{{ recent.get_full_name }}</td>
-                                        <td class="text-capitalize">{{ recent.role }}</td>
+                                        <td class="text-capitalize">
+                                            {% if recent.role == 'employee' %}
+                                                Pasante
+                                            {% elif recent.role == 'admin' %}
+                                                Administrador
+                                            {% elif recent.role == 'employer' %}
+                                                {% if recent.tipo_empresa == 'dependencia' %}
+                                                    Dependencia
+                                                {% elif recent.tipo_empresa == 'empresa_externa' %}
+                                                    Empresa Externa
+                                                {% else %}
+                                                    Empresa
+                                                {% endif %}
+                                            {% else %}
+                                                {{ recent.role }}
+                                            {% endif %}
+                                        </td>
                                         <td>{{ recent.date_joined | date:'M d, Y' }}</td>
                                     </tr>
                                     {% endfor %}

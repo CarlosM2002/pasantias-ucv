@@ -6,11 +6,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-7">
-                <h1 class="text-white font-weight-bold">All Applicants </h1>
+                <h1 class="text-white font-weight-bold">Aplicantes </h1>
                 <div class="custom-breadcrumbs">
-                    <a href="{% url 'jobapp:home' %}">Home</a> <span class="mx-2 slash">/</span>
-                    <a href="{% url 'jobapp:dashboard' %}">Dashboard</a> <span class="mx-2 slash">/</span>
-                    <span class="text-white"><strong>All Applicants </strong></span>
+                    <a href="{% url 'jobapp:home' %}">Inicio</a> <span class="mx-2 slash">/</span>
+                    <a href="{% url 'jobapp:dashboard' %}">Ofertas</a> <span class="mx-2 slash">/</span>
+                    <span class="text-white"><strong>Aplicantes</strong></span>
                 </div>
             </div>
         </div>
@@ -21,17 +21,17 @@
         <div class="row">
             <div class="col-lg-12 mb-5">
                 <div class="card">
-                    <h5 class="card-header text-center mb-5"> All Applicants </h5>
+                    <h5 class="card-header text-center mb-5"> Aplicantes </h5>
                     <div class="table-responsive">
                         <table class="table text-center">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Job Title</th>
-                                    <th>Applied Date</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                    <th>View </th>
+                                    <th>Nombre</th>
+                                    <th>Titulo de la oferta</th>
+                                    <th>Fecha de aplicación</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                    <th>borrar esto</th>
                         
                                 </tr>
                             </thead>
@@ -47,9 +47,9 @@
                                         {% if applicant.status == 'pending' %}
                                             <span class="badge badge-warning">Pending</span>
                                         {% elif applicant.status == 'accepted' %}
-                                            <span class="badge badge-success">Accepted</span>
+                                            <span class="badge badge-success">Acceptar</span>
                                         {% else %}
-                                            <span class="badge badge-danger">Rejected</span>
+                                            <span class="badge badge-danger">Rechazar</span>
                                         {% endif %}
                                     </td>
                                     <td>
@@ -67,7 +67,7 @@
                                             </form>
                                         </div>
                                         {% else %}
-                                            <span class="text-muted">No Action</span>
+                                            <span class="text-muted">Revisado</span>
                                         {% endif %}
                                     </td>
                                     <td>

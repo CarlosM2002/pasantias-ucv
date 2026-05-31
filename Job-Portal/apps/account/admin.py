@@ -60,7 +60,25 @@ class UserAdmin(BaseUserAdmin):
     form = UpdateUserForm
     add_form = AddUserForm
 
-    list_display = ('email', 'first_name', 'last_name', 'gender', 'role', 'is_staff')
+    def role_display(self, obj):
+        """Return role label in Spanish, using tipo_empresa for employers."""
+        role = getattr(obj, 'role', None)
+        if role == 'employee':
+            return 'Pasante'
+        if role == 'admin':
+            return 'Administrador'
+        if role == 'employer':
+            tipo = getattr(obj, 'tipo_empresa', None)
+            if tipo == 'dependencia':
+                return 'Dependencia'
+            if tipo == 'empresa_externa':
+                return 'Empresa Externa'
+            return 'Empresa'
+        return role
+
+    role_display.short_description = 'Rol'
+
+    list_display = ('email', 'first_name', 'last_name', 'gender', 'role_display', 'is_staff')
     list_filter = ('is_staff', )
     fieldsets = (
         (None, {'fields': ('email', 'password')}),

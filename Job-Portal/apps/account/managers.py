@@ -29,7 +29,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
-        extra_fields.setdefault('role', ROLE[0][0])  # 'employer'
+        extra_fields.setdefault('role', ROLE[2][0])  # 'admin'
         extra_fields.setdefault('gender', GENDER_TYPE[0][0])  # 'M'
 
         if extra_fields.get('is_staff') is not True:

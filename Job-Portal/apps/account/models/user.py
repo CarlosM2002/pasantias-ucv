@@ -3,7 +3,7 @@ from django.db import models
 
 from account.managers import CustomUserManager
 
-from account.constants import GENDER_TYPE, ROLE
+from account.constants import GENDER_TYPE, ROLE, TIPO_EMPRESA
 
 
 class User(AbstractUser):
@@ -17,6 +17,7 @@ class User(AbstractUser):
     )
     role = models.CharField(choices=ROLE, max_length=10)
     gender = models.CharField(choices=GENDER_TYPE, max_length=1)
+    tipo_empresa = models.CharField(choices=TIPO_EMPRESA, max_length=20, blank=True, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

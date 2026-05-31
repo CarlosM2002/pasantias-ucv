@@ -8,3 +8,8 @@ ROLE = (
     ('employee', "Employee"),
     ('admin', "Administrator"),
 )
+
+TIPO_EMPRESA = (
+    ('dependencia', 'Dependencia'),
+    ('empresa_externa', 'Empresa Externa'),
+)
