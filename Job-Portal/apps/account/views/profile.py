@@ -37,7 +37,7 @@ class EmployeeEditProfileView(EmployeeRequiredMixin, View):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Your Profile Was Successfully Updated!')
+            messages.success(request, 'Tu perfil fue actualizado exitosamente!')
             return redirect('account:edit-profile', id=user.id)
             
         return render(request, self.template_name, {
@@ -75,7 +75,7 @@ class EmployerEditProfileView(View):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Company Profile Was Successfully Updated!')
+            messages.success(request, 'El perfil de la empresa fue actualizado exitosamente!')
             return redirect('account:edit-profile', id=user.id)
         """
         # If validation failed, collect missing/errored fields and show a message

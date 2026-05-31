@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('resume', models.FileField(blank=True, null=True, upload_to='resumes/')),
                 ('bio', models.TextField(blank=True)),
-                ('skills', taggit.managers.TaggableManager(blank=True, help_text='A comma-separated list of tags.', through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags')),
+                ('skills', taggit.managers.TaggableManager(blank=True, help_text='Separar tags por comas .', through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='employee_profile', to=settings.AUTH_USER_MODEL)),
             ],
         ),
