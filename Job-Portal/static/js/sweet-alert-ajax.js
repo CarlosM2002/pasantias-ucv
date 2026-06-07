@@ -29,7 +29,7 @@ function call_sw_alert_func(route, id, message){
                 if (route.includes('delete-bookmark')) {
                   var $b = $("#bookmark_row_"+id);
                   if ($b.length) { $b.remove(); removed = true; }
-                } else if (route.includes('delete-application')) {
+                }  else if  (route.includes('delete-application')) {
                   var $a = $("#application_row_"+id);
                   if ($a.length) { $a.remove(); removed = true; }
                 }
@@ -44,7 +44,7 @@ function call_sw_alert_func(route, id, message){
                   // If there's no table row (e.g. we're on the job detail page), reload to update buttons
                   location.reload();
                 }
-              } else if(route.includes('close')){
+              } else if(route.includes('close')) {
                 swal({
                   title: "¡Hecho!",
                   text: "Tu oferta ha sido marcada como cerrada!",
@@ -52,6 +52,15 @@ function call_sw_alert_func(route, id, message){
                   button: "Done",
                 });
                 $("#change_job_status_"+id).html('<a class="text-white btn btn-success btn-sm" role="button">Closed</a>')
+              } else if (route.includes('privileges')) {
+                swal({
+                  title: "¡Hecho!",
+                  text: "Los privilegios se han actualizado.",
+                  icon: "success",
+                  button: "Done",
+                }).then(function() {
+                  location.reload();
+                });
               }
             },
 

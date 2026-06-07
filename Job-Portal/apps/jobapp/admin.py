@@ -12,7 +12,7 @@ admin.site.register(Applicant, ApplicantAdmin)
 
 
 class JobAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_published', 'is_closed','created_at','updated_at')
+    list_display = ('title', 'priority', 'is_published', 'is_closed','created_at','updated_at')
     # Put soft-delete flags at the bottom in the admin form UI.
     fieldsets = (
         (None, {
@@ -26,6 +26,7 @@ class JobAdmin(admin.ModelAdmin):
                 'work_mode',
                 'category',
                 'salary',
+                'priority',
                 'views_count',
                 'company_name',
                 'company_description',

@@ -22,7 +22,45 @@
 <section id="ajax_listing_paginattion" class="site-section services-section bg-light block__62849" id="next-section">
   <div class="container">
 
+    {% if promoted_jobs %}
+    <div class="row mb-5 justify-content-center">
+      <div class="col-md-7 text-center">
+        <h2 class="section-title mb-2">Ofertas Promocionadas</h2>
+      </div>
+    </div>
     <div class="row">
+      {% for job in promoted_jobs %}
+      <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
+        <a href="{% url 'jobapp:single-job' job.id %}" class="block__16443 min-h text-center d-block">
+          <span class="custom-icon mx-auto"><span class="icon-magnet d-block"></span></span>
+          <h3>{{ job.title }}</h3>
+          <ul class="job-listing-meta list-unstyled pl-3 mb-0">
+            <li class="menu-fix mb-2">
+              {% if job.job_type == '1' %}
+              <span class="badge badge-primary">Tiempo Completo</span>
+              {% elif job.job_type == '2'%}
+              <span class="badge badge-danger">Medio Tiempo</span>
+              {% else %}
+              <span class="badge badge-info">Flexible</span>
+              {% endif %}
+            </li>
+            <li class="badge badge-secondary menu-fix mb-2"> {{ job.location }}</li>
+          </ul>
+          <p>{{ job.description | safe | truncatechars:150}}</p>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row mb-5 justify-content-center">
+      <div class="col-md-7 text-center">
+        <h2 class="section-title mb-2">Ofertas de Pasantía</h2>
+      </div>
+    </div>
+
+    {% if page_obj %}
+    <div class="row mt-5">
       {% for job in page_obj %}
       <div class="col-6 col-md-6 col-lg-4 mb-4 mb-lg-5">
         <a href="{% url 'jobapp:single-job' job.id %}" class="block__16443 min-h text-center d-block">
@@ -52,6 +90,13 @@
       {% endfor %}
     </div>
     {% include 'jobapp/paginator.html' %}
+    {% else %}
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-8 text-center">
+        <p class="lead">No hay ofertas de pasantía disponibles en este momento.</p>
+      </div>
+    </div>
+    {% endif %}
 
   </div>
 </section>
