@@ -2,7 +2,6 @@
 {% load static %}
 {% block content %}
 
-<!-- HOME -->
 <section class="section-hero overlay inner-page bg-image"
   style="background-image: url('{% static 'images/hero_1.jpg' %}');" id="home-section">
   <div class="container">
@@ -48,12 +47,14 @@
         <form method="POST" enctype="multipart/form-data" class="p-4 border rounded">
           {% csrf_token %}
           <h4 class="mb-3">Información de la cuenta</h4>
+          
           {% for field in form %}
           <div class="row form-group">
-            <div class="col-md-12 mb-3 mb-md-0">
-              <label class="text-black" for="id_{{ field.name }}">{{ field.label }}</label>
+            <div class="col-md-12 mb-4"> 
+              <label class="text-black font-weight-bold" for="id_{{ field.name }}">{{ field.label }}</label>
+              
               {% if field.name == 'gender' %}
-                <div class="d-block">
+                <div class="d-block mt-2">
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gender" id="male" value="M"
                       {% if field.value == 'M' %} checked {% endif %}>
@@ -65,6 +66,21 @@
                     <label class="form-check-label" for="female">Female</label>
                   </div>
                 </div>
+              {% elif field.field.widget.input_type == 'radio' %}
+                <div class="d-block w-100 mt-2 mb-3" style="clear: both;">
+                  {% for radio in field %}
+                    <div class="form-check mb-2" style="padding-left: 2rem;">
+                      {{ radio.tag }}
+                      <label class="form-check-label text-black" style="cursor: pointer;" for="{{ radio.id_for_label }}">
+                        {{ radio.choice_label }}
+                      </label>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% elif field.field.widget.input_type == 'select' or field.field.widget.input_type == 'checkbox' %}
+                <div class="d-block w-100 mt-2 mb-3" style="clear: both;">
+                  {{ field }}
+                </div>
               {% else %}
                 <input type="{{ field.field.widget.input_type }}" class="form-control" name="{{ field.name }}"
                   id="id_{{ field.name }}" value="{{ field.value|default_if_none:'' }}"
@@ -74,12 +90,14 @@
           </div>
           {% endfor %}
 
-          <hr class="my-4">
+          <hr class="my-4" style="clear: both;">
           <h4 class="mb-3">Detalles de la empresa</h4>
+          
           {% for field in profile_form %}
           <div class="row form-group">
-            <div class="col-md-12 mb-3 mb-md-0">
-              <label class="text-black" for="id_{{ field.name }}">{{ field.label }}</label>
+            <div class="col-md-12 mb-4">
+              <label class="text-black font-weight-bold" for="id_{{ field.name }}">{{ field.label }}</label>
+              
               {% if field.name == 'description' %}
                 {{ field }}
               {% elif field.name == 'company_logo' %}
@@ -91,9 +109,21 @@
                      <img src="{{ field.value.url }}" alt="Logo" style="max-height: 100px;" class="img-thumbnail">
                    </div>
                 {% endif %}
+              {% elif field.field.widget.input_type == 'radio' %}
+                <div class="d-block w-100 mt-2 mb-3" style="clear: both;">
+                  {% for radio in field %}
+                    <div class="form-check mb-2" style="padding-left: 2rem;">
+                      {{ radio.tag }}
+                      <label class="form-check-label text-black" style="cursor: pointer;" for="{{ radio.id_for_label }}">
+                        {{ radio.choice_label }}
+                      </label>
+                    </div>
+                  {% endfor %}
+                </div>
               {% else %}
                 {{ field }}
               {% endif %}
+              
               {% if field.help_text %}
                 <small class="form-text text-muted">{{ field.help_text }}</small>
               {% endif %}
@@ -101,7 +131,7 @@
           </div>
           {% endfor %}
 
-          <div class="row form-group mt-4">
+          <div class="row form-group mt-5">
             <div class="col-md-12">
               <input type="submit" value="Actualizar el perfil de la empresa" class="btn px-4 btn-primary text-white">
             </div>

@@ -28,8 +28,12 @@
                 {% if profile_type == 'employee' %}
                 {{ profile.user.get_full_name }}
                 {% else %}
-                {{ profile.user.first_name }} {{ profile.user.last_name }} <small
-                    class="text-muted text-capitalize">(Empresa/Dependencia)</small>
+                {{ profile.user.first_name }} {{ profile.user.last_name }}
+                {% if profile.user.tipo_empresa == 'dependencia' %}
+                    <small class="text-muted text-capitalize">Dependencia</small>
+                {% else %}
+                    <small class="text-muted text-capitalize">Empresa</small>
+                {% endif %}
                 {% endif %}
             </h2>
             <div class="social-links d-flex gap-2">

@@ -2,11 +2,20 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 
-from account.models import User
+from account.models import User, EmployeeProfile
 from account.constants import TIPO_EMPRESA
+from django.core.validators import RegexValidator
 
 
 class EmployeeRegistrationForm(UserCreationForm):
+    cedula = forms.CharField(
+        required=True,
+        label='Cédula',
+        max_length=8,
+        widget=forms.TextInput(attrs={'placeholder': 'Ej: 01234567'}),
+        validators=[RegexValidator(r'^\d{8}$', 'La cédula debe tener 8 dígitos')]
+    )
+
     def __init__(self, *args, **kwargs):
         UserCreationForm.__init__(self, *args, **kwargs)
         self.fields['gender'].required = True
@@ -22,6 +31,7 @@ class EmployeeRegistrationForm(UserCreationForm):
         self.fields['email'].widget.attrs.update({'placeholder': 'Ingrese su correo electrónico'})
         self.fields['password1'].widget.attrs.update({'placeholder': 'Ingrese su contraseña'})
         self.fields['password2'].widget.attrs.update({'placeholder': 'Confirme su contraseña'})
+        self.fields['cedula'].widget.attrs.update({'class': 'form-control'})
 
     class Meta:
         model = User
@@ -38,6 +48,12 @@ class EmployeeRegistrationForm(UserCreationForm):
         user.role = "employee"
         if commit:
             user.save()
+            # Ensure EmployeeProfile exists and save cedula
+            profile, _ = EmployeeProfile.objects.get_or_create(user=user)
+            ced = self.cleaned_data.get('cedula')
+            if ced:
+                profile.cedula = ced
+                profile.save()
         return user
 
 

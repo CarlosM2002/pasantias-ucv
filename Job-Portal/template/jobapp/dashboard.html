@@ -48,8 +48,14 @@
                         <div class="row text-center">
                             <div class="col-md-4 mb-3">
                                 <div class="p-4 bg-light rounded">
-                                    <h3>{{ admin_stats.total_employers }}</h3>
-                                    <p class="mb-0">Empresas registradas</p>
+                                    <h3>{{ admin_stats.total_companies }}</h3>
+                                    <p class="mb-0">Empresas</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="p-4 bg-light rounded">
+                                    <h3>{{ admin_stats.total_dependencies }}</h3>
+                                    <p class="mb-0">Dependencias</p>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
@@ -58,14 +64,14 @@
                                     <p class="mb-0">Usuarios candidatos</p>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row text-center">
                             <div class="col-md-4 mb-3">
                                 <div class="p-4 bg-light rounded">
                                     <h3>{{ admin_stats.total_jobs }}</h3>
                                     <p class="mb-0">Ofertas de trabajo</p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row text-center">
                             <div class="col-md-4 mb-3">
                                 <div class="p-4 bg-light rounded">
                                     <h3>{{ admin_stats.total_applicants }}</h3>
@@ -91,11 +97,12 @@
                                         <th>Fecha de registro</th>
                                         <th>Privilegios</th>
                                         <th>Acciones</th>
+                                        <th>Eliminar cuenta</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for recent in recent_users %}
-                                    <tr>
+                                    <tr id="user_row_{{ recent.id }}">
                                         <td>{{ recent.email }}</td>
                                         <td>{{ recent.get_full_name }}</td>
                                         <td class="text-capitalize">
@@ -106,8 +113,6 @@
                                             {% elif recent.role == 'employer' %}
                                                 {% if recent.tipo_empresa == 'dependencia' %}
                                                     Dependencia
-                                                {% elif recent.tipo_empresa == 'empresa_externa' %}
-                                                    Empresa Externa
                                                 {% else %}
                                                     Empresa
                                                 {% endif %}
@@ -130,13 +135,16 @@
                                         <td>
                                             {% if recent.role == 'employer' %}
                                                 {% if recent.employer_profile.privilegios %}
-                                                    <button onclick="call_sw_alert_func('{% url 'jobapp:set-employer-privileges' recent.id 'revoke' %}','{{ recent.id }}','¿Eliminar privilegios a esta empresa?')" class="btn btn-danger btn-sm">Eliminar Privilegios</button>
+                                                    <button onclick="call_sw_alert_func('{% url 'jobapp:set-employer-privileges' recent.id 'revoke' %}','{{ recent.id }}','¿Eliminar privilegios a esta empresa?')" class="btn btn-danger btn-sm mb-1">Eliminar</button>
                                                 {% else %}
-                                                    <button onclick="call_sw_alert_func('{% url 'jobapp:set-employer-privileges' recent.id 'grant' %}','{{ recent.id }}','¿Otorgar privilegios a esta empresa?')" class="btn btn-primary btn-sm">Otorgar Privilegios</button>
+                                                    <button onclick="call_sw_alert_func('{% url 'jobapp:set-employer-privileges' recent.id 'grant' %}','{{ recent.id }}','¿Otorgar privilegios a esta empresa?')" class="btn btn-primary btn-sm mb-1">Otorgar</button>
                                                 {% endif %}
                                             {% else %}
                                                 -
                                             {% endif %}
+                                        </td>
+                                        <td>
+                                            <button onclick="call_sw_alert_func('{% url 'jobapp:delete-user' recent.id %}','{{ recent.id }}','¿Eliminar este perfil y borrar la cuenta?')" class="btn btn-danger btn-sm">Eliminar</button>
                                         </td>
                                     </tr>
                                     {% endfor %}

@@ -11,5 +11,5 @@ ROLE = (
 
 TIPO_EMPRESA = (
     ('dependencia', 'Dependencia'),
-    ('empresa_externa', 'Empresa Externa'),
+    ('empresa_externa', 'Empresa'),
 )

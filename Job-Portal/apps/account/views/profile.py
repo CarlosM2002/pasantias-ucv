@@ -5,7 +5,7 @@ from django.views.generic import UpdateView, View, DetailView
 
 from account.forms import EmployeeProfileEditForm, EmployerProfileEditForm, EmployeeProfileForm, EmployerProfileForm
 from account.models import User, EmployeeProfile, EmployerProfile
-from jobapp.permission import EmployeeRequiredMixin
+from jobapp.permission import EmployeeRequiredMixin, EmployerRequiredMixin
 
 class EmployeeEditProfileView(EmployeeRequiredMixin, View):
     """Employee updates their own user and profile data."""
@@ -45,7 +45,7 @@ class EmployeeEditProfileView(EmployeeRequiredMixin, View):
             'profile_form': profile_form
         })
 
-class EmployerEditProfileView(View):
+class EmployerEditProfileView(EmployerRequiredMixin, View):
     """Employer updates their own user and profile data."""
     template_name = 'account/employer-edit-profile.html'
 
@@ -76,7 +76,7 @@ class EmployerEditProfileView(View):
             user_form.save()
             profile_form.save()
             messages.success(request, 'El perfil de la empresa fue actualizado exitosamente!')
-            return redirect('account:edit-profile', id=user.id)
+            return redirect('account:employer-edit-profile', id=user.id)
         """
         # If validation failed, collect missing/errored fields and show a message
         missing_fields = []

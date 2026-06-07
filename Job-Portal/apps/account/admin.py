@@ -71,8 +71,6 @@ class UserAdmin(BaseUserAdmin):
             tipo = getattr(obj, 'tipo_empresa', None)
             if tipo == 'dependencia':
                 return 'Dependencia'
-            if tipo == 'empresa_externa':
-                return 'Empresa Externa'
             return 'Empresa'
         return role
 

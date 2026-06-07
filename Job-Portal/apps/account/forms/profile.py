@@ -1,4 +1,5 @@
 from django import forms
+from account.constants import TIPO_EMPRESA
 from account.models import User, EmployeeProfile, EmployerProfile
 
 class EmployeeProfileEditForm(forms.ModelForm):
@@ -14,39 +15,39 @@ class EmployeeProfileEditForm(forms.ModelForm):
         fields = ["first_name", "last_name", "gender"]
 
 class EmployerProfileEditForm(forms.ModelForm):
+    tipo_empresa = forms.ChoiceField(
+        required=False,
+        label='Tipo de empresa',
+        choices=TIPO_EMPRESA,
+        widget=forms.RadioSelect(attrs={'class': 'form-check-input'})
+    )
+
     def __init__(self, *args, **kwargs):
         super(EmployerProfileEditForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].label = 'Nombre de la empresa'
         self.fields['first_name'].widget.attrs.update({'placeholder': 'Ingrese el nombre de la empresa'})
+        if self.instance and getattr(self.instance, 'tipo_empresa', None):
+            self.fields['tipo_empresa'].initial = self.instance.tipo_empresa
 
     class Meta:
         model = User
-        fields = ["first_name"]
+        fields = ["first_name", "tipo_empresa"]
 
 class EmployeeProfileForm(forms.ModelForm):
+    cedula = forms.CharField(required=False, label='Cédula', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej: 01234567'}))
+
     class Meta:
         model = EmployeeProfile
-        fields = ["resume", "bio", "skills"]
+        fields = ["cedula", "resume", "bio", "skills"]
         widgets = {
             'bio': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Tell us about yourself...'}),
         }
 
 class EmployerProfileForm(forms.ModelForm):
-    COMPANY_TYPE_CHOICES = [
-        ('externa', 'Externa'),
-        ('dependencia', 'Dependencia'),
-    ]
-
     location = forms.CharField(
         required=False,
         label='Ubicación',
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la ubicación de la empresa'})
-    )
-    company_type = forms.ChoiceField(
-        required=False,
-        label='Tipo de empresa',
-        choices=COMPANY_TYPE_CHOICES,
-        widget=forms.Select(attrs={'class': 'form-control'})
     )
     company_website = forms.URLField(
         required=False,

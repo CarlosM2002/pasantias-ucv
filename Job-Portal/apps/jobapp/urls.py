@@ -19,6 +19,7 @@ from jobapp.views import (
     SingleJobView,
     UpdateApplicantStatusView,
     toggle_employer_privileges,
+    delete_user_view,  # <-- ¡Aquí está agregado!
 )
 
 app_name = "jobapp"
@@ -35,6 +36,7 @@ urlpatterns = [
     path('dashboard/', dashboard_view, name='dashboard'),
     path('dashboard/admin/report/', admin_report_view, name='admin-report'),
     path('dashboard/admin/employer/<int:user_id>/privileges/<str:action>/', toggle_employer_privileges, name='set-employer-privileges'),
+    path('dashboard/admin/user/<int:user_id>/delete/', delete_user_view, name='delete-user'),
     path('dashboard/employer/job/<int:id>/applicants/', AllApplicantsView.as_view(), name='applicants'),
     path('dashboard/employer/job/edit/<int:id>', JobEditView.as_view(), name='edit-job'),
     path('dashboard/employer/applicant/<int:id>/', ApplicantDetailsView.as_view(), name='applicant-details'),
