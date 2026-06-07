@@ -107,7 +107,7 @@ class AllApplicantsView(EmployerRequiredMixin, ListView):
     context_object_name = 'all_applicants'
 
     def get_queryset(self):
-        return Applicant.objects.filter(job_id=self.kwargs['id']).select_related('user', 'job')
+        return Applicant.objects.filter(job_id=self.kwargs['id'], is_deleted=False).select_related('user', 'job')
 
 
 class ApplicantDetailsView(EmployerRequiredMixin, DetailView):

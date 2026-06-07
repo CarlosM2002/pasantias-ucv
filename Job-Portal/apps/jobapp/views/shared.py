@@ -31,7 +31,7 @@ def dashboard_view(request):
     if request.user.role == 'employer':
         jobs = Job.objects.filter(user=request.user.id, is_deleted=False)
         for job in jobs:
-            count = Applicant.objects.filter(job=job.id).count()
+            count = Applicant.objects.filter(job=job.id, is_deleted=False).count()
             total_applicants[job.id] = count
 
     elif request.user.role == 'employee':
