@@ -26,6 +26,16 @@
                         {% endif %}
                     </p>
                 </div>
+                <div class="mb-3">
+                    <span class="text-muted small font-weight-bold">Sector:</span>
+                    <p class="mb-2">
+                        {% if profile.sector_empresa %}
+                            {{ profile.get_sector_empresa_display|default:profile.sector_empresa }}
+                        {% else %}
+                            No especificado
+                        {% endif %}
+                    </p>
+                </div>
 
                 {% if request.user.id == profile.user.id %}
                 <div class="mt-4">

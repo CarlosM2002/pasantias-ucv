@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from taggit.managers import TaggableManager
 from django.core.validators import RegexValidator
+from account.constants import SECTOR_EMPRESA
 
 class EmployeeProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='employee_profile')
@@ -19,6 +20,7 @@ class EmployerProfile(models.Model):
     company_logo = models.ImageField(upload_to='logos/', blank=True)
     description = models.TextField(blank=True)
     privilegios = models.BooleanField(default=False)
+    sector_empresa = models.CharField(max_length=50, choices=SECTOR_EMPRESA, blank=True, null=True)
 
     def __str__(self):
         return f"Employer Profile for {self.user.email}"

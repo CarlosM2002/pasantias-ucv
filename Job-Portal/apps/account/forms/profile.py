@@ -1,5 +1,5 @@
 from django import forms
-from account.constants import TIPO_EMPRESA
+from account.constants import TIPO_EMPRESA, SECTOR_EMPRESA
 from account.models import User, EmployeeProfile, EmployerProfile
 
 class EmployeeProfileEditForm(forms.ModelForm):
@@ -59,15 +59,31 @@ class EmployerProfileForm(forms.ModelForm):
         label='Logo de la empresa',
         widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'})
     )
+    company_website = forms.URLField(
+        required=False,
+        label='Sitio web de la empresa',
+        widget=forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el sitio web de la empresa'})
+    )
+    company_logo = forms.ImageField(
+        required=False,
+        label='Logo de la empresa',
+        widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'})
+    )
     description = forms.CharField(
         required=False,
         label='Descripción de la empresa',
         widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Cuéntanos sobre tu empresa...'})
     )
+    sector_empresa = forms.ChoiceField(
+        required=False,
+        label='Sector de la empresa',
+        choices=SECTOR_EMPRESA,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
     
     class Meta:
         model = EmployerProfile
-        fields = ["company_website", "company_logo", "description"]
+        fields = ["company_website", "company_logo", "description", "sector_empresa"]
         widgets = {
             'description': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Tell us about your company...'}),
         }
