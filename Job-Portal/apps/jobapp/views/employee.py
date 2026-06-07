@@ -19,11 +19,20 @@ class ApplyJobView(EmployeeRequiredMixin, View):
         job = get_object_or_404(Job, id=id)
         form = JobApplyForm(request.POST)
 
-        if Applicant.objects.filter(user=user, job=job).exists():
-            messages.error(request, 'You already applied for the Job!')
+        # Handle existing applicant records (including soft-deleted)
+        existing = Applicant.objects.filter(user=user, job=job).first()
+        if existing:
+            if not existing.is_deleted:
+                messages.error(request, '¡Ya has solicitado este puesto!')
+            else:
+                # reactivate soft-deleted application instead of creating a new row
+                existing.is_deleted = False
+                existing.status = 'pendiente'
+                existing.save()
+                messages.success(request, '¡Has solicitado este puesto con éxito!')
         elif form.is_valid():
             Applicant.objects.create(user=user, job=job)
-            messages.success(request, 'You have successfully applied for this job!')
+            messages.success(request, '¡Has solicitado este puesto con éxito!')
 
         return redirect(reverse('jobapp:single-job', kwargs={'id': id}))
 
@@ -45,7 +54,27 @@ class DeleteBookmarkView(EmployeeRequiredMixin, DeleteView):
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        messages.success(request, 'Saved Job was successfully deleted!')
+        messages.success(request, '¡El puesto guardado fue eliminado con éxito!')
+        success_url = self.get_success_url()
+        self.object.delete()
+        return redirect(success_url)
+
+
+class DeleteApplicantView(EmployeeRequiredMixin, DeleteView):
+    """Employee deletes an application."""
+    model = Applicant
+    pk_url_kwarg = 'id'
+    success_url = reverse_lazy('jobapp:dashboard')
+
+    def get_queryset(self):
+        return Applicant.objects.filter(user=self.request.user, is_deleted=False)
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        messages.success(request, '¡La solicitud se eliminó correctamente!')
         success_url = self.get_success_url()
         self.object.delete()
         return redirect(success_url)
@@ -61,11 +90,18 @@ class JobBookmarkView(EmployeeRequiredMixin, View):
         job = get_object_or_404(Job, id=id)
         form = JobBookmarkForm(request.POST)
 
-        if BookmarkJob.objects.filter(user=user, job=job).exists():
-            messages.error(request, 'You already saved this Job!')
+        # Handle existing bookmark records (including soft-deleted)
+        existing = BookmarkJob.objects.filter(user=user, job=job).first()
+        if existing:
+            if not existing.is_deleted:
+                messages.error(request, '¡Ya has guardado este puesto!')
+            else:
+                existing.is_deleted = False
+                existing.save()
+                messages.success(request, '¡Has guardado este puesto con éxito!')
         elif form.is_valid():
             BookmarkJob.objects.create(user=user, job=job)
-            messages.success(request, 'You have successfully saved this job!')
+            messages.success(request, '¡Has guardado este puesto con éxito!')
 
         return redirect(reverse('jobapp:single-job', kwargs={'id': id}))
 

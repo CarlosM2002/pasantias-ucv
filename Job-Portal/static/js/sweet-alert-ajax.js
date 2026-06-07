@@ -24,8 +24,27 @@ function call_sw_alert_func(route, id, message){
                   icon: "success",
                   button: "Done",
                 });
-                $("#row_"+id).remove();
-              }else if(route.includes('close')){
+                // Try removing by specific prefixes to avoid id collisions between models
+                var removed = false;
+                if (route.includes('delete-bookmark')) {
+                  var $b = $("#bookmark_row_"+id);
+                  if ($b.length) { $b.remove(); removed = true; }
+                } else if (route.includes('delete-application')) {
+                  var $a = $("#application_row_"+id);
+                  if ($a.length) { $a.remove(); removed = true; }
+                }
+                // Fallback: try removing generic row or both prefixes
+                if (!removed) {
+                  var $row = $("#bookmark_row_"+id);
+                  if ($row.length) { $row.remove(); removed = true; }
+                  var $row2 = $("#application_row_"+id);
+                  if ($row2.length) { $row2.remove(); removed = true; }
+                }
+                if (!removed) {
+                  // If there's no table row (e.g. we're on the job detail page), reload to update buttons
+                  location.reload();
+                }
+              } else if(route.includes('close')){
                 swal({
                   title: "¡Hecho!",
                   text: "Tu oferta ha sido marcada como cerrada!",

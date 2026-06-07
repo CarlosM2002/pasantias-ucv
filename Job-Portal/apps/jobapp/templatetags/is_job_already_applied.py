@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.simple_tag(name='is_job_already_applied')
 def is_job_already_applied(job, user):
-    applied = Applicant.objects.filter(job=job, user=user)
+    applied = Applicant.objects.filter(job=job, user=user, is_deleted=False)
     if applied:
         return True
     else:

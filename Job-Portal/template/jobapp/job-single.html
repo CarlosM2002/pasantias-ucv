@@ -2,6 +2,7 @@
 {% load static %}
 {% load is_job_already_applied %}
 {% load is_job_already_saved %}
+{% load job_rel_ids %}
 {% load i18n %}
 
 {% block meta_title %}{{ job.title }} at {{ job.company_name }} | DJobPortal{% endblock %}
@@ -143,9 +144,12 @@
             {% if user.is_authenticated and user.role == 'employee' %}
             {% is_job_already_saved job request.user as is_saved %}
             {% if is_saved %}
-            <span class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>
-              Guardado
-            </span>
+            {% get_bookmark_id job request.user as bk_id %}
+            <form action="{% url 'jobapp:delete-bookmark' 0 %}" method="GET" style="display:inline;">
+              <button type="button" onclick="call_sw_alert_func('{% url 'jobapp:delete-bookmark' bk_id %}','{{ bk_id }}','Una vez borrada, esta oferta será eliminada de tu lista de favoritas!')" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>
+                Eliminar de favoritos
+              </button>
+            </form>
             {% else %}
 
             <form action="{% url 'jobapp:bookmark-job' job.id %}" method="POST">
@@ -178,7 +182,8 @@
           {% if is_applied %}
 
           <div class="col-6">
-            <span class="btn btn-block btn-danger btn-md">Ya has aplicado</span>
+            {% get_application_id job request.user as app_id %}
+            <button type="button" onclick="call_sw_alert_func('{% url 'jobapp:delete-application' app_id %}','{{ app_id }}','Una vez quitada, esta postulación será eliminada de tu lista de postulaciones!')" class="btn btn-block btn-danger btn-md">Quitar postulación</button>
           </div>
           {% else %}
           <div class="col-6">
