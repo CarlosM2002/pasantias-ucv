@@ -3,6 +3,7 @@ from django.db import models
 from django.core.cache import cache
 from django.utils import timezone
 
+from account.constants import TIPO_EMPRESA
 from core.models import SoftDeleteModel, TimeStampedModel
 
 from django_ckeditor_5.fields import CKEditor5Field
@@ -22,13 +23,6 @@ WORK_MODE = (
     ('3', 'Presencial'),
 )
 
-EXPERIENCE_LEVEL = (
-    ('0', 'Entry Level'),
-    ('1', 'Mid Level'),
-    ('2', 'Senior Level'),
-    ('3', 'Lead / Manager'),
-)
-
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -45,11 +39,11 @@ class Job(TimeStampedModel, SoftDeleteModel):
     location = models.CharField(max_length=300, db_index=True)
     job_type = models.CharField(choices=JOB_TYPE, max_length=1, db_index=True)
     work_mode = models.CharField(choices=WORK_MODE, max_length=1, default='3')
-    experience_level = models.CharField(choices=EXPERIENCE_LEVEL, max_length=1, default='0')
     category = models.ForeignKey(Category, related_name='Category', on_delete=models.CASCADE)
-    salary = models.CharField(max_length=30, blank=True)
+    salary = models.BooleanField(default=False)
     views_count = models.PositiveIntegerField(default=0)
     company_name = models.CharField(max_length=300, db_index=True)
+    tipo_empresa = models.CharField(choices=TIPO_EMPRESA, max_length=20, blank=True, null=True)
     company_description = CKEditor5Field(config_name='extends', blank=True, null=True)
     url = models.URLField(max_length=200)
     last_date = models.DateField()

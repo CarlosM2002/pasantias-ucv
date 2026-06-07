@@ -124,7 +124,7 @@ class SearchResultView(ListView):
     def get_queryset(self):
         return search_jobs(
             title_or_company=self.request.GET.get('job_title_or_company_name'),
-            location=self.request.GET.get('location'),
+            company_type=self.request.GET.get('tipo_empresa'),
             category_id=self.request.GET.get('category'),
         )
 

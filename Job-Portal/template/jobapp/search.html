@@ -6,10 +6,13 @@
       <input type="text"  name="job_title_or_company_name" class="form-control form-control-lg" placeholder="Empresa / Oferta">
     </div>
     <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-      <input type="text"  name="location" class="form-control form-control-lg" placeholder="Tipo de entidad">
+      <select name="tipo_empresa" class="selectpicker border rounded" id="tipo_empresa" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" data-dropup-auto="false" title="Tipo de entidad">
+        <option value="dependencia">Dependencia</option>
+        <option value="empresa_externa">Empresa Externa</option>
+      </select>
     </div>
     <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-      <select name="category" class="selectpicker" id="category" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Especialidad">
+      <select name="category" class="selectpicker" id="category" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" data-dropup-auto="false" title="Especialidad">
         {% for category in categories %}
         <option value="{{ category.id }}">{{ category.name }}</option>
         {% endfor %}

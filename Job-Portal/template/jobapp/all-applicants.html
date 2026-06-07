@@ -31,7 +31,6 @@
                                     <th>Fecha de aplicación</th>
                                     <th>Estado</th>
                                     <th>Acción</th>
-                                    <th>borrar esto</th>
                         
                                 </tr>
                             </thead>
@@ -45,11 +44,11 @@
                                     <td>{{ applicant.created_at | date:'M d, Y' }}</td>
                                     <td>
                                         {% if applicant.status == 'pending' %}
-                                            <span class="badge badge-warning">Pending</span>
+                                            <span class="badge badge-warning">Pendiente</span>
                                         {% elif applicant.status == 'accepted' %}
-                                            <span class="badge badge-success">Acceptar</span>
+                                            <span class="badge badge-success">Aceptado</span>
                                         {% else %}
-                                            <span class="badge badge-danger">Rechazar</span>
+                                            <span class="badge badge-danger">Rechazado</span>
                                         {% endif %}
                                     </td>
                                     <td>
@@ -58,24 +57,19 @@
                                             <form action="{% url 'jobapp:update-applicant-status' applicant.id %}" method="POST" class="mr-1">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="status" value="accepted">
-                                                <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                                                <button type="submit" class="btn btn-success btn-sm">Aceptar</button>
                                             </form>
                                             <form action="{% url 'jobapp:update-applicant-status' applicant.id %}" method="POST">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="status" value="rejected">
-                                                <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                                                <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
                                             </form>
                                         </div>
                                         {% else %}
                                             <span class="text-muted">Revisado</span>
                                         {% endif %}
                                     </td>
-                                    <td>
-                                        <a class="btn btn-info btn-sm" href="{% url 'jobapp:applicant-details' applicant.user.id %}"
-                                                role="button">
-                                            Details
-                                        </a>
-                                    </td>
+                                   
 
                                 </tr>
                                 {% endfor %}

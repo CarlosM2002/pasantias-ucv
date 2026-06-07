@@ -8,9 +8,17 @@ class JobForm(forms.ModelForm):
         forms.ModelForm.__init__(self, *args, **kwargs)
         self.fields['title'].label = "Título :"
         self.fields['location'].label = "Ubicación :"
-        self.fields['salary'].label = "Remuneración :"
+        self.fields['salary'] = forms.TypedChoiceField(
+            choices=(
+                ('True', 'Sí'),
+                ('False', 'No'),
+            ),
+            coerce=lambda x: x == 'True',
+            widget=forms.Select(attrs={'class': 'form-control'}),
+            label="Remuneración :",
+            required=False,
+        )
         self.fields['work_mode'].label = "Modalidad :"
-        self.fields['experience_level'].label = "Nivel de Experiencia :"
         self.fields['description'].label = "Descripción de la Oferta :"
         self.fields['tags'].label = "Etiquetas :"
         self.fields['last_date'].label = "Fecha Límite de Envío :"
@@ -19,7 +27,6 @@ class JobForm(forms.ModelForm):
 
         self.fields['title'].widget.attrs.update({'placeholder': 'Por ejemplo: Desarrollador de Software'})
         self.fields['location'].widget.attrs.update({'placeholder': 'Por ejemplo: Chacao'})
-        self.fields['salary'].widget.attrs.update({'placeholder': '$800 - $1200'})
         self.fields['tags'].widget.attrs.update(
             {'placeholder': 'Use comma separated. eg: Python, JavaScript '}
         )
@@ -34,7 +41,6 @@ class JobForm(forms.ModelForm):
             "location",
             "job_type",
             "work_mode",
-            "experience_level",
             "category",
             "salary",
             "description",
@@ -69,7 +75,16 @@ class JobEditForm(forms.ModelForm):
         forms.ModelForm.__init__(self, *args, **kwargs)
         self.fields['title'].label = "Título :"
         self.fields['location'].label = "Ubicación :"
-        self.fields['salary'].label = "Remuneración :"
+        self.fields['salary'] = forms.TypedChoiceField(
+            choices=(
+                ('True', 'Sí'),
+                ('False', 'No'),
+            ),
+            coerce=lambda x: x == 'True',
+            widget=forms.Select(attrs={'class': 'form-control'}),
+            label="Remuneración :",
+            required=False,
+        )
         self.fields['work_mode'].label = "Modalidad :"
         self.fields['description'].label = "Descripción de la Oferta :"
         self.fields['last_date'].label = "Fecha Límite de solicitud :"
@@ -78,7 +93,6 @@ class JobEditForm(forms.ModelForm):
 
         self.fields['title'].widget.attrs.update({'placeholder': 'Por ejemplo: Desarrollador de Software'})
         self.fields['location'].widget.attrs.update({'placeholder': 'Por ejemplo: Chacao'})
-        self.fields['salary'].widget.attrs.update({'placeholder': '$800 - $1200'})
         self.fields['last_date'].widget.attrs.update({'placeholder': 'YYYY-MM-DD '})
         self.fields['company_name'].widget.attrs.update({'placeholder': 'Nombre de la empresa'})
         self.fields['url'].widget.attrs.update({'placeholder': 'https://ejemplo.com'})

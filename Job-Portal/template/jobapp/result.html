@@ -9,10 +9,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <h1 class="text-white font-weight-bold">Search Result</h1>
+        <h1 class="text-white font-weight-bold">Búsqueda de Ofertas</h1>
         <div class="custom-breadcrumbs">
           <a href="{% url 'jobapp:home' %}">Home</a> <span class="mx-2 slash">/</span>
-          <span class="text-white"><strong>Search Result</strong></span>
+          <span class="text-white"><strong>Búsqueda de Ofertas</strong></span>
         </div>
       </div>
     </div>
@@ -32,15 +32,15 @@
             <li class="menu-fix mb-2">
               {% if job.job_type == '1' %}
               <span class="badge badge-primary">
-                Full Time
+                Tiempo Completo
               </span>
               {% elif job.job_type == '2'%}
               <span class="badge badge-danger">
-                Part Time
+                Medio Tiempo
               </span>
               {% else %}
               <span class="badge badge-info">
-                Internship
+                Flexible
               </span>
               {% endif %}
             </li>
