@@ -34,9 +34,10 @@ class CreateJobView(EmployerRequiredMixin, CreateView):
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.user = self.request.user
+        instance.tipo_empresa = self.request.user.tipo_empresa
         instance.save()
         form.save_m2m()
-        messages.success(self.request, 'You are successfully posted your job! Please wait for review.')
+        messages.success(self.request, 'Se publicó tu oferta de trabajo con éxito!')
         return redirect(reverse_lazy('jobapp:single-job', kwargs={'id': instance.id}))
 
 

@@ -201,7 +201,7 @@
                         </tbody>
                     </table>
                     {% else %}
-                    <p class="m-5">You have not any job yet !! <a href="{% url 'jobapp:create-job' %}">Create a new one.</a></p>
+                    <p class="m-5">No has publicado ninguna oferta aún. <a href="{% url 'jobapp:create-job' %}">Crea una nueva.</a></p>
                     {% endif %}
                     {% elif user.role == "employee" %}
 
@@ -241,7 +241,7 @@
                                 </tbody>
                             </table>
                             {% else %}
-                            <p class="m-5">You have not any save job yet !! </p>
+                            <p class="m-5">No has guardado ninguna oferta aún. </p>
                             {% endif %}
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -276,7 +276,7 @@
                                 </tbody>
                             </table>
                             {% else %}
-                            <p class="m-5">You have not any applied job yet !! </p>
+                            <p class="m-5">No has aplicado a ninguna oferta aún. </p>
                             {% endif %}
                         </div>
                         

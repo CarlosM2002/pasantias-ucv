@@ -19,7 +19,6 @@ class JobForm(forms.ModelForm):
             required=False,
         )
         self.fields['work_mode'].label = "Modalidad :"
-        self.fields['experience_level'].label = "Nivel de Experiencia :"
         self.fields['description'].label = "Descripción de la Oferta :"
         self.fields['tags'].label = "Etiquetas :"
         self.fields['last_date'].label = "Fecha Límite de Envío :"
@@ -42,7 +41,6 @@ class JobForm(forms.ModelForm):
             "location",
             "job_type",
             "work_mode",
-            "experience_level",
             "category",
             "salary",
             "description",

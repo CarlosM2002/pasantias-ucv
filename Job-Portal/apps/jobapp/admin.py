@@ -24,7 +24,6 @@ class JobAdmin(admin.ModelAdmin):
                 'location',
                 'job_type',
                 'work_mode',
-                'experience_level',
                 'category',
                 'salary',
                 'views_count',
