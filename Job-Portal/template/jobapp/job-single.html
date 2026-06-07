@@ -224,7 +224,7 @@
               {% endif %}
             </li>
             <li class="mb-2"><strong class="text-black">Ubicación:</strong> {{ job.location }}</li>
-            <li class="mb-2"><strong class="text-black">Salario:</strong> {{ job.salary }}</li>
+            <li class="mb-2"><strong class="text-black">Remuneración:</strong> {% if job.salary %}Sí{% else %}No{% endif %}</li>
             <li class="mb-2"><strong class="text-black">Modalidad:</strong> {{ job.get_work_mode_display }}</li>
             <li class="mb-2"><strong class="text-black">Vistas:</strong> 👀 {{ job.views_count }}</li>
             <li class="mb-2"><strong class="text-black">Fecha límite de solicitud:</strong> {{ job.last_date|date:"d M Y" }}

@@ -80,6 +80,15 @@
             </select>
           </div>
 
+          {% elif field.name == 'salary' %}
+          <div class="form-group">
+            <label class="text-black" for="id_salary">{{ field.label }}</label>
+            <select name="salary" class="form-control" id="id_salary">
+              <option value="True" {% if field.value == True or field.value == 'True' %}selected{% endif %}>Sí</option>
+              <option value="False" {% if field.value == False or field.value == 'False' or not field.value %}selected{% endif %}>No</option>
+            </select>
+          </div>
+
           {% elif field.name == 'description' %}
           <div class="form-group">
             <label for="job-type">Descripción</label>

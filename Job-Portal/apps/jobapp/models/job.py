@@ -47,7 +47,7 @@ class Job(TimeStampedModel, SoftDeleteModel):
     work_mode = models.CharField(choices=WORK_MODE, max_length=1, default='3')
     experience_level = models.CharField(choices=EXPERIENCE_LEVEL, max_length=1, default='0')
     category = models.ForeignKey(Category, related_name='Category', on_delete=models.CASCADE)
-    salary = models.CharField(max_length=30, blank=True)
+    salary = models.BooleanField(default=False)
     views_count = models.PositiveIntegerField(default=0)
     company_name = models.CharField(max_length=300, db_index=True)
     company_description = CKEditor5Field(config_name='extends', blank=True, null=True)
