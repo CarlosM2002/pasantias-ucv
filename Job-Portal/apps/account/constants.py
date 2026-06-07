@@ -13,3 +13,16 @@ TIPO_EMPRESA = (
     ('dependencia', 'Dependencia'),
     ('empresa_externa', 'Empresa'),
 )
+
+SECTOR_EMPRESA = (
+    ('industria', 'Industria'),
+    ('automotriz', 'Automotriz'),
+    ('tecnologia', 'Tecnología'),
+    ('salud', 'Salud'),
+    ('finanzas', 'Finanzas'),
+    ('comercio', 'Comercio'),
+    ('energia', 'Energía'),
+    ('telecomunicaciones', 'Telecomunicaciones'),
+    ('construccion', 'Construcción'),
+    ('logistica', 'Logística'),
+)
