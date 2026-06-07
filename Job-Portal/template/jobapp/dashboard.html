@@ -253,7 +253,7 @@
                                 </thead>
                                 <tbody>
                                     {% for job in savedjobs %}
-                                    <tr id="row_{{ job.id }}">
+                                    <tr id="bookmark_row_{{ job.id }}">
                                         <td><a href="{% url 'jobapp:single-job' job.job.id %}">{{ job.job.title }}</a></td>
                                         <td>{{ job.created_at | date:'M d, Y'  }}</td>
                                         <td>{{ job.job.last_date | date:'M d, Y' }}</td>
@@ -278,11 +278,12 @@
                                         <th>Fecha de Aplicación</th>
                                         <th>Estado</th>
                                         <th>Fecha de Vencimiento</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for job in appliedjobs %}
-                                    <tr id="row_{{ job.id }}">
+                                    <tr id="application_row_{{ job.id }}">
                                         <td><a href="{% url 'jobapp:single-job' job.job.id %}">{{ job.job.title }}</a></td>
                                         <td>{{ job.created_at | date:'M d, Y'  }}</td>
                                         <td>
@@ -294,7 +295,10 @@
                                                 <span class="badge badge-danger">Rechazado</span>
                                             {% endif %}
                                         </td>
-                                        <td>{{ job.job.last_date | date:'M d, Y' }}</td>            
+                                        <td>{{ job.job.last_date | date:'M d, Y' }}</td>
+                                        <td>
+                                            <button onclick="call_sw_alert_func('{% url 'jobapp:delete-application' job.id %}','{{ job.id }}','Una vez quitada, esta postulación será eliminada de tu lista de postulaciones!')" class="btn btn-danger btn-sm">Quitar</button>
+                                        </td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>

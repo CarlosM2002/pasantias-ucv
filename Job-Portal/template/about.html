@@ -32,6 +32,16 @@
         <h3>Nuestra Misión</h3>
         <p>Proveer una herramienta tecnológica local y eficiente que simplifique la búsqueda de oportunidades, garantizando que cada candidato encuentre el entorno adecuado para aplicar sus conocimientos técnicos y desarrollar su perfil profesional.</p>
 
+        <h3>Formatos Documentos Pasantias</h3>
+        <p>Descarga los documentos necesarios para completar tus tramites de pasantia. Para más información visita el <a href="https://campusvirtualucv.org/login/index.php" target="_blank" rel="noopener noreferrer">campus virtual</a>.</p>
+        <ul>
+          {% for file in doc_files %}
+            <li><a href="{% static file %}" download>{{ file|slice:"5:" }}</a></li>
+          {% empty %}
+            <li>No hay plantillas disponibles.</li>
+          {% endfor %}
+        </ul>
+
         <h3>Contacto</h3>
         <p>Para consultas sobre el uso de la plataforma o soporte técnico, escríbenos a <a href="mailto:soporte@portalpec.example.com">soporte@portalpec.example.com</a>.</p>
       </div>

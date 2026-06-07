@@ -3,6 +3,8 @@ from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
+from django.conf import settings
+import os
 from django.views.generic import DetailView, ListView
 from django.db.models import F
 from jobapp.models import Category, Job
@@ -64,7 +66,22 @@ def home_view(request):
 
 def about_view(request):
     """Simple About page."""
-    return render(request, 'about.html')
+    docs_dir = os.path.join(settings.BASE_DIR, 'static', 'docs')
+    doc_files = []
+    try:
+        for fname in sorted(os.listdir(docs_dir)):
+            # only include files (skip directories)
+            fpath = os.path.join(docs_dir, fname)
+            if os.path.isfile(fpath):
+                # pass relative static path like 'docs/filename.ext'
+                doc_files.append(os.path.join('docs', fname).replace('\\', '/'))
+    except Exception:
+        doc_files = []
+
+    context = {
+        'doc_files': doc_files,
+    }
+    return render(request, 'about.html', context)
 
 
 class JobListView(ListView):

@@ -1,4 +1,4 @@
-from .employee import ApplyJobView, DeleteBookmarkView, JobBookmarkView
+from .employee import ApplyJobView, DeleteApplicantView, DeleteBookmarkView, JobBookmarkView
 from .employer import (
     AllApplicantsView,
     ApplicantDetailsView,

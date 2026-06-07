@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.simple_tag(name='is_job_already_saved')
 def is_job_already_saved(job, user):
-    applied = BookmarkJob.objects.filter(job=job, user=user)
+    applied = BookmarkJob.objects.filter(job=job, user=user, is_deleted=False)
     if applied:
         return True
     else:
