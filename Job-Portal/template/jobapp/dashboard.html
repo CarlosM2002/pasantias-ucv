@@ -89,6 +89,8 @@
                                         <th>Nombre</th>
                                         <th>Rol</th>
                                         <th>Fecha de registro</th>
+                                        <th>Privilegios</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -114,6 +116,28 @@
                                             {% endif %}
                                         </td>
                                         <td>{{ recent.date_joined | date:'M d, Y' }}</td>
+                                        <td>
+                                            {% if recent.role == 'employer' %}
+                                                {% if recent.employer_profile.privilegios %}
+                                                    <span class="badge badge-success">Sí</span>
+                                                {% else %}
+                                                    <span class="badge badge-secondary">No</span>
+                                                {% endif %}
+                                            {% else %}
+                                                -
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if recent.role == 'employer' %}
+                                                {% if recent.employer_profile.privilegios %}
+                                                    <button onclick="call_sw_alert_func('{% url 'jobapp:set-employer-privileges' recent.id 'revoke' %}','{{ recent.id }}','¿Eliminar privilegios a esta empresa?')" class="btn btn-danger btn-sm">Eliminar Privilegios</button>
+                                                {% else %}
+                                                    <button onclick="call_sw_alert_func('{% url 'jobapp:set-employer-privileges' recent.id 'grant' %}','{{ recent.id }}','¿Otorgar privilegios a esta empresa?')" class="btn btn-primary btn-sm">Otorgar Privilegios</button>
+                                                {% endif %}
+                                            {% else %}
+                                                -
+                                            {% endif %}
+                                        </td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>

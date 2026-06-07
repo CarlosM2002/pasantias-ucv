@@ -16,6 +16,7 @@ class EmployerProfile(models.Model):
     company_website = models.URLField(blank=True)
     company_logo = models.ImageField(upload_to='logos/', blank=True)
     description = models.TextField(blank=True)
+    privilegios = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Employer Profile for {self.user.email}"

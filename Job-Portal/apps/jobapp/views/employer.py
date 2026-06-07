@@ -35,6 +35,7 @@ class CreateJobView(EmployerRequiredMixin, CreateView):
         instance = form.save(commit=False)
         instance.user = self.request.user
         instance.tipo_empresa = self.request.user.tipo_empresa
+        instance.priority = getattr(getattr(self.request.user, 'employer_profile', None), 'privilegios', False)
         instance.save()
         form.save_m2m()
         messages.success(self.request, 'Se publicó tu oferta de trabajo con éxito!')
@@ -57,7 +58,9 @@ class JobEditView(EmployerRequiredMixin, UpdateView):
         return context
 
     def form_valid(self, form):
-        instance = form.save()
+        instance = form.save(commit=False)
+        instance.priority = getattr(getattr(self.request.user, 'employer_profile', None), 'privilegios', False)
+        instance.save()
         messages.success(self.request, 'Your Job Post Was Successfully Updated!')
         return redirect(reverse_lazy('jobapp:single-job', kwargs={'id': instance.id}))
 

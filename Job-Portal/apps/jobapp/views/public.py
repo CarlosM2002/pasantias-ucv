@@ -17,9 +17,11 @@ def home_view(request):
     """
     published_jobs = Job.objects.filter(is_published=True, is_deleted=False).order_by('-updated_at')
     jobs = published_jobs.filter(is_closed=False)
+    promoted_jobs = jobs.filter(priority=True)
+    regular_jobs = jobs.filter(priority=False)
     total_candidates = User.objects.filter(role='employee').count()
     total_companies = User.objects.filter(role='employer').count()
-    paginator = Paginator(jobs, 3)
+    paginator = Paginator(regular_jobs, 3)
     page_number = request.GET.get('page', None)
     page_obj = paginator.get_page(page_number)
 
@@ -54,6 +56,7 @@ def home_view(request):
         'total_jobs': stats['total_jobs'],
         'total_completed_jobs': stats['total_completed_jobs'],
         'page_obj': page_obj,
+        'promoted_jobs': promoted_jobs,
         'categories': Category.objects.all(),
     }
     return render(request, 'jobapp/index.html', context)
@@ -72,9 +75,19 @@ class JobListView(ListView):
 
     def get_queryset(self):
         user_id = self.request.GET.get('user_id')
+        queryset = get_listed_jobs()
         if user_id:
-            return get_listed_jobs().filter(user_id=user_id)
-        return get_listed_jobs()
+            queryset = queryset.filter(user_id=user_id)
+        return queryset.filter(priority=False)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_id = self.request.GET.get('user_id')
+        queryset = get_listed_jobs()
+        if user_id:
+            queryset = queryset.filter(user_id=user_id)
+        context['promoted_jobs'] = queryset.filter(priority=True)
+        return context
 
     # Keep default ListView context behavior so `page_obj` is a proper
     # paginated Page object expected by the templates.

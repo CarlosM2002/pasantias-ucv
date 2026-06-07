@@ -44,6 +44,7 @@ class Job(TimeStampedModel, SoftDeleteModel):
     views_count = models.PositiveIntegerField(default=0)
     company_name = models.CharField(max_length=300, db_index=True)
     tipo_empresa = models.CharField(choices=TIPO_EMPRESA, max_length=20, blank=True, null=True)
+    priority = models.BooleanField(default=False)
     company_description = CKEditor5Field(config_name='extends', blank=True, null=True)
     url = models.URLField(max_length=200)
     last_date = models.DateField()

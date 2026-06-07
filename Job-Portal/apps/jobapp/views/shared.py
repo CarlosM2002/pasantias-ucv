@@ -1,16 +1,17 @@
 import io
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.pdfgen.canvas import Canvas
 
-from account.models import User
+from account.models import EmployerProfile, User
 from jobapp.models import Applicant, BookmarkJob, Job
 
 
@@ -44,7 +45,7 @@ def dashboard_view(request):
             'total_jobs': Job.objects.filter(is_deleted=False).count(),
             'total_applicants': Applicant.objects.filter(is_deleted=False, job__is_deleted=False).count(),
         }
-        recent_users = User.objects.exclude(id=request.user.id).order_by('-date_joined')[:5]
+        recent_users = User.objects.exclude(id=request.user.id).select_related('employer_profile').order_by('-date_joined')[:5]
 
     context = {
         'jobs': jobs,
@@ -55,6 +56,31 @@ def dashboard_view(request):
         'recent_users': recent_users,
     }
     return render(request, 'jobapp/dashboard.html', context)
+
+
+@login_required(login_url=reverse_lazy('account:login'))
+def toggle_employer_privileges(request, user_id, action):
+    if request.user.role != 'admin':
+        raise PermissionDenied
+
+    if action not in ('grant', 'revoke'):
+        raise PermissionDenied
+
+    employer = get_object_or_404(User, id=user_id, role='employer')
+    profile, _ = EmployerProfile.objects.get_or_create(user=employer)
+
+    if action == 'grant':
+        profile.privilegios = True
+        profile.save()
+        Job.objects.filter(user=employer, is_deleted=False).update(priority=True)
+        messages.success(request, f'Privilegios otorgados a {employer.email}.')
+    else:
+        profile.privilegios = False
+        profile.save()
+        Job.objects.filter(user=employer, is_deleted=False).update(priority=False)
+        messages.success(request, f'Privilegios eliminados de {employer.email}.')
+
+    return redirect('jobapp:dashboard')
 
 
 @login_required(login_url=reverse_lazy('account:login'))
