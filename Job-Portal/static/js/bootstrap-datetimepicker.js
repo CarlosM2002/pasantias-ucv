@@ -54,7 +54,7 @@
     this.container = options.container || 'body';
 
     this.language = options.language || this.element.data('date-language') || 'en';
-    this.language = this.language in dates ? this.language : this.language.split('-')[0]; // fr-CA fallback to fr
+    this.language = this.language in dates ? this.language : this.language.split('-')[0]; 
     this.language = this.language in dates ? this.language : 'en';
     this.isRTL = dates[this.language].rtl || false;
     this.formatType = options.formatType || this.element.data('format-type') || 'standard';
@@ -176,7 +176,7 @@
       template = template.replace('{rightArrow}', this.icons.rightArrow);
     }
     this.picker = $(template)
-      .appendTo(this.isInline ? this.element : this.container) // 'body')
+      .appendTo(this.isInline ? this.element : this.container) 
       .on({
         click:     $.proxy(this.click, this),
         mousedown: $.proxy(this.mousedown, this)
@@ -310,7 +310,7 @@
     _events:       [],
     _attachEvents: function () {
       this._detachEvents();
-      if (this.isInput) { // single input
+      if (this.isInput) { 
         this._events = [
           [this.element, {
             focus:   $.proxy(this.show, this),
@@ -319,7 +319,7 @@
           }]
         ];
       }
-      else if (this.component && this.hasInput) { // component: input + button
+      else if (this.component && this.hasInput) { 
         this._events = [
 
           [this.element.find('input'), {
@@ -338,7 +338,7 @@
           ]);
         }
       }
-      else if (this.element.is('div')) {  // inline datetimepicker
+      else if (this.element.is('div')) {  
         this.isInline = true;
       }
       else {
@@ -1264,19 +1264,19 @@
 
     keydown: function (e) {
       if (this.picker.is(':not(:visible)')) {
-        if (e.keyCode === 27) // allow escape to hide and re-show picker
+        if (e.keyCode === 27) 
           this.show();
         return;
       }
       var dateChanged = false,
         dir, newDate, newViewDate;
       switch (e.keyCode) {
-        case 27: // escape
+        case 27: 
           this.hide();
           e.preventDefault();
           break;
-        case 37: // left
-        case 39: // right
+        case 37: 
+        case 39: 
           if (!this.keyboardNavigation) break;
           dir = e.keyCode === 37 ? -1 : 1;
           var viewMode = this.viewMode;
@@ -1310,8 +1310,8 @@
             dateChanged = true;
           }
           break;
-        case 38: // up
-        case 40: // down
+        case 38: 
+        case 40: 
           if (!this.keyboardNavigation) break;
           dir = e.keyCode === 38 ? -1 : 1;
           viewMode = this.viewMode;
@@ -1350,7 +1350,7 @@
             dateChanged = true;
           }
           break;
-        case 13: // enter
+        case 13: 
           if (this.viewMode !== 0) {
             var oldViewMode = this.viewMode;
             this.showMode(-1);
@@ -1366,7 +1366,7 @@
           }
           e.preventDefault();
           break;
-        case 9: // tab
+        case 9: 
           this.hide();
           break;
       }
@@ -1742,8 +1742,8 @@
           j: date.getUTCDate(),
           l: dates[language].days[date.getUTCDay()],
           D: dates[language].daysShort[date.getUTCDay()],
-          w: date.getUTCDay(), // 0 -> 6
-          N: (date.getUTCDay() === 0 ? 7 : date.getUTCDay()),       // 1 -> 7
+          w: date.getUTCDay(), 
+          N: (date.getUTCDay() === 0 ? 7 : date.getUTCDay()),       
           S: (date.getUTCDate() % 10 <= dates[language].suffix.length ? dates[language].suffix[date.getUTCDate() % 10 - 1] : ''),
 
           a: (dates[language].meridiem.length === 2 ? dates[language].meridiem[date.getUTCHours() < 12 ? 0 : 1] : ''),

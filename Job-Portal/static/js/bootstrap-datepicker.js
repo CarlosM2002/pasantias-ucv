@@ -214,7 +214,7 @@
 			});
 			o.orientation = {x: 'auto', y: 'auto'};
 			if (!_plc || _plc === 'auto')
-				; // no action
+				; 
 			else if (plc.length === 1){
 				switch (plc[0]){
 					case 'top':
@@ -270,7 +270,7 @@
 			}
 		},
 		_buildEvents: function(){
-			if (this.isInput){ // single input
+			if (this.isInput){ 
 				this._events = [
 					[this.element, {
 						focus: $.proxy(this.show, this),
@@ -282,7 +282,7 @@
 					}]
 				];
 			}
-			else if (this.component && this.hasInput){ // component: input + button
+			else if (this.component && this.hasInput){ 
 				this._events = [
 
 					[this.element.find('input'), {
@@ -298,7 +298,7 @@
 					}]
 				];
 			}
-			else if (this.element.is('div')){  // inline datepicker
+			else if (this.element.is('div')){  
 				this.isInline = true;
 			}
 			else {
@@ -1087,7 +1087,7 @@
 
 		keydown: function(e){
 			if (this.picker.is(':not(:visible)')){
-				if (e.keyCode === 27) // allow escape to hide and re-show picker
+				if (e.keyCode === 27) 
 					this.show();
 				return;
 			}
@@ -1095,7 +1095,7 @@
 				dir, newDate, newViewDate,
 				focusDate = this.focusDate || this.viewDate;
 			switch (e.keyCode){
-				case 27: // escape
+				case 27: 
 					if (this.focusDate){
 						this.focusDate = null;
 						this.viewDate = this.dates.get(-1) || this.viewDate;
@@ -1105,8 +1105,8 @@
 						this.hide();
 					e.preventDefault();
 					break;
-				case 37: // left
-				case 39: // right
+				case 37: 
+				case 39: 
 					if (!this.o.keyboardNavigation)
 						break;
 					dir = e.keyCode === 37 ? -1 : 1;
@@ -1133,8 +1133,8 @@
 						e.preventDefault();
 					}
 					break;
-				case 38: // up
-				case 40: // down
+				case 38: 
+				case 40: 
 					if (!this.o.keyboardNavigation)
 						break;
 					dir = e.keyCode === 38 ? -1 : 1;
@@ -1161,11 +1161,11 @@
 						e.preventDefault();
 					}
 					break;
-				case 32: // spacebar
+				case 32: 
 
 
 					break;
-				case 13: // enter
+				case 13: 
 					focusDate = this.focusDate || this.dates.get(-1) || this.viewDate;
 					this._toggle_multidate(focusDate);
 					dateChanged = true;
@@ -1179,7 +1179,7 @@
 							this.hide();
 					}
 					break;
-				case 9: // tab
+				case 9: 
 					this.focusDate = null;
 					this.viewDate = this.dates.get(-1) || this.viewDate;
 					this.fill();

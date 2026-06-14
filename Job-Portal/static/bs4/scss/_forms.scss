@@ -72,8 +72,8 @@ select.form-control {
 .col-form-label {
   padding-top: calc(#{$input-padding-y} + #{$input-border-width});
   padding-bottom: calc(#{$input-padding-y} + #{$input-border-width});
-  margin-bottom: 0; // Override the `<label>/<legend>` default
-  @include font-size(inherit); // Override the `<legend>` default
+  margin-bottom: 0; 
+  @include font-size(inherit); 
   line-height: $input-line-height;
 }
 
@@ -100,7 +100,7 @@ select.form-control {
   width: 100%;
   padding-top: $input-padding-y;
   padding-bottom: $input-padding-y;
-  margin-bottom: 0; // match inputs if this class comes on inputs with default margins
+  margin-bottom: 0; 
   line-height: $input-line-height;
   color: $input-plaintext-color;
   background-color: transparent;
@@ -196,13 +196,13 @@ textarea.form-control {
 }
 
 .form-check-label {
-  margin-bottom: 0; // Override default `<label>` bottom margin
+  margin-bottom: 0; 
 }
 
 .form-check-inline {
   display: inline-flex;
   align-items: center;
-  padding-left: 0; // Override base .form-check
+  padding-left: 0; 
   margin-right: $form-check-inline-margin-x;
 
   .form-check-input {
@@ -234,7 +234,7 @@ textarea.form-control {
 .form-inline {
   display: flex;
   flex-flow: row wrap;
-  align-items: center; // Prevent shorter elements from growing to same height as others (e.g., small buttons growing to normal sized button height)
+  align-items: center; 
 
 
 
@@ -260,7 +260,7 @@ textarea.form-control {
 
     .form-control {
       display: inline-block;
-      width: auto; // Prevent labels from stacking above inputs in `.form-group`
+      width: auto; 
       vertical-align: middle;
     }
 

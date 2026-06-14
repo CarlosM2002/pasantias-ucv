@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
 
-  padding-left: 0; // reset padding because ul and ol
+  padding-left: 0; 
   margin-bottom: 0;
 }
 
@@ -15,12 +15,12 @@
 
 
 .list-group-item-action {
-  width: 100%; // For `<button>`s (anchors become 100% by default though)
+  width: 100%; 
   color: $list-group-action-color;
-  text-align: inherit; // For `<button>`s (anchors inherit)
+  text-align: inherit; 
 
   @include hover-focus {
-    z-index: 1; // Place hover/focus items above their siblings for proper border styling
+    z-index: 1; 
     color: $list-group-action-hover-color;
     text-decoration: none;
     background-color: $list-group-hover-bg;
@@ -62,7 +62,7 @@
   }
 
   &.active {
-    z-index: 2; // Place active items above their siblings for proper border styling
+    z-index: 2; 
     color: $list-group-active-color;
     background-color: $list-group-active-bg;
     border-color: $list-group-active-border-color;

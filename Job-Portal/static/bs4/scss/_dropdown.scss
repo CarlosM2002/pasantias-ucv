@@ -17,14 +17,14 @@
   top: 100%;
   left: 0;
   z-index: $zindex-dropdown;
-  display: none; // none by default, but block on "open" of the menu
+  display: none; 
   float: left;
   min-width: $dropdown-min-width;
   padding: $dropdown-padding-y 0;
-  margin: $dropdown-spacer 0 0; // override default ul
+  margin: $dropdown-spacer 0 0; 
   @include font-size($dropdown-font-size);
   color: $dropdown-color;
-  text-align: left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
+  text-align: left;
   list-style: none;
   background-color: $dropdown-bg;
   background-clip: padding-box;
@@ -116,15 +116,15 @@
 
 .dropdown-item {
   display: block;
-  width: 100%; // For `<button>`s
+  width: 100%; 
   padding: $dropdown-item-padding-y $dropdown-item-padding-x;
   clear: both;
   font-weight: $font-weight-normal;
   color: $dropdown-link-color;
-  text-align: inherit; // For `<button>`s
-  white-space: nowrap; // prevent links from randomly breaking onto new lines
-  background-color: transparent; // For `<button>`s
-  border: 0; // For `<button>`s
+  text-align: inherit; 
+  white-space: nowrap; 
+  background-color: transparent; 
+  border: 0;
 
 
   @if $dropdown-padding-y == 0 {
@@ -169,10 +169,10 @@
 .dropdown-header {
   display: block;
   padding: $dropdown-padding-y $dropdown-item-padding-x;
-  margin-bottom: 0; // for use with heading elements
+  margin-bottom: 0;  
   @include font-size($font-size-sm);
   color: $dropdown-header-color;
-  white-space: nowrap; // as with > li > a
+  white-space: nowrap;  
 }
 
 .dropdown-item-text {

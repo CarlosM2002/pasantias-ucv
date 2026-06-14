@@ -6,7 +6,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  min-width: 0; // See https://github.com/twbs/bootstrap/pull/22740#issuecomment-305868106
+  min-width: 0; 
   word-wrap: break-word;
   background-color: $card-bg;
   background-clip: border-box;
@@ -67,7 +67,7 @@
 
 .card-header {
   padding: $card-spacer-y $card-spacer-x;
-  margin-bottom: 0; // Removes the default margin-bottom of <hN>
+  margin-bottom: 0; 
   color: $card-cap-color;
   background-color: $card-cap-bg;
   border-bottom: $card-border-width solid $card-border-color;
@@ -118,17 +118,17 @@
 }
 
 .card-img {
-  width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
+  width: 100%; 
   @include border-radius($card-inner-border-radius);
 }
 
 .card-img-top {
-  width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
+  width: 100%;
   @include border-top-radius($card-inner-border-radius);
 }
 
 .card-img-bottom {
-  width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
+  width: 100%; 
   @include border-bottom-radius($card-inner-border-radius);
 }
 
@@ -152,7 +152,7 @@
       flex: 1 0 0%;
       flex-direction: column;
       margin-right: $card-deck-margin;
-      margin-bottom: 0; // Override the default
+      margin-bottom: 0; 
       margin-left: $card-deck-margin;
     }
   }
@@ -234,8 +234,8 @@
     widows: 1;
 
     .card {
-      display: inline-block; // Don't let them vertically span multiple columns
-      width: 100%; // Don't let their width change
+      display: inline-block; 
+      width: 100%; 
     }
   }
 }

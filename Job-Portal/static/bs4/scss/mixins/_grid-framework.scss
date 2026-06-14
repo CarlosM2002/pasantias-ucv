@@ -35,7 +35,7 @@
       .col#{$infix}-auto {
         flex: 0 0 auto;
         width: auto;
-        max-width: 100%; // Reset earlier grid tiers
+        max-width: 100%; 
       }
 
       @for $i from 1 through $columns {
@@ -53,7 +53,7 @@
       }
 
       @for $i from 0 through ($columns - 1) {
-        @if not ($infix == "" and $i == 0) { // Avoid emitting useless .offset-0
+        @if not ($infix == "" and $i == 0) { 
           .offset#{$infix}-#{$i} {
             @include make-col-offset($i, $columns);
           }

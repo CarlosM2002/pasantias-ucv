@@ -16,14 +16,14 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box; // 1
+  box-sizing: border-box; 
 }
 
 html {
-  font-family: sans-serif; // 2
-  line-height: 1.15; // 3
-  -webkit-text-size-adjust: 100%; // 4
-  -webkit-tap-highlight-color: rgba($black, 0); // 5
+  font-family: sans-serif; 
+  line-height: 1.15; 
+  -webkit-text-size-adjust: 100%; 
+  -webkit-tap-highlight-color: rgba($black, 0); 
 }
 
 
@@ -39,14 +39,14 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 
 body {
-  margin: 0; // 1
+  margin: 0; 
   font-family: $font-family-base;
   @include font-size($font-size-base);
   font-weight: $font-weight-base;
   line-height: $line-height-base;
   color: $body-color;
-  text-align: left; // 3
-  background-color: $body-bg; // 2
+  text-align: left; 
+  background-color: $body-bg; 
 }
 
 
@@ -62,9 +62,9 @@ body {
 
 
 hr {
-  box-sizing: content-box; // 1
-  height: 0; // 1
-  overflow: visible; // 2
+  box-sizing: content-box; 
+  height: 0; 
+  overflow: visible; 
 }
 
 
@@ -95,12 +95,12 @@ p {
 
 
 abbr[title],
-abbr[data-original-title] { // 1
-  text-decoration: underline; // 2
-  text-decoration: underline dotted; // 2
-  cursor: help; // 3
-  border-bottom: 0; // 4
-  text-decoration-skip-ink: none; // 5
+abbr[data-original-title] { 
+  text-decoration: underline; 
+  text-decoration: underline dotted; 
+  cursor: help; 
+  border-bottom: 0; 
+  text-decoration-skip-ink: none; 
 }
 
 address {
@@ -129,7 +129,7 @@ dt {
 
 dd {
   margin-bottom: .5rem;
-  margin-left: 0; // Undo browser default
+  margin-left: 0; 
 }
 
 blockquote {
@@ -138,11 +138,11 @@ blockquote {
 
 b,
 strong {
-  font-weight: $font-weight-bolder; // Add the correct font weight in Chrome, Edge, and Safari
+  font-weight: $font-weight-bolder; 
 }
 
 small {
-  @include font-size(80%); // Add the correct font size in all browsers
+  @include font-size(80%); 
 }
 
 
@@ -166,7 +166,7 @@ sup { top: -.5em; }
 a {
   color: $link-color;
   text-decoration: $link-decoration;
-  background-color: transparent; // Remove the gray background on active links in IE 10.
+  background-color: transparent; 
 
   @include hover {
     color: $link-hover-color;
@@ -201,7 +201,7 @@ code,
 kbd,
 samp {
   font-family: $font-family-monospace;
-  @include font-size(1em); // Correct the odd `em` font sizing in all browsers.
+  @include font-size(1em); 
 }
 
 pre {
@@ -226,7 +226,7 @@ figure {
 
 img {
   vertical-align: middle;
-  border-style: none; // Remove the border on images inside links in IE 10-.
+  border-style: none; 
 }
 
 svg {
@@ -240,7 +240,7 @@ svg {
 
 
 table {
-  border-collapse: collapse; // Prevent double borders
+  border-collapse: collapse; 
 }
 
 caption {
@@ -286,7 +286,7 @@ button,
 select,
 optgroup,
 textarea {
-  margin: 0; // Remove the margin in Firefox and Safari
+  margin: 0; 
   font-family: inherit;
   @include font-size(inherit);
   line-height: inherit;
@@ -294,12 +294,12 @@ textarea {
 
 button,
 input {
-  overflow: visible; // Show the overflow in Edge
+  overflow: visible; 
 }
 
 button,
 select {
-  text-transform: none; // Remove the inheritance of text transform in Firefox
+  text-transform: none; 
 }
 
 
@@ -311,10 +311,10 @@ select {
 
 
 button,
-[type="button"], // 1
+[type="button"], 
 [type="reset"],
 [type="submit"] {
-  -webkit-appearance: button; // 2
+  -webkit-appearance: button; 
 }
 
 @if $enable-pointer-cursor-for-buttons {
@@ -338,8 +338,8 @@ button::-moz-focus-inner,
 
 input[type="radio"],
 input[type="checkbox"] {
-  box-sizing: border-box; // 1. Add the correct box sizing in IE 10-
-  padding: 0; // 2. Remove the padding in IE 10-
+  box-sizing: border-box; 
+  padding: 0; 
 }
 
 
@@ -356,7 +356,7 @@ input[type="month"] {
 }
 
 textarea {
-  overflow: auto; // Remove the default vertical scrollbar in IE.
+  overflow: auto; 
 
   resize: vertical;
 }
@@ -378,17 +378,17 @@ fieldset {
 legend {
   display: block;
   width: 100%;
-  max-width: 100%; // 1
+  max-width: 100%; 
   padding: 0;
   margin-bottom: .5rem;
   @include font-size(1.5rem);
   line-height: inherit;
-  color: inherit; // 2
-  white-space: normal; // 1
+  color: inherit; 
+  white-space: normal; 
 }
 
 progress {
-  vertical-align: baseline; // Add the correct vertical alignment in Chrome, Firefox, and Opera.
+  vertical-align: baseline; 
 }
 
 [type="number"]::-webkit-inner-spin-button,
@@ -401,7 +401,7 @@ progress {
 
 
 
-  outline-offset: -2px; // 2. Correct the outline style in Safari.
+  outline-offset: -2px; 
   -webkit-appearance: none;
 }
 
@@ -417,8 +417,8 @@ progress {
 
 
 ::-webkit-file-upload-button {
-  font: inherit; // 2
-  -webkit-appearance: button; // 1
+  font: inherit; 
+  -webkit-appearance: button; 
 }
 
 
@@ -429,12 +429,12 @@ output {
 }
 
 summary {
-  display: list-item; // Add the correct display in all browsers
+  display: list-item; 
   cursor: pointer;
 }
 
 template {
-  display: none; // Add the correct display in IE
+  display: none; 
 }
 
 

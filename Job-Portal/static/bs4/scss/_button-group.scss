@@ -4,7 +4,7 @@
 .btn-group-vertical {
   position: relative;
   display: inline-flex;
-  vertical-align: middle; // match .btn alignment given font-size hack above
+  vertical-align: middle;
 
   > .btn {
     position: relative;
@@ -136,7 +136,7 @@
 .btn-group-toggle {
   > .btn,
   > .btn-group > .btn {
-    margin-bottom: 0; // Override default `<label>` value
+    margin-bottom: 0; 
 
     input[type="radio"],
     input[type="checkbox"] {

@@ -48,11 +48,11 @@
 }
 
 .modal-dialog-scrollable {
-  display: flex; // IE10/11
+  display: flex; 
   max-height: calc(100% - #{$modal-dialog-margin * 2});
 
   .modal-content {
-    max-height: calc(100vh - #{$modal-dialog-margin * 2}); // IE10/11
+    max-height: calc(100vh - #{$modal-dialog-margin * 2}); 
     overflow: hidden;
   }
 
@@ -72,7 +72,7 @@
   min-height: calc(100% - #{$modal-dialog-margin * 2});
 
   &::before {
-    display: block; // IE10
+    display: block; 
     height: calc(100vh - #{$modal-dialog-margin * 2});
     content: "";
   }
@@ -96,7 +96,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%; // Ensure `.modal-content` extends the full width of the parent `.modal-dialog`
+  width: 100%; 
 
   color: $modal-content-color;
   pointer-events: auto;
@@ -125,8 +125,8 @@
 
 .modal-header {
   display: flex;
-  align-items: flex-start; // so the close btn always stays on the upper right corner
-  justify-content: space-between; // Put modal header elements (title and dismiss) on opposite ends
+  align-items: flex-start; 
+  justify-content: space-between; 
   padding: $modal-header-padding;
   border-bottom: $modal-header-border-width solid $modal-header-border-color;
   @include border-top-radius($modal-content-border-radius);
@@ -154,8 +154,8 @@
 
 .modal-footer {
   display: flex;
-  align-items: center; // vertically center
-  justify-content: flex-end; // Right align buttons with flex property because text-align doesn't work on flex items
+  align-items: center; 
+  justify-content: flex-end; 
   padding: $modal-inner-padding;
   border-top: $modal-footer-border-width solid $modal-footer-border-color;
   @include border-bottom-radius($modal-content-border-radius);
