@@ -1,24 +1,4 @@
-/* =========================================================
- * bootstrap-datepicker.js
- * Repo: https://github.com/eternicode/bootstrap-datepicker/
- * Demo: http://eternicode.github.io/bootstrap-datepicker/
- * Docs: http://bootstrap-datepicker.readthedocs.org/
- * Forked from http://www.eyecon.ro/bootstrap-datepicker
- * =========================================================
- * Started by Stefan Petre; improvements by Andrew Rowls + contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ========================================================= */
+
 
 (function($, undefined){
 
@@ -43,8 +23,8 @@
 				return this.slice(i)[0];
 			},
 			contains: function(d){
-				// Array.indexOf is not cross-browser;
-				// $.inArray doesn't work with Dates
+
+
 				var val = d && d.valueOf();
 				for (var i=0, l=this.length; i < l; i++)
 					if (this[i].valueOf() === val)
@@ -80,8 +60,6 @@
 		};
 	})();
 
-
-	// Picker object
 
 	var Datepicker = function(element, options){
 		this.dates = new DateArray();
@@ -144,13 +122,12 @@
 		constructor: Datepicker,
 
 		_process_options: function(opts){
-			// Store raw options for reference
+
 			this._o = $.extend({}, this._o, opts);
-			// Processed options
+
 			var o = this.o = $.extend({}, this._o);
 
-			// Check if "de-DE" style date is available, if not language should
-			// fallback to 2 letter code eg "de"
+
 			var lang = o.language;
 			if (!dates[lang]){
 				lang = lang.split('-')[0];
@@ -187,7 +164,6 @@
 
 			o.startView = Math.max(o.startView, o.minViewMode);
 
-			// true, false, or Number > 0
 			if (o.multidate !== true){
 				o.multidate = Number(o.multidate) || false;
 				if (o.multidate !== false)
@@ -308,7 +284,7 @@
 			}
 			else if (this.component && this.hasInput){ // component: input + button
 				this._events = [
-					// For components that are not readonly, allow keyboard nav
+
 					[this.element.find('input'), {
 						focus: $.proxy(this.show, this),
 						keyup: $.proxy(function(e){
@@ -333,13 +309,13 @@
 				];
 			}
 			this._events.push(
-				// Component: listen for blur on element descendants
+
 				[this.element, '*', {
 					blur: $.proxy(function(e){
 						this._focused_from = e.target;
 					}, this)
 				}],
-				// Input: listen for blur on element
+
 				[this.element, {
 					blur: $.proxy(function(e){
 						this._focused_from = e.target;
@@ -356,7 +332,7 @@
 				}],
 				[$(document), {
 					'mousedown touchstart': $.proxy(function(e){
-						// Clicked outside the datepicker, hide it
+
 						if (!(
 							this.element.is(e.target) ||
 							this.element.find(e.target).length ||
@@ -566,10 +542,10 @@
 				if (this.o.orientation.x === 'right')
 					left -= calendarWidth - width;
 			}
-			// auto x orientation is best-placement: if it crosses a window
-			// edge, fudge it sideways
+
+
 			else {
-				// Default to left
+
 				this.picker.addClass('datepicker-orient-left');
 				if (offset.left < 0)
 					left -= offset.left - visualPadding;
@@ -577,8 +553,7 @@
 					left = windowWidth - calendarWidth - visualPadding;
 			}
 
-			// auto y orientation is best-situation: top or bottom, no fudging,
-			// decision based on which shows more of the calendar
+
 			var yorient = this.o.orientation.y,
 				top_overflow, bottom_overflow;
 			if (yorient === 'auto'){
@@ -649,11 +624,11 @@
 				this.viewDate = new Date(this.o.endDate);
 
 			if (fromArgs){
-				// setting date by clicking
+
 				this.setValue();
 			}
 			else if (dates.length){
-				// setting date by typing
+
 				if (String(oldDates) !== String(this.dates))
 					this._trigger('changeDate');
 			}
@@ -710,7 +685,7 @@
 			}
 			if (this.focusDate && date.valueOf() === this.focusDate.valueOf())
 				cls.push('focused');
-			// Compare internal UTC date with local today, not UTC today
+
 			if (this.o.todayHighlight &&
 				date.getUTCFullYear() === today.getFullYear() &&
 				date.getUTCMonth() === today.getMonth() &&
@@ -768,16 +743,16 @@
 				if (prevMonth.getUTCDay() === this.o.weekStart){
 					html.push('<tr>');
 					if (this.o.calendarWeeks){
-						// ISO 8601: First week contains first thursday.
-						// ISO also states week starts on Monday, but we can be more abstract here.
+
+
 						var
-							// Start of current week: based on weekstart/current date
+
 							ws = new Date(+prevMonth + (this.o.weekStart - prevMonth.getUTCDay() - 7) % 7 * 864e5),
-							// Thursday of this week
+
 							th = new Date(Number(ws) + (7 + 4 - ws.getUTCDay()) % 7 * 864e5),
-							// First Thursday of year, year from thursday
+
 							yth = new Date(Number(yth = UTCDate(th.getUTCFullYear(), 0, 1)) + (7 + 4 - yth.getUTCDay())%7*864e5),
-							// Calendar week: ms between thursdays, div ms per day, div 7 days
+
 							calWeek =  (th - yth) / 864e5 / 7 + 1;
 						html.push('<td class="cw">'+ calWeek +'</td>');
 
@@ -1065,36 +1040,36 @@
 			dir = dir > 0 ? 1 : -1;
 			if (mag === 1){
 				test = dir === -1
-					// If going back one month, make sure month is not current month
-					// (eg, Mar 31 -> Feb 31 == Feb 28, not Mar 02)
+
+
 					? function(){
 						return new_date.getUTCMonth() === month;
 					}
-					// If going forward one month, make sure month is as expected
-					// (eg, Jan 31 -> Feb 31 == Feb 28, not Mar 02)
+
+
 					: function(){
 						return new_date.getUTCMonth() !== new_month;
 					};
 				new_month = month + dir;
 				new_date.setUTCMonth(new_month);
-				// Dec -> Jan (12) or Jan -> Dec (-1) -- limit expected date to 0-11
+
 				if (new_month < 0 || new_month > 11)
 					new_month = (new_month + 12) % 12;
 			}
 			else {
-				// For magnitudes >1, move one month at a time...
+
 				for (var i=0; i < mag; i++)
-					// ...which might decrease the day (eg, Jan 31 to Feb 28, etc)...
+
 					new_date = this.moveMonth(new_date, dir);
-				// ...then reset the day, keeping it in the new month
+
 				new_month = new_date.getUTCMonth();
 				new_date.setUTCDate(day);
 				test = function(){
 					return new_month !== new_date.getUTCMonth();
 				};
 			}
-			// Common date-resetting loop -- if date is beyond end of month, make it
-			// end of month
+
+
 			while (test()){
 				new_date.setUTCDate(--day);
 				new_date.setUTCMonth(new_month);
@@ -1187,8 +1162,8 @@
 					}
 					break;
 				case 32: // spacebar
-					// Spacebar is used in manually typing dates in some formats.
-					// As such, its behavior should not be hijacked.
+
+
 					break;
 				case 13: // enter
 					focusDate = this.focusDate || this.dates.get(-1) || this.viewDate;
@@ -1274,9 +1249,9 @@
 			});
 		},
 		dateUpdated: function(e){
-			// `this.updating` is a workaround for preventing infinite recursion
-			// between `changeDate` triggering and `setUTCDate` calling.  Until
-			// there is a better mechanism.
+
+
+
 			if (this.updating)
 				return;
 			this.updating = true;
@@ -1294,13 +1269,13 @@
 			});
 
 			if (new_date < this.dates[i]){
-				// Date being moved earlier/left
+
 				while (i >= 0 && new_date < this.dates[i]){
 					this.pickers[i--].setUTCDate(new_date);
 				}
 			}
 			else if (new_date > this.dates[i]){
-				// Date being moved later/right
+
 				while (i < l && new_date > this.dates[i]){
 					this.pickers[i++].setUTCDate(new_date);
 				}
@@ -1316,7 +1291,7 @@
 	};
 
 	function opts_from_el(el, prefix){
-		// Derive options from element data-attrs
+
 		var data = $(el).data(),
 			out = {}, inkey,
 			replace = new RegExp('^' + prefix.toLowerCase() + '([A-Z])');
@@ -1333,10 +1308,10 @@
 	}
 
 	function opts_from_locale(lang){
-		// Derive options from locale plugins
+
 		var out = {};
-		// Check if "de-DE" style date is available, if not language should
-		// fallback to 2 letter code eg "de"
+
+
 		if (!dates[lang]){
 			lang = lang.split('-')[0];
 			if (!dates[lang])
@@ -1361,10 +1336,10 @@
 				options = typeof option === 'object' && option;
 			if (!data){
 				var elopts = opts_from_el(this, 'date'),
-					// Preliminary otions
+
 					xopts = $.extend({}, defaults, elopts, options),
 					locopts = opts_from_locale(xopts.language),
-					// Options priority: js args, data-attrs, locales, defaults
+
 					opts = $.extend({}, defaults, locopts, elopts, options);
 				if ($this.is('.input-daterange') || opts.inputs){
 					var ropts = {
@@ -1454,8 +1429,8 @@
 		validParts: /dd?|DD?|mm?|MM?|yy(?:yy)?/g,
 		nonpunctuation: /[^ -\/:-@\[\u3400-\u9fff-`{-~\t\n\r]+/g,
 		parseFormat: function(format){
-			// IE treats \0 as a string end in inputs (truncating the value),
-			// so it's a bad format delimiter, anyway
+
+
 			var separators = format.replace(this.validParts, '\0').split('\0'),
 				parts = format.match(this.validParts);
 			if (!separators || !separators.length || !parts || parts.length === 0){
@@ -1526,13 +1501,13 @@
 			setters_map['dd'] = setters_map['d'];
 			date = UTCDate(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
 			var fparts = format.parts.slice();
-			// Remove noop parts
+
 			if (parts.length !== fparts.length){
 				fparts = $(fparts).filter(function(i,p){
 					return $.inArray(p, setters_order) !== -1;
 				}).toArray();
 			}
-			// Process remainder
+
 			function match_part(){
 				var m = this.slice(0, parts[i].length),
 					p = parts[i].slice(0, m.length);
@@ -1640,8 +1615,7 @@
 	$.fn.datepicker.DPGlobal = DPGlobal;
 
 
-	/* DATEPICKER NO CONFLICT
-	* =================== */
+
 
 	$.fn.datepicker.noConflict = function(){
 		$.fn.datepicker = old;
@@ -1649,8 +1623,7 @@
 	};
 
 
-	/* DATEPICKER DATA-API
-	* ================== */
+
 
 	$(document).on(
 		'focus.datepicker.data-api click.datepicker.data-api',
@@ -1660,7 +1633,7 @@
 			if ($this.data('datepicker'))
 				return;
 			e.preventDefault();
-			// component click requires us to explicitly show it
+
 			$this.datepicker('show');
 		}
 	);

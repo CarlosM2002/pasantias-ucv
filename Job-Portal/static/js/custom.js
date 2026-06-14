@@ -1,9 +1,9 @@
 jQuery(function($) {
 
 	'use strict';
-	
+
 	$(".loader").delay(1000).fadeOut("slow");
-  $("#overlayer").delay(1000).fadeOut("slow");	
+  $("#overlayer").delay(1000).fadeOut("slow");
 
 	var siteMenuClone = function() {
 
@@ -14,11 +14,11 @@ jQuery(function($) {
 
 
 		setTimeout(function() {
-			
+
 			var counter = 0;
       $('.site-mobile-menu .has-children').each(function(){
         var $this = $(this);
-        
+
         $this.prepend('<span class="arrow-collapse collapsed">');
 
         $this.find('.arrow-collapse').attr({
@@ -44,8 +44,8 @@ jQuery(function($) {
       } else {
         $this.addClass('active');
       }
-      e.preventDefault();  
-      
+      e.preventDefault();
+
     });
 
 		$(window).resize(function() {
@@ -70,9 +70,8 @@ jQuery(function($) {
 				$('body').addClass('offcanvas-menu');
 				$this.addClass('active');
 			}
-		}) 
+		})
 
-		// click outisde offcanvas
 		$(document).mouseup(function(e) {
 	    var container = $(".site-mobile-menu");
 	    if (!container.is(e.target) && container.has(e.target).length === 0) {
@@ -81,7 +80,7 @@ jQuery(function($) {
 				}
 	    }
 		});
-	}; 
+	};
 	siteMenuClone();
 
 
@@ -99,10 +98,10 @@ jQuery(function($) {
 			$(this).closest('.input-group').find('.form-control').val(parseInt($(this).closest('.input-group').find('.form-control').val()) + 1);
 		});
 	};
-	// sitePlusMinus();
+
 
    var siteIstotope = function() {
-  	/* activate jquery isotope */
+
 	  var $container = $('#posts').isotope({
 	    itemSelector : '.item',
 	    isFitWidth: true
@@ -113,10 +112,9 @@ jQuery(function($) {
 	      columnWidth: '.col-sm-3'
 	    });
 	  });
-	  
+
 	  $container.isotope({ filter: '*' });
 
-	    // filter items on button click
 	  $('#filters').on( 'click', 'button', function(e) {
 	  	e.preventDefault();
 	    var filterValue = $(this).attr('data-filter');
@@ -154,12 +152,10 @@ jQuery(function($) {
 	}
 	stickyFillInit();
 
-
-	// navigation
   var OnePageNavigation = function() {
     var navToggler = $('.site-menu-toggle');
    	$("body").on("click", ".main-menu li a[href^='#'], .smoothscroll[href^='#'], .site-mobile-menu .site-nav-wrap li a", function(e) {
-    //   e.preventDefault();
+
 
       var hash = this.hash;
 
@@ -190,7 +186,7 @@ jQuery(function($) {
 						  }, 2000
 						);
 					});
-					
+
 				}
 
 			} , { offset: '95%' } );
@@ -259,7 +255,7 @@ jQuery(function($) {
 
 	}
 	quillInit();
-  
+
 
 });
 

@@ -527,7 +527,7 @@ h1, h2, h3, h4 {
     .home-section .search-jobs-form .form-control:active, .home-section .search-jobs-form .form-control:focus {
       color: #343a40; }
     .home-section .search-jobs-form .form-control::-webkit-input-placeholder {
-      /* Chrome/Opera/Safari */
+
       color: rgba(52, 58, 64, 0.5); }
     .home-section .search-jobs-form .form-control::-moz-placeholder {
       color: rgba(52, 58, 64, 0.5); }
@@ -710,7 +710,7 @@ h1, h2, h3, h4 {
   .testimony-full blockquote cite {
     font-size: 1.2rem; }
 
-/* Job Listings */
+
 .job-listings {
   padding: 0;
   margin: 0;
@@ -1405,7 +1405,7 @@ h1, h2, h3, h4 {
       color: #000 !important; }
 
   .footer-social.mt-3 {
-    margin-top: 0 !important; 
+    margin-top: 0 !important;
 }
 
 
@@ -1456,8 +1456,7 @@ h1, h2, h3, h4 {
     color: #fff;
     border-color: #000 !important; }
 
-/* Isotope Transitions
-------------------------------- */
+
 .isotope,
 .isotope .item {
   -webkit-transition-duration: 0.8s;
@@ -1484,8 +1483,8 @@ h1, h2, h3, h4 {
   transition-property: transform, opacity;
   transition-property: transform, opacity, -webkit-transform; }
 
-/* responsive media queries */
-/* Mouse scroll effect */
+
+
 .mouse {
   position: absolute;
   bottom: 40px;
@@ -1737,7 +1736,7 @@ h1, h2, h3, h4 {
       margin-left: auto;
       margin-right: auto; } }
 
-/*PRELOADING------------ */
+
 #overlayer {
   width: 100%;
   height: 100%;
@@ -1782,19 +1781,19 @@ h1, h2, h3, h4 {
 .table td, .table th {
 
   vertical-align: middle !important;
-  
+
 }
 
 
 .ov-fix{
   overflow:hidden
 }
-/* CKEditor */
+
 .django-ckeditor-widget {
     width: 100% ;
 }
 
-/* Profile Page Styles */
+
 .profile-header-card {
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }

@@ -1,11 +1,9 @@
-// Embedded icons from Open Iconic.
-// Released under MIT and copyright 2014 Waybury.
-// https://useiconic.com/open
 
 
-// Checkboxes and radios
-//
-// Base class takes care of all the key behavioral aspects.
+
+
+
+
 
 .custom-control {
   position: relative;
@@ -32,7 +30,7 @@
   }
 
   &:focus ~ .custom-control-label::before {
-    // the mixin is not used here to make sure there is feedback
+
     @if $enable-shadows {
       box-shadow: $input-box-shadow, $input-focus-box-shadow;
     } @else {
@@ -62,16 +60,14 @@
   }
 }
 
-// Custom control indicators
-//
-// Build the custom controls out of pseudo-elements.
+
+
 
 .custom-control-label {
   position: relative;
   margin-bottom: 0;
   vertical-align: top;
 
-  // Background-color and (when enabled) gradient
   &::before {
     position: absolute;
     top: ($font-size-base * $line-height-base - $custom-control-indicator-size) / 2;
@@ -86,7 +82,6 @@
     @include box-shadow($custom-control-indicator-box-shadow);
   }
 
-  // Foreground (icon)
   &::after {
     position: absolute;
     top: ($font-size-base * $line-height-base - $custom-control-indicator-size) / 2;
@@ -100,9 +95,7 @@
 }
 
 
-// Checkboxes
-//
-// Tweak just a few things for checkboxes.
+
 
 .custom-checkbox {
   .custom-control-label::before {
@@ -136,13 +129,12 @@
   }
 }
 
-// Radios
-//
-// Tweak just a few things for radios.
+
+
 
 .custom-radio {
   .custom-control-label::before {
-    // stylelint-disable-next-line property-blacklist
+
     border-radius: $custom-radio-indicator-border-radius;
   }
 
@@ -160,9 +152,7 @@
 }
 
 
-// switches
-//
-// Tweak a few things for switches
+
 
 .custom-switch {
   padding-left: $custom-switch-width + $custom-control-gutter;
@@ -172,7 +162,7 @@
       left: -($custom-switch-width + $custom-control-gutter);
       width: $custom-switch-width;
       pointer-events: all;
-      // stylelint-disable-next-line property-blacklist
+
       border-radius: $custom-switch-indicator-border-radius;
     }
 
@@ -182,7 +172,7 @@
       width: $custom-switch-indicator-size;
       height: $custom-switch-indicator-size;
       background-color: $custom-control-indicator-border-color;
-      // stylelint-disable-next-line property-blacklist
+
       border-radius: $custom-switch-indicator-border-radius;
       @include transition(transform .15s ease-in-out, $custom-forms-transition);
     }
@@ -203,11 +193,9 @@
 }
 
 
-// Select
-//
-// Replaces the browser default select with a custom one, mostly pulled from
-// https://primer.github.io/.
-//
+
+
+
 
 .custom-select {
   display: inline-block;
@@ -237,11 +225,11 @@
     }
 
     &::-ms-value {
-      // For visual consistency with other platforms/browsers,
-      // suppress the default white text on blue background highlight given to
-      // the selected option text when the (still closed) <select> receives focus
-      // in IE and (under certain conditions) Edge.
-      // See https://github.com/twbs/bootstrap/issues/19398.
+
+
+
+
+
       color: $input-color;
       background-color: $input-bg;
     }
@@ -259,7 +247,6 @@
     background-color: $custom-select-disabled-bg;
   }
 
-  // Hides the default caret in IE11
   &::-ms-expand {
     display: none;
   }
@@ -282,9 +269,7 @@
 }
 
 
-// File
-//
-// Custom file input.
+
 
 .custom-file {
   position: relative;
@@ -357,11 +342,10 @@
   }
 }
 
-// Range
-//
-// Style range inputs the same across browsers. Vendor-specific rules for pseudo
-// elements cannot be mixed. As such, there are no shared styles for focus or
-// active states on prefixed selectors.
+
+
+
+
 
 .custom-range {
   width: 100%;
@@ -373,8 +357,7 @@
   &:focus {
     outline: none;
 
-    // Pseudo-elements must be split across multiple rulesets to have an effect.
-    // No box-shadow() mixin for focus accessibility.
+
     &::-webkit-slider-thumb { box-shadow: $custom-range-thumb-focus-box-shadow; }
     &::-moz-range-thumb     { box-shadow: $custom-range-thumb-focus-box-shadow; }
     &::-ms-thumb            { box-shadow: $custom-range-thumb-focus-box-shadow; }

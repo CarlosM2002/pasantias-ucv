@@ -175,15 +175,15 @@
                                 <td>{{ job.last_date | date:'M d, Y' }}</td>
                                 <td>
                                     {% if job.is_published == True %}
-                                
+
                                         <span class="badge badge-info">Published</span>
-                                
+
                                     {% else %}
 
                                         <span class="badge badge-danger px-2">Pendiente</span>
 
                                     {% endif %}
-                                
+
                                 </td>
 
                                 <td>
@@ -195,7 +195,7 @@
                                         <i class="fa fa-users"></i>
                                         <span class="badge badge-success text-white">
 
-                                       
+
                                             {% if is_applicant > 1 %}
 
 
@@ -208,7 +208,7 @@
                                             {% endif %}
 
                                         </span>
-                                        
+
                                     </a>
                                     {% endif %}
 
@@ -222,8 +222,8 @@
                                             <button onclick="call_sw_alert_func('{% url 'jobapp:complete' job.id %}','{{ job.id }}', 'Once Clicked, Your Post Will Marked Completed')" class="text-white btn btn-success btn-sm" >Make Close</button>
                                         </span>
                                         {% else %}
-                                        <a class="text-white btn btn-success btn-sm" 
-                                        role="button">Closed</a>                                    
+                                        <a class="text-white btn btn-success btn-sm"
+                                        role="button">Closed</a>
                                         {% endif %}
                                         {% endif %}
                                     <button onclick="call_sw_alert_func('{% url 'jobapp:delete' job.id %}','{{ job.id }}','Una vez borres esta oferta, no podrás recuperarla.')" class="btn btn-danger btn-sm">Borrar</button>
@@ -315,7 +315,7 @@
                             <p class="m-5">No has aplicado a ninguna oferta aún. </p>
                             {% endif %}
                         </div>
-                        
+
                       </div>
 
                     {% endif %}

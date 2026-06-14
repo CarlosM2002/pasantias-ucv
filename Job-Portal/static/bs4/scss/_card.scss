@@ -1,6 +1,6 @@
-//
-// Base styles
-//
+
+
+
 
 .card {
   position: relative;
@@ -32,8 +32,8 @@
 }
 
 .card-body {
-  // Enable `flex-grow: 1` for decks and groups so that card blocks take up
-  // as much space as possible, ensuring footers are aligned to the bottom.
+
+
   flex: 1 1 auto;
   padding: $card-spacer-x;
   color: $card-color;
@@ -62,9 +62,8 @@
   }
 }
 
-//
-// Optional textual caps
-//
+
+
 
 .card-header {
   padding: $card-spacer-y $card-spacer-x;
@@ -95,9 +94,7 @@
 }
 
 
-//
-// Header navs
-//
+
 
 .card-header-tabs {
   margin-right: -$card-spacer-x / 2;
@@ -111,7 +108,6 @@
   margin-left: -$card-spacer-x / 2;
 }
 
-// Card image
 .card-img-overlay {
   position: absolute;
   top: 0;
@@ -126,7 +122,6 @@
   @include border-radius($card-inner-border-radius);
 }
 
-// Card image caps
 .card-img-top {
   width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
   @include border-top-radius($card-inner-border-radius);
@@ -137,8 +132,6 @@
   @include border-bottom-radius($card-inner-border-radius);
 }
 
-
-// Card deck
 
 .card-deck {
   display: flex;
@@ -155,7 +148,7 @@
 
     .card {
       display: flex;
-      // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
+
       flex: 1 0 0%;
       flex-direction: column;
       margin-right: $card-deck-margin;
@@ -166,26 +159,23 @@
 }
 
 
-//
-// Card groups
-//
+
 
 .card-group {
   display: flex;
   flex-direction: column;
 
-  // The child selector allows nested `.card` within `.card-group`
-  // to display properly.
+
   > .card {
     margin-bottom: $card-group-margin;
   }
 
   @include media-breakpoint-up(sm) {
     flex-flow: row wrap;
-    // The child selector allows nested `.card` within `.card-group`
-    // to display properly.
+
+
     > .card {
-      // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
+
       flex: 1 0 0%;
       margin-bottom: 0;
 
@@ -194,19 +184,18 @@
         border-left: 0;
       }
 
-      // Handle rounded corners
       @if $enable-rounded {
         &:not(:last-child) {
           @include border-right-radius(0);
 
           .card-img-top,
           .card-header {
-            // stylelint-disable-next-line property-blacklist
+
             border-top-right-radius: 0;
           }
           .card-img-bottom,
           .card-footer {
-            // stylelint-disable-next-line property-blacklist
+
             border-bottom-right-radius: 0;
           }
         }
@@ -216,12 +205,12 @@
 
           .card-img-top,
           .card-header {
-            // stylelint-disable-next-line property-blacklist
+
             border-top-left-radius: 0;
           }
           .card-img-bottom,
           .card-footer {
-            // stylelint-disable-next-line property-blacklist
+
             border-bottom-left-radius: 0;
           }
         }
@@ -231,9 +220,7 @@
 }
 
 
-//
-// Columns
-//
+
 
 .card-columns {
   .card {
@@ -254,9 +241,7 @@
 }
 
 
-//
-// Accordion
-//
+
 
 .accordion {
   > .card {

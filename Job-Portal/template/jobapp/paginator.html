@@ -5,7 +5,7 @@
   </div>
   <div class="col-md-6 text-center text-md-right">
     <div class="custom-pagination ml-auto">
-      
+
       <span id="prev_page">
       {% if page_obj.has_previous %}
       <a id="ajax_paginator" href="?page={{ page_obj.previous_page_number }}" class="prev">Prev</a>
@@ -28,7 +28,7 @@
         <a id="ajax_paginator" class="next" href="?page={{ page_obj.next_page_number }}">Next</a>
       </span>
       {% endif %}
-    
+
     </div>
   </div>
 </div>

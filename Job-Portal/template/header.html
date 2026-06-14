@@ -15,10 +15,10 @@
       </div>
     </div>
     <div class="site-mobile-menu-body"></div>
-  </div> <!-- .site-mobile-menu -->
+  </div>
 
 
-  <!-- NAVBAR -->
+
   <header class="site-navbar mt-3">
     <div class="container-fluid">
       <div class="row align-items-center">
@@ -40,9 +40,9 @@
                   class="js-clone-nav pr-3 btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span
                     class="mr-2 icon-add"></span>Publicar oferta</a>
 
-                  
+
                     <li class="pr-3 has-children">
-                      <a>Mi cuenta</a> 
+                      <a>Mi cuenta</a>
                       <ul class="dropdown">
                         <li><a href="{% url 'jobapp:dashboard' %}">Ofertas</a></li>
                         <li><a href="{% url 'account:employer-profile' request.user.id %}">Perfil</a></li>
@@ -52,7 +52,7 @@
                 {% elif user.is_authenticated and user.role == 'admin' %}
 
                     <li class="pr-3 has-children">
-                      <a>Administrador</a> 
+                      <a>Administrador</a>
                       <ul class="dropdown">
                         <li><a href="{% url 'jobapp:dashboard' %}">Panel de administración</a></li>
                         <li><a href="{% url 'account:logout' %}">Cerrar sesión</a></li>
@@ -69,9 +69,7 @@
                     <li><a href="{% url 'account:logout' %}">Cerrar sesión</a></li>
                   </ul>
                 </li>
-                <!-- <a href="{% url 'account:logout' %}"
-                class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span
-                  class="mr-2 icon-lock_outline"></span>Log Out</a> -->
+
                 {% else %}
 
                 <li class="pr-3 has-children">

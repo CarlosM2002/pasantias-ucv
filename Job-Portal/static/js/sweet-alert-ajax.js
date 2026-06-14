@@ -1,5 +1,5 @@
 function call_sw_alert_func(route, id, message){
-    // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
 
     swal({
       title: "¿Estás seguro?",
@@ -10,12 +10,12 @@ function call_sw_alert_func(route, id, message){
     })
     .then((willDelete) => {
       if (willDelete) {
-        // var CSRF_TOKEN = `{{ csrf_token() }}`;
-        // console.log(CSRF_TOKEN);
+
+
         $.ajax({
           type: 'GET',
           url: route,
-          // data : {'_method' : 'DELETE', '_token' : CSRF_TOKEN },
+
           success : function(data) {
             if (route.includes('delete')) {
               swal({
@@ -68,7 +68,7 @@ function call_sw_alert_func(route, id, message){
           error : function () {
             swal({
               title: '¡Ocurrió un error inesperado!',
-              // text: data.message,
+
               timer: '1500'
             });
           }

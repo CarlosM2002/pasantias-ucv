@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError as DjangoValidationError
 
 from account.models import User, EmployeeProfile
 from account.constants import TIPO_EMPRESA
@@ -56,6 +58,27 @@ class EmployeeRegistrationForm(UserCreationForm):
                 profile.save()
         return user
 
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Las contraseñas no coinciden.")
+        # Run Django's password validators and translate 'too short' message
+        try:
+            if password1:
+                validate_password(password1, user=None)
+        except DjangoValidationError as e:
+            messages = []
+            for err in e.error_list:
+                code = getattr(err, 'code', '')
+                msg = str(err)
+                if code == 'password_too_short' or 'too short' in msg.lower():
+                    messages.append('La contraseña es demasiado corta. Debe contener al menos 8 caracteres.')
+                else:
+                    messages.append(msg)
+            raise forms.ValidationError(messages)
+        return password2
+
 
 class EmployerRegistrationForm(UserCreationForm):
     tipo_empresa = forms.ChoiceField(
@@ -92,6 +115,26 @@ class EmployerRegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Las contraseñas no coinciden.")
+        try:
+            if password1:
+                validate_password(password1, user=None)
+        except DjangoValidationError as e:
+            messages = []
+            for err in e.error_list:
+                code = getattr(err, 'code', '')
+                msg = str(err)
+                if code == 'password_too_short' or 'too short' in msg.lower():
+                    messages.append('La contraseña es demasiado corta. Debe contener al menos 8 caracteres.')
+                else:
+                    messages.append(msg)
+            raise forms.ValidationError(messages)
+        return password2
 
 
 class UserLoginForm(forms.Form):

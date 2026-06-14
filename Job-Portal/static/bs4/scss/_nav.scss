@@ -1,7 +1,7 @@
-// Base class
-//
-// Kickstart any navigation component with a set of style resets. Works with
-// `<nav>`s or `<ul>`s.
+
+
+
+
 
 .nav {
   display: flex;
@@ -19,7 +19,6 @@
     text-decoration: none;
   }
 
-  // Disabled state lightens text
   &.disabled {
     color: $nav-link-disabled-color;
     pointer-events: none;
@@ -27,9 +26,8 @@
   }
 }
 
-//
-// Tabs
-//
+
+
 
 .nav-tabs {
   border-bottom: $nav-tabs-border-width solid $nav-tabs-border-color;
@@ -61,17 +59,15 @@
   }
 
   .dropdown-menu {
-    // Make dropdown border overlap tab border
+
     margin-top: -$nav-tabs-border-width;
-    // Remove the top rounded corners here since there is a hard edge above the menu
+
     @include border-top-radius(0);
   }
 }
 
 
-//
-// Pills
-//
+
 
 .nav-pills {
   .nav-link {
@@ -86,9 +82,7 @@
 }
 
 
-//
-// Justified variants
-//
+
 
 .nav-fill {
   .nav-item {
@@ -106,9 +100,7 @@
 }
 
 
-// Tabbable tabs
-//
-// Hide tabbable panes to start, show them when `.active`
+
 
 .tab-content {
   > .tab-pane {

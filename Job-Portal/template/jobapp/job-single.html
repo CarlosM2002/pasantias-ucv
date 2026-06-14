@@ -13,21 +13,21 @@
 {{ job.location }}, {{ job.company_name }}{% endblock %}
 
 {% block extra_meta %}
-<!-- Open Graph / Facebook -->
+
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:title" content="{{ job.title }} at {{ job.company_name }}">
 <meta property="og:description" content="{{ job.description|striptags|truncatewords:30 }}">
 <meta property="og:image" content="{% static 'images/favicon.png' %}">
 
-<!-- Twitter -->
+
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="{{ request.build_absolute_uri }}">
 <meta property="twitter:title" content="{{ job.title }} at {{ job.company_name }}">
 <meta property="twitter:description" content="{{ job.description|striptags|truncatewords:30 }}">
 <meta property="twitter:image" content="{% static 'images/favicon.png' %}">
 
-<!-- JSON-LD for JobPosting -->
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -53,7 +53,7 @@
 </script>
 {% endblock %}
 {% block content %}
-<!-- HOME -->
+
 
 
 <section class="section-hero overlay inner-page bg-image"
@@ -115,13 +115,13 @@
       </div>
       <div class="col-lg-4">
         <div class="row">
-          
+
           <div class="col-7">
 
             {% if request.user.id != job.user.id and user.role == 'employer' %}
 
             <a href="{% url 'jobapp:create-job' %}" class="btn btn-block btn-primary btn-md">Publicar Oferta</a>
-            
+
             {% endif %}
 
           </div>
@@ -131,7 +131,7 @@
     <div class="row">
       <div class="col-lg-8">
         <div class="mb-5">
-          <!-- <figure class="mb-5"><img src="images/job_single_img_1.jpg" alt="Image" class="img-fluid rounded"></figure> -->
+
           <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>
             Información de la oferta
           </h3>
