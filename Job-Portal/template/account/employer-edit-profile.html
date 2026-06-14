@@ -43,16 +43,16 @@
         {% endfor %}
         {% endfor %}
         {% endif %}
-        
+
         <form method="POST" enctype="multipart/form-data" class="p-4 border rounded">
           {% csrf_token %}
           <h4 class="mb-3">Información de la cuenta</h4>
-          
+
           {% for field in form %}
           <div class="row form-group">
-            <div class="col-md-12 mb-4"> 
+            <div class="col-md-12 mb-4">
               <label class="text-black font-weight-bold" for="id_{{ field.name }}">{{ field.label }}</label>
-              
+
               {% if field.name == 'gender' %}
                 <div class="d-block mt-2">
                   <div class="form-check form-check-inline">
@@ -92,12 +92,12 @@
 
           <hr class="my-4" style="clear: both;">
           <h4 class="mb-3">Detalles de la empresa</h4>
-          
+
           {% for field in profile_form %}
           <div class="row form-group">
             <div class="col-md-12 mb-4">
               <label class="text-black font-weight-bold" for="id_{{ field.name }}">{{ field.label }}</label>
-              
+
               {% if field.name == 'description' %}
                 {{ field }}
               {% elif field.name == 'company_logo' %}
@@ -123,7 +123,7 @@
               {% else %}
                 {{ field }}
               {% endif %}
-              
+
               {% if field.help_text %}
                 <small class="form-text text-muted">{{ field.help_text }}</small>
               {% endif %}

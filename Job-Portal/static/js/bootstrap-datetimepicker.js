@@ -1,29 +1,4 @@
-﻿/* =========================================================
- * bootstrap-datetimepicker.js
- * =========================================================
- * Copyright 2012 Stefan Petre
- *
- * Improvements by Andrew Rowls
- * Improvements by Sébastien Malot
- * Improvements by Yun Lai
- * Improvements by Kenneth Henderick
- * Improvements by CuGBabyBeaR
- * Improvements by Christian Vaas <auspex@auspex.eu>
- *
- * Project URL : http://www.malot.fr/bootstrap-datetimepicker
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ========================================================= */
+﻿
 
 (function(factory){
     if (typeof define === 'function' && define.amd)
@@ -35,7 +10,6 @@
 
 }(function($, undefined){
 
-  // Add ECMA262-5 Array methods if not supported natively (IE8)
   if (!('indexOf' in Array.prototype)) {
     Array.prototype.indexOf = function (find, i) {
       if (i === undefined) i = 0;
@@ -50,7 +24,6 @@
     }
   }
 
-  // Add timezone abbreviation support for ie6+, Chrome, Firefox
   function timeZoneAbbreviation() {
     var abbreviation, date, formattedStr, i, len, matchedStrings, ref, str;
     date = (new Date()).toString();
@@ -72,18 +45,16 @@
     return new Date(Date.UTC.apply(Date, arguments));
   }
 
-  // Picker object
   var Datetimepicker = function (element, options) {
     var that = this;
 
     this.element = $(element);
 
-    // add container for single page application
-    // when page switch the datetimepicker div will be removed also.
+
     this.container = options.container || 'body';
 
     this.language = options.language || this.element.data('date-language') || 'en';
-    this.language = this.language in dates ? this.language : this.language.split('-')[0]; // fr-CA fallback to fr
+    this.language = this.language in dates ? this.language : this.language.split('-')[0]; 
     this.language = this.language in dates ? this.language : 'en';
     this.isRTL = dates[this.language].rtl || false;
     this.formatType = options.formatType || this.element.data('format-type') || 'standard';
@@ -120,7 +91,7 @@
     this._attachEvents();
 
     this.clickedOutside = function (e) {
-        // Clicked outside the datetimepicker, hide it
+
         if ($(e.target).closest('.datetimepicker').length === 0) {
             that.hide();
         }
@@ -205,7 +176,7 @@
       template = template.replace('{rightArrow}', this.icons.rightArrow);
     }
     this.picker = $(template)
-      .appendTo(this.isInline ? this.element : this.container) // 'body')
+      .appendTo(this.isInline ? this.element : this.container) 
       .on({
         click:     $.proxy(this.click, this),
         mousedown: $.proxy(this.mousedown, this)
@@ -339,7 +310,7 @@
     _events:       [],
     _attachEvents: function () {
       this._detachEvents();
-      if (this.isInput) { // single input
+      if (this.isInput) { 
         this._events = [
           [this.element, {
             focus:   $.proxy(this.show, this),
@@ -348,9 +319,9 @@
           }]
         ];
       }
-      else if (this.component && this.hasInput) { // component: input + button
+      else if (this.component && this.hasInput) { 
         this._events = [
-          // For components that are not readonly, allow keyboard nav
+
           [this.element.find('input'), {
             focus:   $.proxy(this.show, this),
             keyup:   $.proxy(this.update, this),
@@ -367,7 +338,7 @@
           ]);
         }
       }
-      else if (this.element.is('div')) {  // inline datetimepicker
+      else if (this.element.is('div')) {  
         this.isInline = true;
       }
       else {
@@ -759,7 +730,7 @@
         } else if (prevMonth.getUTCFullYear() > year || (prevMonth.getUTCFullYear() === year && prevMonth.getUTCMonth() > month)) {
           classes.push('new');
         }
-        // Compare internal UTC date with local today, not UTC today
+
         if (this.todayHighlight &&
           prevMonth.getUTCFullYear() === today.getFullYear() &&
           prevMonth.getUTCMonth() === today.getMonth() &&
@@ -793,7 +764,7 @@
           classes.push('disabled');
         }
         var actual = UTCDate(year, month, dayMonth, i);
-        // We want the previous hour for the startDate
+
         if ((actual.valueOf() + 3600000) <= this.startDate || actual.valueOf() > this.endDate) {
           classes.push('disabled');
         } else if (hours === i) {
@@ -862,8 +833,8 @@
         .end()
         .find('.month').removeClass('active');
       if (currentYear === year) {
-        // getUTCMonths() returns 0 based, and we need to select the next one
-        // To cater bootstrap 2 we don't need to select the next one
+
+
         months.eq(this.date.getUTCMonth()).addClass('active');
       }
       if (year < startYear || year > endYear) {
@@ -1057,7 +1028,6 @@
                 var date = new Date();
                 date = UTCDate(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), 0);
 
-                // Respect startDate and endDate.
                 if (date < this.startDate) date = this.startDate;
                 else if (date > this.endDate) date = this.endDate;
 
@@ -1217,7 +1187,7 @@
     moveMinute: function (date, dir) {
       if (!dir) return date;
       var new_date = new Date(date.valueOf());
-      //dir = dir > 0 ? 1 : -1;
+
       new_date.setUTCMinutes(new_date.getUTCMinutes() + (dir * this.minuteStep));
       return new_date;
     },
@@ -1225,7 +1195,7 @@
     moveHour: function (date, dir) {
       if (!dir) return date;
       var new_date = new Date(date.valueOf());
-      //dir = dir > 0 ? 1 : -1;
+
       new_date.setUTCHours(new_date.getUTCHours() + dir);
       return new_date;
     },
@@ -1233,7 +1203,7 @@
     moveDate: function (date, dir) {
       if (!dir) return date;
       var new_date = new Date(date.valueOf());
-      //dir = dir > 0 ? 1 : -1;
+
       new_date.setUTCDate(new_date.getUTCDate() + dir);
       return new_date;
     },
@@ -1248,35 +1218,35 @@
       dir = dir > 0 ? 1 : -1;
       if (mag === 1) {
         test = dir === -1
-          // If going back one month, make sure month is not current month
-          // (eg, Mar 31 -> Feb 31 === Feb 28, not Mar 02)
+
+
           ? function () {
           return new_date.getUTCMonth() === month;
         }
-          // If going forward one month, make sure month is as expected
-          // (eg, Jan 31 -> Feb 31 === Feb 28, not Mar 02)
+
+
           : function () {
           return new_date.getUTCMonth() !== new_month;
         };
         new_month = month + dir;
         new_date.setUTCMonth(new_month);
-        // Dec -> Jan (12) or Jan -> Dec (-1) -- limit expected date to 0-11
+
         if (new_month < 0 || new_month > 11)
           new_month = (new_month + 12) % 12;
       } else {
-        // For magnitudes >1, move one month at a time...
+
         for (var i = 0; i < mag; i++)
-          // ...which might decrease the day (eg, Jan 31 to Feb 28, etc)...
+
           new_date = this.moveMonth(new_date, dir);
-        // ...then reset the day, keeping it in the new month
+
         new_month = new_date.getUTCMonth();
         new_date.setUTCDate(day);
         test = function () {
           return new_month !== new_date.getUTCMonth();
         };
       }
-      // Common date-resetting loop -- if date is beyond end of month, make it
-      // end of month
+
+
       while (test()) {
         new_date.setUTCDate(--day);
         new_date.setUTCMonth(new_month);
@@ -1294,19 +1264,19 @@
 
     keydown: function (e) {
       if (this.picker.is(':not(:visible)')) {
-        if (e.keyCode === 27) // allow escape to hide and re-show picker
+        if (e.keyCode === 27) 
           this.show();
         return;
       }
       var dateChanged = false,
         dir, newDate, newViewDate;
       switch (e.keyCode) {
-        case 27: // escape
+        case 27: 
           this.hide();
           e.preventDefault();
           break;
-        case 37: // left
-        case 39: // right
+        case 37: 
+        case 39: 
           if (!this.keyboardNavigation) break;
           dir = e.keyCode === 37 ? -1 : 1;
           var viewMode = this.viewMode;
@@ -1340,8 +1310,8 @@
             dateChanged = true;
           }
           break;
-        case 38: // up
-        case 40: // down
+        case 38: 
+        case 40: 
           if (!this.keyboardNavigation) break;
           dir = e.keyCode === 38 ? -1 : 1;
           viewMode = this.viewMode;
@@ -1380,7 +1350,7 @@
             dateChanged = true;
           }
           break;
-        case 13: // enter
+        case 13: 
           if (this.viewMode !== 0) {
             var oldViewMode = this.viewMode;
             this.showMode(-1);
@@ -1396,7 +1366,7 @@
           }
           e.preventDefault();
           break;
-        case 9: // tab
+        case 9: 
           this.hide();
           break;
       }
@@ -1431,16 +1401,7 @@
           this.viewMode = newViewMode;
         }
       }
-      /*
-       vitalets: fixing bug of very special conditions:
-       jquery 1.7.1 + webkit + show inline datetimepicker in bootstrap popover.
-       Method show() does not set display css correctly and datetimepicker is not shown.
-       Changed to .css('display', 'block') solve the problem.
-       See https://github.com/vitalets/x-editable/issues/37
 
-       In jquery 1.7.2+ everything works fine.
-       */
-      //this.picker.find('>div').hide().filter('.datetimepicker-'+DPGlobal.modes[this.viewMode].clsName).show();
       this.picker.find('>div').hide().filter('.datetimepicker-' + DPGlobal.modes[this.viewMode].clsName).css('display', 'block');
       this.updateNavArrows();
     },
@@ -1567,8 +1528,8 @@
     },
     nonpunctuation: /[^ -\/:-@\[-`{-~\t\n\rTZ]+/g,
     parseFormat: function (format, type) {
-      // IE treats \0 as a string end in inputs (truncating the value),
-      // so it's a bad format delimiter, anyway
+
+
       var separators = format.replace(this.validParts(type), '\0').split('\0'),
         parts = format.match(this.validParts(type));
       if (!separators || !separators.length || !parts || parts.length === 0) {
@@ -1730,25 +1691,25 @@
       if (type === 'standard') {
         val = {
           t:    date.getTime(),
-          // year
+
           yy:   date.getUTCFullYear().toString().substring(2),
           yyyy: date.getUTCFullYear(),
-          // month
+
           m:    date.getUTCMonth() + 1,
           M:    dates[language].monthsShort[date.getUTCMonth()],
           MM:   dates[language].months[date.getUTCMonth()],
-          // day
+
           d:    date.getUTCDate(),
           D:    dates[language].daysShort[date.getUTCDay()],
           DD:   dates[language].days[date.getUTCDay()],
           p:    (dates[language].meridiem.length === 2 ? dates[language].meridiem[date.getUTCHours() < 12 ? 0 : 1] : ''),
-          // hour
+
           h:    date.getUTCHours(),
-          // minute
+
           i:    date.getUTCMinutes(),
-          // second
+
           s:    date.getUTCSeconds(),
-          // timezone
+
           z:    timezone
         };
 
@@ -1767,30 +1728,30 @@
         val.dd = (val.d < 10 ? '0' : '') + val.d;
         val.mm = (val.m < 10 ? '0' : '') + val.m;
       } else if (type === 'php') {
-        // php format
+
         val = {
-          // year
+
           y: date.getUTCFullYear().toString().substring(2),
           Y: date.getUTCFullYear(),
-          // month
+
           F: dates[language].months[date.getUTCMonth()],
           M: dates[language].monthsShort[date.getUTCMonth()],
           n: date.getUTCMonth() + 1,
           t: DPGlobal.getDaysInMonth(date.getUTCFullYear(), date.getUTCMonth()),
-          // day
+
           j: date.getUTCDate(),
           l: dates[language].days[date.getUTCDay()],
           D: dates[language].daysShort[date.getUTCDay()],
-          w: date.getUTCDay(), // 0 -> 6
-          N: (date.getUTCDay() === 0 ? 7 : date.getUTCDay()),       // 1 -> 7
+          w: date.getUTCDay(), 
+          N: (date.getUTCDay() === 0 ? 7 : date.getUTCDay()),       
           S: (date.getUTCDate() % 10 <= dates[language].suffix.length ? dates[language].suffix[date.getUTCDate() % 10 - 1] : ''),
-          // hour
+
           a: (dates[language].meridiem.length === 2 ? dates[language].meridiem[date.getUTCHours() < 12 ? 0 : 1] : ''),
           g: (date.getUTCHours() % 12 === 0 ? 12 : date.getUTCHours() % 12),
           G: date.getUTCHours(),
-          // minute
+
           i: date.getUTCMinutes(),
-          // second
+
           s: date.getUTCSeconds()
         };
         val.m = (val.n < 10 ? '0' : '') + val.n;
@@ -1857,7 +1818,7 @@
                 '</tr>' +
       '</thead>',
     contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>',
-    footTemplate: '<tfoot>' + 
+    footTemplate: '<tfoot>' +
                     '<tr><th colspan="7" class="today"></th></tr>' +
                     '<tr><th colspan="7" class="clear"></th></tr>' +
                   '</tfoot>'
@@ -1938,16 +1899,14 @@
     '</div>';
   $.fn.datetimepicker.DPGlobal = DPGlobal;
 
-  /* DATETIMEPICKER NO CONFLICT
-   * =================== */
+
 
   $.fn.datetimepicker.noConflict = function () {
     $.fn.datetimepicker = old;
     return this;
   };
 
-  /* DATETIMEPICKER DATA-API
-   * ================== */
+
 
   $(document).on(
     'focus.datetimepicker.data-api click.datetimepicker.data-api',
@@ -1956,7 +1915,7 @@
       var $this = $(this);
       if ($this.data('datetimepicker')) return;
       e.preventDefault();
-      // component click requires us to explicitly show it
+
       $this.datetimepicker('show');
     }
   );

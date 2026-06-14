@@ -26,12 +26,12 @@
         <h2>Oferta de Pasantía</h2>
       </div>
     </div>
-    
+
     <form method="POST" enctype="multipart/form-data">
       <div class="row mb-5 p-4 p-md-5 border rounded">
         <div class="col-lg-12">
           <h3 class="text-black mb-5 border-bottom pb-2">Detalles de la Oferta</h3>
-          
+
           {% if form.errors %}
             {% for field in form %}
               {% for error in field.errors %}
@@ -42,9 +42,9 @@
               {% endfor %}
             {% endfor %}
           {% endif %}
-          
+
           {% csrf_token %}
-          
+
           {% for field in form %}
             {% if field.name == 'job_type' %}
             <div class="form-group">
@@ -56,7 +56,7 @@
                 <option value="3">Flexible</option>
               </select>
             </div>
-            
+
             {% elif field.name == 'work_mode' %}
             <div class="form-group">
               <label for="work-mode">Modalidad</label>
@@ -67,7 +67,7 @@
                 <option value="3">Presencial</option>
               </select>
             </div>
-            
+
             {% elif field.name == 'category' %}
             <div class="form-group">
               <label for="job-type">Categoría</label>
@@ -96,14 +96,14 @@
                 {{ form.description }}
               </div>
             </div>
-            
+
             {% elif field.name == 'last_date' %}
             <div class="form-group">
               <label class="text-black" for="id_{{ field.name }}">{{ field.label }}</label>
               <input type="text" class="form-control appointment_date" placeholder="Select Date" name="{{ field.name }}"
                 id="id_{{ field.name }}" required="true">
             </div>
-            
+
             {% elif field.name == 'company_description' %}
             <div class="form-group">
               <label for="job-type">Descripción de la empresa :</label>
@@ -112,7 +112,7 @@
                 {{ form.company_description }}
               </div>
             </div>
-            
+
             {% else %}
               {% if field.name == 'company_name'%}
               <h3 class="text-black mt-5 mb-5 border-bottom pb-2">Detalles de la Empresa / Dependencia</h3>

@@ -1,6 +1,5 @@
-// stylelint-disable declaration-no-important
 
-// Margin and Padding
+
 
 @each $breakpoint in map-keys($grid-breakpoints) {
   @include media-breakpoint-up($breakpoint) {
@@ -28,7 +27,6 @@
       }
     }
 
-    // Negative margins (e.g., where `.mb-n1` is negative version of `.mb-1`)
     @each $size, $length in $spacers {
       @if $size != 0 {
         .m#{$infix}-n#{$size} { margin: -$length !important; }
@@ -51,7 +49,6 @@
       }
     }
 
-    // Some special margin utils
     .m#{$infix}-auto { margin: auto !important; }
     .mt#{$infix}-auto,
     .my#{$infix}-auto {
