@@ -10,24 +10,19 @@ from jobapp.permission import EmployeeRequiredMixin
 
 
 class ApplyJobView(EmployeeRequiredMixin, View):
-    """
-    Employee applies to a job. Kept as View (not CreateView)
-    because it has custom duplicate-prevention logic.
-    """
+
     def post(self, request, id):
         user = request.user
         job = get_object_or_404(Job, id=id)
         form = JobApplyForm(request.POST)
 
-        # Handle existing applicant records (including soft-deleted)
         existing = Applicant.objects.filter(user=user, job=job).first()
         if existing:
             if not existing.is_deleted:
                 messages.error(request, '¡Ya has solicitado este puesto!')
             else:
-                # reactivate soft-deleted application instead of creating a new row
                 existing.is_deleted = False
-                existing.status = 'pendiente'
+                existing.status = 'pending'
                 existing.save()
                 messages.success(request, '¡Has solicitado este puesto con éxito!')
         elif form.is_valid():
@@ -41,7 +36,7 @@ class ApplyJobView(EmployeeRequiredMixin, View):
 
 
 class DeleteBookmarkView(EmployeeRequiredMixin, DeleteView):
-    """Employee deletes a saved bookmark."""
+
     model = BookmarkJob
     pk_url_kwarg = 'id'
     success_url = reverse_lazy('jobapp:dashboard')
@@ -61,7 +56,7 @@ class DeleteBookmarkView(EmployeeRequiredMixin, DeleteView):
 
 
 class DeleteApplicantView(EmployeeRequiredMixin, DeleteView):
-    """Employee deletes an application."""
+
     model = Applicant
     pk_url_kwarg = 'id'
     success_url = reverse_lazy('jobapp:dashboard')
@@ -81,16 +76,12 @@ class DeleteApplicantView(EmployeeRequiredMixin, DeleteView):
 
 
 class JobBookmarkView(EmployeeRequiredMixin, View):
-    """
-    Employee bookmarks a job. Kept as View (not CreateView)
-    because it has custom duplicate-prevention logic.
-    """
+
     def post(self, request, id):
         user = request.user
         job = get_object_or_404(Job, id=id)
         form = JobBookmarkForm(request.POST)
 
-        # Handle existing bookmark records (including soft-deleted)
         existing = BookmarkJob.objects.filter(user=user, job=job).first()
         if existing:
             if not existing.is_deleted:
@@ -107,6 +98,3 @@ class JobBookmarkView(EmployeeRequiredMixin, View):
 
     def get(self, request, id):
         return redirect(reverse('jobapp:single-job', kwargs={'id': id}))
-
-
-

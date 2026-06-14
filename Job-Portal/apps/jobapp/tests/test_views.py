@@ -26,16 +26,13 @@ class JobappViewsTest(TestCase):
         """Verify that the detail view shows the updated title immediately (cache invalidation)."""
         url = reverse('jobapp:single-job', kwargs={'id': self.job.id})
         
-        # 1. First request to populate cache
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Original Title')
 
-        # 2. Update the job title
         self.job.title = 'Updated Title'
         self.job.save()
 
-        # 3. Second request - should NOT show the old title from cache
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Updated Title')

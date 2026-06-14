@@ -18,9 +18,6 @@ from jobapp.models import Applicant, BookmarkJob, Job
 
 @login_required(login_url=reverse_lazy('account:login'))
 def dashboard_view(request):
-    """
-    Handle Dashboard View
-    """
     jobs = []
     savedjobs = []
     appliedjobs = []
@@ -171,7 +168,6 @@ def admin_report_view(request):
         y -= 14
 
     if applicants.exists():
-        # Group data by semester (1 or 2) for the current year
         current_year = timezone.now().year
         companies_by_sem = {1: {'Empresa': [], 'Dependencia': []}, 2: {'Empresa': [], 'Dependencia': []}}
         students_by_sem = {1: [], 2: []}
@@ -192,7 +188,6 @@ def admin_report_view(request):
             sem = 1 if s.date_joined.month <= 6 else 2
             students_by_sem[sem].append(s.get_full_name() or s.email)
 
-        # Print semester lists
         if y < margin + 220:
             pdf.showPage()
             y = height - margin
@@ -247,7 +242,6 @@ def admin_report_view(request):
 
             y -= 6
 
-        # Simplified application detail lines including the company/dependency of the offer
         if y < margin + 90:
             pdf.showPage()
             y = height - margin

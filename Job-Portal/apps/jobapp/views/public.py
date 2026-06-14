@@ -14,9 +14,6 @@ User = get_user_model()
 
 
 def home_view(request):
-    """
-    Home page — kept as FBV due to AJAX + stats logic.
-    """
     published_jobs = Job.objects.filter(is_published=True, is_deleted=False).order_by('-updated_at')
     jobs = published_jobs.filter(is_closed=False)
     promoted_jobs = jobs.filter(priority=True)
@@ -40,10 +37,8 @@ def home_view(request):
         }
         return JsonResponse(data)
 
-    # Cache stats for 15 minutes
     stats = cache.get('home_stats')
     if not stats:
-        # Use get_listed_jobs() to count active jobs (not deleted and not closed)
         stats = {
             'total_candidates': User.objects.filter(role='employee').count(),
             'total_companies': User.objects.filter(role='employer').count(),
@@ -65,15 +60,12 @@ def home_view(request):
 
 
 def about_view(request):
-    """Simple About page."""
     docs_dir = os.path.join(settings.BASE_DIR, 'static', 'docs')
     doc_files = []
     try:
         for fname in sorted(os.listdir(docs_dir)):
-            # only include files (skip directories)
             fpath = os.path.join(docs_dir, fname)
             if os.path.isfile(fpath):
-                # pass relative static path like 'docs/filename.ext'
                 doc_files.append(os.path.join('docs', fname).replace('\\', '/'))
     except Exception:
         doc_files = []
@@ -85,10 +77,9 @@ def about_view(request):
 
 
 class JobListView(ListView):
-    """All published open jobs."""
     template_name = 'jobapp/job-list.html'
     context_object_name = 'page_obj'
-    paginate_by = 1000  # show up to 1000 active jobs per page (effectively 'all' for most sites)
+    paginate_by = 1000
 
     def get_queryset(self):
         user_id = self.request.GET.get('user_id')
@@ -106,31 +97,22 @@ class JobListView(ListView):
         context['promoted_jobs'] = queryset.filter(priority=True)
         return context
 
-    # Keep default ListView context behavior so `page_obj` is a proper
-    # paginated Page object expected by the templates.
-
 
 class SingleJobView(DetailView):
-    """Single job detail page with related jobs and caching."""
     template_name = 'jobapp/job-single.html'
     context_object_name = 'job'
     pk_url_kwarg = 'id'
 
     def get_object(self, queryset=None):
         job_id = self.kwargs['id']
-        
-        # Increment views_count safely in DB
         Job.objects.filter(id=job_id).update(views_count=F('views_count') + 1)
-        
         job = cache.get(job_id)
         if not job:
             job = get_object_or_404(Job, id=job_id)
             cache.set(job_id, job, 60 * 15)
         else:
-            # Refresh views_count in cached object
             job.views_count += 1
             cache.set(job_id, job, 60 * 15)
-            
         return job
 
     def get_context_data(self, **kwargs):
@@ -146,7 +128,6 @@ class SingleJobView(DetailView):
 
 
 class SearchResultView(ListView):
-    """Job search results with multiple filter fields."""
     template_name = 'jobapp/result.html'
     context_object_name = 'page_obj'
     paginate_by = 10

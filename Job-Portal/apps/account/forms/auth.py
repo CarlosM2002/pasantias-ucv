@@ -48,7 +48,6 @@ class EmployeeRegistrationForm(UserCreationForm):
         user.role = "employee"
         if commit:
             user.save()
-            # Ensure EmployeeProfile exists and save cedula
             profile, _ = EmployeeProfile.objects.get_or_create(user=user)
             ced = self.cleaned_data.get('cedula')
             if ced:
@@ -112,11 +111,11 @@ class UserLoginForm(forms.Form):
         super(UserLoginForm, self).__init__(*args, **kwargs)
 
     def clean(self, *args, **kwargs):
-        email = self.cleaned_data.get("email")
-        password = self.cleaned_data.get("password")
+        cleaned_data = super(UserLoginForm, self).clean(*args, **kwargs)
+        email = cleaned_data.get('email')
+        password = cleaned_data.get('password')
 
         if email and password:
-            self.user = authenticate(email=email, password=password)
             try:
                 user = User.objects.get(email=email)
             except User.DoesNotExist:
@@ -128,7 +127,9 @@ class UserLoginForm(forms.Form):
             if not user.is_active:
                 raise forms.ValidationError("El usuario no está activo.")
 
-        return super(UserLoginForm, self).clean(*args, **kwargs)
+            self.user = user
+
+        return cleaned_data
 
     def get_user(self):
         return self.user

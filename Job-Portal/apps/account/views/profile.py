@@ -7,8 +7,8 @@ from account.forms import EmployeeProfileEditForm, EmployerProfileEditForm, Empl
 from account.models import User, EmployeeProfile, EmployerProfile
 from jobapp.permission import EmployeeRequiredMixin, EmployerRequiredMixin
 
+
 class EmployeeEditProfileView(EmployeeRequiredMixin, View):
-    """Employee updates their own user and profile data."""
     template_name = 'account/employee-edit-profile.html'
 
     def get(self, request, id):
@@ -45,8 +45,8 @@ class EmployeeEditProfileView(EmployeeRequiredMixin, View):
             'profile_form': profile_form
         })
 
+
 class EmployerEditProfileView(EmployerRequiredMixin, View):
-    """Employer updates their own user and profile data."""
     template_name = 'account/employer-edit-profile.html'
 
     def get(self, request, id):
@@ -77,28 +77,14 @@ class EmployerEditProfileView(EmployerRequiredMixin, View):
             profile_form.save()
             messages.success(request, 'El perfil de la empresa fue actualizado exitosamente!')
             return redirect('account:employer-edit-profile', id=user.id)
-        """
-        # If validation failed, collect missing/errored fields and show a message
-        missing_fields = []
-        for form_obj in (user_form, profile_form):
-            for fname, errs in form_obj.errors.items():
-                try:
-                    label = form_obj.fields[fname].label
-                except Exception:
-                    label = fname
-                # only add once
-                if label not in missing_fields:
-                    missing_fields.append(label)
 
-        if missing_fields:
-            messages.error(request, 'Faltan o son inválidos los campos: %s' % (', '.join(missing_fields)))
-        """
         return render(request, self.template_name, {
             'form': user_form,
             'profile_form': profile_form
         })
+
+
 class CandidateProfileView(DetailView):
-    """View candidate profile."""
     model = EmployeeProfile
     template_name = 'account/candidate-profile.html'
     context_object_name = 'profile'
@@ -106,8 +92,8 @@ class CandidateProfileView(DetailView):
     def get_object(self, queryset=None):
         return get_object_or_404(EmployeeProfile, user_id=self.kwargs.get('id'))
 
+
 class EmployerProfileView(DetailView):
-    """View employer profile."""
     model = EmployerProfile
     template_name = 'account/employer-profile.html'
     context_object_name = 'profile'

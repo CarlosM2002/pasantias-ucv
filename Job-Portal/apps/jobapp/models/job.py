@@ -52,13 +52,11 @@ class Job(TimeStampedModel, SoftDeleteModel):
     is_closed = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
-        # Invalidate cache before saving
         if self.id:
             cache.delete(str(self.id))
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        # Soft delete related applications and bookmarks when this job is deleted.
         now = timezone.now()
         self.applicant_set.filter(is_deleted=False).update(is_deleted=True, deleted_at=now)
         self.bookmarkjob_set.filter(is_deleted=False).update(is_deleted=True, deleted_at=now)

@@ -19,7 +19,7 @@ from jobapp.views import (
     SingleJobView,
     UpdateApplicantStatusView,
     toggle_employer_privileges,
-    delete_user_view,  # <-- ¡Aquí está agregado!
+    delete_user_view,
 )
 
 app_name = "jobapp"

@@ -96,7 +96,6 @@ class MakeCompleteJobView(EmployerRequiredMixin, View):
             messages.error(request, 'Something went wrong!')
         return redirect('jobapp:dashboard')
 
-    # Allow GET as well for compatibility with existing links
     def get(self, request, id):
         return self.post(request, id)
 
@@ -122,7 +121,6 @@ class UpdateApplicantStatusView(EmployerRequiredMixin, View):
     """Employer updates the status of an application (Accepted/Rejected)."""
     def post(self, request, id):
         applicant = get_object_or_404(Applicant, id=id)
-        # Ensure the employer owns the job
         if applicant.job.user != request.user:
             messages.error(request, 'You are not authorized to perform this action.')
             return redirect('jobapp:dashboard')

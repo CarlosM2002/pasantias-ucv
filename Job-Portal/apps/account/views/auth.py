@@ -8,10 +8,7 @@ from account.forms import EmployerRegistrationForm, EmployeeRegistrationForm, Us
 
 
 class UserLoginView(LoginView):
-    """
-    Email-based login using Django's built-in LoginView.
-    Redirects to dashboard after login.
-    """
+  
     form_class = UserLoginForm
     template_name = 'account/login.html'
     redirect_authenticated_user = True
@@ -24,7 +21,6 @@ class UserLoginView(LoginView):
 
 
 class UserLogoutView(View):
-    """Logs out the user and redirects to login page."""
 
     def get(self, request, *args, **kwargs):
         auth.logout(request)
@@ -36,7 +32,6 @@ class UserLogoutView(View):
 
 
 class EmployeeRegistrationView(CreateView):
-    """Handles employee (job seeker) registration."""
     form_class = EmployeeRegistrationForm
     template_name = 'account/employee-registration.html'
     success_url = reverse_lazy('account:login')
@@ -48,7 +43,6 @@ class EmployeeRegistrationView(CreateView):
 
 
 class EmployerRegistrationView(CreateView):
-    """Handles employer (company) registration."""
     form_class = EmployerRegistrationForm
     template_name = 'account/employer-registration.html'
     success_url = reverse_lazy('account:login')
